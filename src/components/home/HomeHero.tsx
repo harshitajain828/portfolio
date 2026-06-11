@@ -2,58 +2,107 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { projects } from "@/lib/projects";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
-
 export default function HomeHero() {
   const router = useRouter();
   const sectionRef = useRef<HTMLElement>(null);
+  const cardRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const nameRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const stripRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef(0);
   const [active, setActive] = useState(0);
-  const [stripX, setStripX] = useState(0);
 
-  // pin the hero; scroll progress drives the active project
-  useLayoutEffect(() => {
+  useEffect(() => {
+    const n = projects.length;
     const section = sectionRef.current;
     if (!section) return;
+
+    const measure = () =>
+      nameRefs.current.map((el) =>
+        el ? el.offsetLeft + el.offsetWidth / 2 : 0
+      );
+    let nameCenters = measure();
+
+    // one render pass per scroll frame — Lenis supplies the smoothing,
+    // we just map progress -> deck + scrubber transforms imperatively
+    const render = (p: number) => {
+      const f = p * (n - 1); // fractional deck position
+
+      cardRefs.current.forEach((el, i) => {
+        if (!el) return;
+        const d = i - f;
+        if (d >= 0) {
+          // waiting in the deck: peek below the active card, slightly
+          // smaller and tilted, fading out past the 3rd card
+          const dd = Math.min(d, 3);
+          el.style.transform = `translateY(${dd * 30}px) rotate(${
+            d * 3
+          }deg) scale(${1 - dd * 0.06})`;
+          el.style.zIndex = String(20 - Math.ceil(d));
+          el.style.opacity = String(d > 2.5 ? Math.max(0, 1 - (d - 2.5) * 2) : 1);
+        } else {
+          // dismissed: slides up and off, riding above the deck
+          el.style.transform = `translateY(${d * 130}%) rotate(${d * -4}deg)`;
+          el.style.zIndex = String(30 + Math.ceil(-d));
+          el.style.opacity = "1";
+        }
+        // only the active card is clickable; dismissed cards must not
+        // swallow clicks meant for the nav as they pass over it
+        el.style.pointerEvents = Math.abs(d) < 0.5 ? "auto" : "none";
+      });
+
+      // names strip — continuous horizontal scrub between name centers
+      const strip = stripRef.current;
+      if (strip && nameCenters.length) {
+        const i0 = Math.max(0, Math.min(n - 1, Math.floor(f)));
+        const i1 = Math.min(n - 1, i0 + 1);
+        const c =
+          nameCenters[i0] + (nameCenters[i1] - nameCenters[i0]) * (f - i0);
+        strip.style.transform = `translateX(${window.innerWidth / 2 - c}px)`;
+      }
+
+      const a = Math.round(f);
+      nameRefs.current.forEach((el, i) => {
+        if (el) el.style.color = i === a ? "var(--ink)" : "var(--dim)";
+      });
+      setActive((prev) => (prev === a ? prev : a));
+    };
+
     const st = ScrollTrigger.create({
       trigger: section,
       start: "top top",
-      end: `+=${projects.length * 90}%`,
+      end: `+=${n * 100}%`,
       pin: true,
+      anticipatePin: 1,
+      snap: {
+        snapTo: 1 / (n - 1),
+        duration: { min: 0.3, max: 0.8 },
+        ease: "power2.out",
+      },
       onUpdate: (self) => {
-        const i = Math.min(
-          projects.length - 1,
-          Math.floor(self.progress * projects.length)
-        );
-        setActive(i);
+        progressRef.current = self.progress;
+        render(self.progress);
       },
     });
-    return () => st.kill();
-  }, []);
 
-  // center the active giant name under the ruler
-  useEffect(() => {
-    const measure = () => {
-      const el = nameRefs.current[active];
-      const strip = stripRef.current;
-      if (!el || !strip) return;
-      const center = el.offsetLeft + el.offsetWidth / 2;
-      setStripX(window.innerWidth / 2 - center);
+    const remeasure = () => {
+      nameCenters = measure();
+      render(progressRef.current);
     };
-    measure();
-    // re-measure once webfonts land — Anton changes the name widths
-    document.fonts?.ready.then(measure);
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, [active]);
+    render(0);
+    document.fonts?.ready.then(remeasure);
+    window.addEventListener("resize", remeasure);
+    return () => {
+      st.kill();
+      window.removeEventListener("resize", remeasure);
+    };
+  }, []);
 
   const p = projects[active];
 
@@ -76,39 +125,29 @@ export default function HomeHero() {
         </div>
       </div>
 
-      {/* center photo stack */}
+      {/* deck of cards */}
       <div className="relative z-10 flex flex-1 items-center justify-center">
-        <div className="relative h-[52vh] w-[34vh] md:h-[58vh] md:w-[38vh]">
-          {projects.map((proj, i) => {
-            const offset = i - active;
-            const hidden = Math.abs(offset) > 1;
-            return (
-              <button
-                key={proj.slug}
-                onClick={() => router.push(`/work/${proj.slug}`)}
-                aria-label={`Open ${proj.title} case study`}
-                className="absolute inset-0 cursor-pointer"
-                style={{
-                  transform: `translateX(${offset * 46}%) rotate(${
-                    offset * 7
-                  }deg) scale(${offset === 0 ? 1 : 0.82})`,
-                  zIndex: 10 - Math.abs(offset),
-                  opacity: hidden ? 0 : offset === 0 ? 1 : 0.9,
-                  transition: `transform 0.8s ${EASE}, opacity 0.6s ${EASE}`,
-                  pointerEvents: offset === 0 ? "auto" : "none",
-                }}
-              >
-                <Image
-                  src={proj.cover}
-                  alt={proj.title}
-                  fill
-                  priority={i === 0}
-                  sizes="(min-width: 768px) 38vh, 34vh"
-                  className="object-cover shadow-[0_24px_80px_rgba(0,0,0,0.25)]"
-                />
-              </button>
-            );
-          })}
+        <div className="relative h-[50vh] w-[33vh] md:h-[56vh] md:w-[37vh]">
+          {projects.map((proj, i) => (
+            <button
+              key={proj.slug}
+              ref={(el) => {
+                cardRefs.current[i] = el;
+              }}
+              onClick={() => router.push(`/work/${proj.slug}`)}
+              aria-label={`Open ${proj.title} case study`}
+              className="absolute inset-0 cursor-pointer will-change-transform"
+            >
+              <Image
+                src={proj.cover}
+                alt={proj.title}
+                fill
+                priority={i === 0}
+                sizes="(min-width: 768px) 37vh, 33vh"
+                className="object-cover shadow-[0_24px_80px_rgba(0,0,0,0.25)]"
+              />
+            </button>
+          ))}
         </div>
       </div>
 
@@ -117,11 +156,7 @@ export default function HomeHero() {
         <div className="ruler ruler--up text-ink" />
         <div
           ref={stripRef}
-          className="flex w-max items-baseline gap-[6vw] whitespace-nowrap py-1"
-          style={{
-            transform: `translateX(${stripX}px)`,
-            transition: `transform 0.9s ${EASE}`,
-          }}
+          className="flex w-max items-baseline gap-[6vw] whitespace-nowrap py-1 will-change-transform"
         >
           {projects.map((proj, i) => (
             <span
@@ -129,11 +164,8 @@ export default function HomeHero() {
               ref={(el) => {
                 nameRefs.current[i] = el;
               }}
-              className="font-display cursor-pointer text-[9vw] leading-none md:text-[5.5vw]"
-              style={{
-                color: i === active ? "var(--ink)" : "var(--dim)",
-                transition: `color 0.5s ${EASE}`,
-              }}
+              className="font-display cursor-pointer text-[9vw] leading-none transition-colors duration-300 md:text-[5.5vw]"
+              style={{ color: i === 0 ? "var(--ink)" : "var(--dim)" }}
               onClick={() => router.push(`/work/${proj.slug}`)}
             >
               {proj.title}
@@ -142,7 +174,7 @@ export default function HomeHero() {
         </div>
         <div className="ruler text-ink" />
 
-        {/* footer strip of the hero */}
+        {/* hero footer strip */}
         <div className="label flex items-center justify-between px-5 pt-3 md:px-8">
           <span className="mono">©2026</span>
           <span className="hidden md:block">Last update: Jun 2026</span>
