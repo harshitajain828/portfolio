@@ -33,13 +33,16 @@ export default function WorkPage() {
                 className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
               />
             </div>
-            <div className="flex items-baseline justify-between px-5 py-5 md:px-6">
-              <span className="font-display text-[28px] md:text-[36px]">
-                {p.title}
-              </span>
-              <span className="mono opacity-60">
-                {String(i + 1).padStart(2, "0")} · {p.year}
-              </span>
+            <div className="px-5 py-5 md:px-6">
+              <div className="flex items-baseline justify-between">
+                <span className="font-display text-[28px] md:text-[36px]">
+                  {p.title}
+                </span>
+                <span className="mono opacity-60">
+                  {String(i + 1).padStart(2, "0")} · {p.year}
+                </span>
+              </div>
+              <div className="label mt-1 opacity-60">{p.outcomeLine}</div>
             </div>
           </Link>
         ))}

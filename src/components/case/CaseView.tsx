@@ -39,12 +39,27 @@ export default function CaseView({
   return (
     <main className="bg-cream">
       <div className="relative md:grid md:grid-cols-2">
-        {/* giant title straddling the seam */}
-        <h1
-          className="font-display pointer-events-none fixed top-[16vh] left-1/2 z-30 w-[92vw] -translate-x-1/2 text-center text-[13vw] leading-none text-cream mix-blend-difference md:text-[9vw]"
-        >
-          {project.title}
-        </h1>
+        {/* sticky chrome: giant title + back + counter, scoped to the split
+            section so it scrolls away with it instead of haunting the footer */}
+        <div className="pointer-events-none absolute inset-0 z-30">
+          <div className="sticky top-0 flex h-screen flex-col justify-between">
+            <h1 className="font-display pt-[13vh] text-center text-[13vw] leading-none text-cream mix-blend-difference md:text-[9vw]">
+              {project.title}
+            </h1>
+            <div className="flex items-end justify-between px-5 pb-5 md:px-8">
+              <Link
+                href="/"
+                className="label pointer-events-auto mix-blend-difference text-cream hover-line"
+              >
+                ← Back
+              </Link>
+              <div className="mono mix-blend-difference text-cream">
+                {pad(current + 1)} <span className="opacity-50">//</span>{" "}
+                {pad(media.length)}
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* left — media column */}
         <div className="relative">
@@ -70,7 +85,7 @@ export default function CaseView({
 
         {/* right — spec sheet, sticky */}
         <div className="relative">
-          <div className="sticky top-0 flex h-auto min-h-[60vh] flex-col justify-center gap-10 px-5 py-28 md:h-screen md:px-14">
+          <div className="sticky top-0 flex h-auto min-h-[60vh] flex-col justify-start gap-10 px-5 py-28 md:h-screen md:px-14 md:pt-[32vh]">
             <SpecRow label="Credits">
               <Pair k="Role:" v={project.role} />
               <Pair k="Type:" v={project.type} />
@@ -95,18 +110,68 @@ export default function CaseView({
           </div>
         </div>
 
-        {/* fixed chrome: back + counter */}
-        <Link
-          href="/"
-          className="label fixed bottom-5 left-5 z-40 mix-blend-difference text-cream hover-line md:left-8"
-        >
-          ← Back
-        </Link>
-        <div className="mono fixed bottom-5 right-5 z-40 mix-blend-difference text-cream md:right-8">
-          {pad(current + 1)} <span className="opacity-50">//</span>{" "}
-          {pad(media.length)}
-        </div>
       </div>
+
+      {/* narrative — the part a hiring manager actually reads */}
+      <section className="border-t border-ink/10 px-5 py-20 md:px-8">
+        {/* stats strip */}
+        <div className="mb-20 grid grid-cols-1 gap-px overflow-hidden border border-ink/10 sm:grid-cols-3">
+          {project.narrative.stats.map((s) => (
+            <div
+              key={s}
+              className="mono bg-cream px-6 py-5 text-center outline outline-1 outline-ink/10"
+            >
+              {s}
+            </div>
+          ))}
+        </div>
+
+        <NarrativeBlock n="01" label="Problem">
+          <p className="max-w-[62ch] text-[16px] normal-case leading-relaxed">
+            {project.narrative.problem}
+          </p>
+        </NarrativeBlock>
+
+        <NarrativeBlock n="02" label="Decisions">
+          <div className="flex flex-col gap-10">
+            {project.narrative.decisions.map((d, i) => (
+              <div key={d.title} className="grid gap-3 md:grid-cols-[48px_1fr]">
+                <span className="mono pt-1 opacity-50">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div>
+                  <h3 className="mb-2 text-[16px] font-semibold">{d.title}</h3>
+                  <p className="max-w-[58ch] text-[14px] normal-case leading-relaxed opacity-80">
+                    {d.body}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </NarrativeBlock>
+
+        <NarrativeBlock n="03" label="Outcome">
+          <p className="max-w-[30ch] font-display text-[28px] leading-[1.1] md:text-[36px]">
+            {project.statement}
+          </p>
+          <p className="mt-6 max-w-[62ch] text-[15px] normal-case leading-relaxed opacity-85">
+            {project.narrative.outcome}
+          </p>
+        </NarrativeBlock>
+
+        <NarrativeBlock n="04" label="Learnings" last>
+          <ul className="flex max-w-[62ch] flex-col gap-4">
+            {project.narrative.learnings.map((l) => (
+              <li
+                key={l}
+                className="border-l border-ink/20 pl-4 text-[14px] normal-case leading-relaxed opacity-80"
+              >
+                {l}
+              </li>
+            ))}
+          </ul>
+        </NarrativeBlock>
+      </section>
 
       {/* next project */}
       <Link
@@ -121,6 +186,32 @@ export default function CaseView({
 
       <FooterStrip />
     </main>
+  );
+}
+
+function NarrativeBlock({
+  n,
+  label,
+  last = false,
+  children,
+}: {
+  n: string;
+  label: string;
+  last?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={`grid gap-6 py-14 md:grid-cols-[220px_1fr] ${
+        last ? "" : "border-b border-ink/10"
+      }`}
+    >
+      <div className="label flex items-start gap-3 opacity-70">
+        <span className="mono">{n}</span>
+        <span>{label}:</span>
+      </div>
+      <div>{children}</div>
+    </div>
   );
 }
 
