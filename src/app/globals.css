@@ -186,6 +186,14 @@ a {
   color: inherit;
 }
 
+/* index ledger rows — hover tints to the project accent */
+.idx-row {
+  transition: color 0.3s ease;
+}
+.idx-row:hover {
+  color: var(--acc, currentColor);
+}
+
 .hover-line {
   position: relative;
 }

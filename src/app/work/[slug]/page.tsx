@@ -32,5 +32,12 @@ export default async function CasePage({
   const idx = projects.findIndex((p) => p.slug === slug);
   const next = projects[(idx + 1) % projects.length];
 
-  return <CaseView project={project} next={next} />;
+  return (
+    <CaseView
+      project={project}
+      index={idx}
+      total={projects.length}
+      next={next}
+    />
+  );
 }

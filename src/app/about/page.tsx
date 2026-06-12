@@ -1,4 +1,6 @@
+import Link from "next/link";
 import FooterStrip from "@/components/FooterStrip";
+import { projects } from "@/lib/projects";
 
 export const metadata = { title: "About — Harshita Jain®" };
 
@@ -16,16 +18,15 @@ const ledgers: { label: string; items: string[] }[] = [
     ],
   },
   {
-    label: "Build",
+    label: "AI toolchain",
     items: [
       "Figma",
-      "Framer",
+      "Framer + Framer MCP",
       "Claude Code",
-      "Figma ↔ Claude MCP",
-      "GSAP",
-      "HTML / CSS",
-      "React (working knowledge)",
+      "Figma ↔ Claude connectors",
+      "GSAP (directing motion)",
       "Adobe Creative Cloud",
+      "Midjourney · Gemini · Claude",
     ],
   },
   {
@@ -49,33 +50,44 @@ const ledgers: { label: string; items: string[] }[] = [
 export default function AboutPage() {
   return (
     <main className="bg-cream">
-      {/* manifesto */}
-      <section className="mx-auto max-w-[820px] px-5 pt-40 pb-24 text-center md:px-8">
-        <p className="text-[17px] leading-relaxed md:text-[19px]">
-          I&apos;m a product and UI/UX designer with a computer science
-          background, based in Udaipur, India. I take products from problem
-          framing to polished interface — research, flows, design systems,
-          the whole arc.
-        </p>
-        <p className="mt-8 text-[15px] leading-relaxed opacity-75">
-          And I work AI-native: Claude Code, Framer MCP, the new toolchain —
-          so my designs become living prototypes instead of static screens.
-          This site is itself the proof: every pixel designed and
-          art-directed by me, brought to life with my AI toolchain.
-        </p>
+      {/* intro */}
+      <section className="px-5 pt-36 pb-20 md:px-8">
+        <div className="label mb-10 flex items-center gap-3 opacity-70">
+          <span className="bracket" />
+          <span>About</span>
+        </div>
+        <h1 className="serif max-w-[26ch] text-[34px] leading-[1.12] md:text-[56px]">
+          I&apos;m Harshita — a product &amp; UI/UX designer who treats{" "}
+          <em className="serif-italic">curiosity as a tool</em> and AI as a
+          studio.
+        </h1>
+        <div className="mt-12 grid gap-8 md:grid-cols-2">
+          <p className="max-w-[52ch] text-[15px] normal-case leading-relaxed opacity-85">
+            Based in Udaipur, India, with a computer science background (MCA),
+            I take products from problem framing to polished interface —
+            research, flows, design systems, the whole arc. My case studies
+            are self-initiated by choice: each one is a complete product
+            thought through end-to-end, not a fragment of someone else&apos;s
+            brief.
+          </p>
+          <p className="max-w-[52ch] text-[15px] normal-case leading-relaxed opacity-85">
+            I work AI-native — Claude Code, Framer MCP, the connectors most
+            designers haven&apos;t opened yet — so my designs become living
+            prototypes instead of static screens. This site is the proof:
+            every pixel designed and art-directed by me, brought to life with
+            my AI toolchain.
+          </p>
+        </div>
       </section>
 
-      {/* role row */}
-      <section className="label grid grid-cols-1 gap-4 border-t border-ink/10 px-5 py-10 sm:grid-cols-3 md:px-8">
-        <div>
-          <span className="opacity-60">Role:</span> Product Designer
+      {/* role strip */}
+      <section className="label grid grid-cols-1 gap-4 border-t border-ink/10 px-5 py-8 sm:grid-cols-3 md:px-8">
+        <div className="flex items-center gap-3">
+          <span className="rec-dot" style={{ color: "#ff4d1c" }} />
+          <span>Open to product roles</span>
         </div>
-        <div className="sm:text-center">
-          <span className="opacity-60">Base:</span> Udaipur, IN — Remote-ready
-        </div>
-        <div className="sm:text-right">
-          <span className="opacity-60">Status:</span> Open to product roles
-        </div>
+        <div className="sm:text-center">Udaipur, IN — Remote-ready</div>
+        <div className="sm:text-right lowercase">harshitajain828@gmail.com</div>
       </section>
 
       {/* black ledger */}
@@ -97,15 +109,46 @@ export default function AboutPage() {
 
         <div className="mt-24">
           <div className="label mb-6 border-b border-cream/20 pb-2 text-cream/80">
-            How I build:
+            How I work:
           </div>
-          <p className="font-display max-w-[18ch] text-[9vw] leading-[0.95] md:text-[5vw]">
-            Figma → AI toolchain → Live prototype
+          <p className="font-display max-w-[16ch] text-[10vw] leading-[1] md:text-[5.5vw]">
+            Figma → AI toolchain →{" "}
+            <em className="serif-italic font-normal">live prototype</em>
           </p>
         </div>
       </section>
 
-      <FooterStrip dark />
+      {/* colorful bridge to work */}
+      <section className="px-5 py-20 md:px-8">
+        <div className="label mb-8 flex items-center gap-3 opacity-70">
+          <span className="bracket" />
+          <span>The proof</span>
+        </div>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {projects.map((p, i) => (
+            <Link
+              key={p.slug}
+              href={`/work/${p.slug}`}
+              className="group flex min-h-[160px] flex-col justify-between rounded-sm p-5 transition-transform duration-300 hover:-translate-y-1"
+              style={{ backgroundColor: p.accent, color: p.accentFg }}
+            >
+              <span className="mono opacity-70">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <span>
+                <span className="font-display block text-[26px] leading-none">
+                  {p.title}
+                </span>
+                <span className="label mt-2 block opacity-80">
+                  View case study →
+                </span>
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <FooterStrip />
     </main>
   );
 }
