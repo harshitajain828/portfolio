@@ -11,13 +11,13 @@ const steps = [
   },
   {
     n: "02",
-    t: "Build",
-    d: "The design becomes a working product — AI-native workflow with Claude Code, GSAP and modern web tooling. This site is the receipt.",
+    t: "Prototype",
+    d: "AI-native: Claude Code, Framer MCP, the whole new toolchain — designs become real, clickable prototypes in days, not sprints. This site is one.",
   },
   {
     n: "03",
-    t: "Ship",
-    d: "Live, responsive, fast. No handoff gap, no translation loss between the design and what users actually get.",
+    t: "Hand off",
+    d: "A CS background means I speak engineer. Specs, components and edge cases land build-ready — nothing lost in translation.",
   },
 ];
 
@@ -26,7 +26,7 @@ export default function Home() {
     <main>
       {/* identity hero — who, what, available. 3 seconds, no hostage-taking */}
       <section className="flex min-h-[92vh] flex-col justify-end px-5 pb-10 pt-32 md:px-8">
-        <h1 className="font-display text-[16.5vw] leading-[0.86] md:text-[13vw]">
+        <h1 className="font-display text-[14.5vw] leading-[0.92] md:text-[10.5vw]">
           <span className="mask-line">
             <span style={{ animationDelay: "0.1s" }}>Harshita</span>
           </span>
@@ -53,11 +53,11 @@ export default function Home() {
         </h1>
 
         <div className="mt-8 flex flex-wrap items-end justify-between gap-6">
-          <p className="mask-line max-w-[40ch] text-[17px] leading-snug md:text-[20px]">
+          <p className="mask-line max-w-[42ch] text-[17px] leading-snug md:text-[20px]">
             <span style={{ animationDelay: "0.38s" }}>
-              <strong>Product designer who ships</strong> —{" "}
+              <strong>Product designer, AI-native</strong> —{" "}
               <em className="serif-italic text-[1.25em]">
-                designs in Figma, builds in code.
+                fluent in the tools most designers haven&apos;t opened yet.
               </em>
             </span>
           </p>
@@ -79,8 +79,10 @@ export default function Home() {
         <div>
           <p className="serif max-w-[40ch] text-[24px] leading-snug md:text-[32px]">
             I&apos;m a product &amp; UI/UX designer from Udaipur, India, with a
-            computer science background. Most designers stop at the handoff —{" "}
-            <em className="serif-italic">I keep going until it&apos;s live.</em>
+            computer science background. I work AI-native —{" "}
+            <em className="serif-italic">
+              so my designs don&apos;t sit in Figma waiting to become real.
+            </em>
           </p>
           <Link href="/about" className="hover-line label mt-8 inline-block">
             More about me →
@@ -110,7 +112,7 @@ export default function Home() {
       {/* contact CTA */}
       <section className="border-t border-ink/10 px-5 py-28 text-center md:px-8">
         <div className="label mb-6 opacity-70">
-          Have a product that needs designing — and shipping?
+          Have a product that needs designing?
         </div>
         <a
           href="mailto:harshitajain828@gmail.com"

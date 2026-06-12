@@ -20,8 +20,8 @@ export default function FooterStrip({ dark = false }: { dark?: boolean }) {
       <Link href="/contact" className="hover-line hidden sm:block">
         Hire me
       </Link>
-      <span className="hidden lg:block">Design + code by Harshita Jain</span>
-      <span className="mono">AI-native: Claude Code · GSAP</span>
+      <span className="hidden lg:block">Designed by Harshita Jain</span>
+      <span className="mono">Built AI-native: Claude Code · GSAP</span>
     </footer>
   );
 }

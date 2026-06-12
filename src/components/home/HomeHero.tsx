@@ -116,12 +116,12 @@ export default function HomeHero() {
         <div className="label max-w-[240px] text-[15px] leading-tight">
           <strong>I design products.</strong>
           <br />
-          Then I build them myself.
+          AI-native, end to end.
         </div>
         <div className="label max-w-[260px] text-right text-[15px] leading-tight">
-          AI-native workflow.
+          Fluent in the new toolchain.
           <br />
-          <strong>Shipped, not handed off.</strong>
+          <strong>Udaipur → remote.</strong>
         </div>
       </div>
 

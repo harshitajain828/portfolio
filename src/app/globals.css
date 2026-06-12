@@ -10,8 +10,8 @@
 @theme inline {
   --color-cream: var(--cream);
   --color-ink: var(--ink);
-  --font-display: var(--font-anton);
-  --font-ui: var(--font-oswald);
+  --font-display: var(--font-bricolage);
+  --font-ui: var(--font-inter-tight);
   --font-mono: var(--font-roboto-mono);
 }
 
@@ -23,7 +23,7 @@ html {
 body {
   background: var(--cream);
   color: var(--ink);
-  font-family: var(--font-oswald), Verdana, sans-serif;
+  font-family: var(--font-inter-tight), Verdana, sans-serif;
   font-size: 15px;
   line-height: 1.15;
   text-transform: uppercase;
@@ -37,9 +37,10 @@ body {
 
 /* --- type utilities --- */
 .font-display {
-  font-family: var(--font-anton), Impact, sans-serif;
-  letter-spacing: -0.03em;
-  line-height: 0.92;
+  font-family: var(--font-bricolage), Impact, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
 }
 
 .label {
@@ -121,6 +122,24 @@ body {
   border-radius: 50%;
   background: currentColor;
   animation: blink 1.6s steps(1) infinite;
+}
+
+/* loader */
+@keyframes loaderUp {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes loaderFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* masked line-rise entrance */

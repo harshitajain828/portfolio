@@ -43,7 +43,7 @@ export default function CaseView({
             section so it scrolls away with it instead of haunting the footer */}
         <div className="pointer-events-none absolute inset-0 z-30">
           <div className="sticky top-0 flex h-screen flex-col justify-between">
-            <h1 className="font-display pt-[13vh] text-center text-[13vw] leading-none text-cream mix-blend-difference md:text-[9vw]">
+            <h1 className="font-display pt-[13vh] text-center text-[11vw] leading-none text-cream mix-blend-difference md:text-[7vw]">
               {project.title}
             </h1>
             <div className="flex items-end justify-between px-5 pb-5 md:px-8">

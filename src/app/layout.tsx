@@ -1,18 +1,23 @@
 import type { Metadata } from "next";
-import { Anton, Instrument_Serif, Oswald, Roboto_Mono } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Inter_Tight,
+  Instrument_Serif,
+  Roboto_Mono,
+} from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Hud from "@/components/Hud";
 import Loader from "@/components/Loader";
+import PageTransition from "@/components/PageTransition";
 
-const anton = Anton({
-  variable: "--font-anton",
-  weight: "400",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
 });
 
-const oswald = Oswald({
-  variable: "--font-oswald",
+const interTight = Inter_Tight({
+  variable: "--font-inter-tight",
   weight: ["400", "500", "600"],
   subsets: ["latin"],
 });
@@ -33,7 +38,7 @@ const robotoMono = Roboto_Mono({
 export const metadata: Metadata = {
   title: "Harshita Jain® — Product Designer",
   description:
-    "Product & UI/UX designer. I design products, then I build them myself — Figma to shipped, AI-native end to end.",
+    "AI-native product & UI/UX designer — from research and Figma to live prototypes with the new AI toolchain.",
 };
 
 export default function RootLayout({
@@ -44,10 +49,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${oswald.variable} ${robotoMono.variable} ${instrumentSerif.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${interTight.variable} ${robotoMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-cream text-ink">
         <Loader />
+        <PageTransition />
         <Hud />
         <SmoothScroll>{children}</SmoothScroll>
       </body>

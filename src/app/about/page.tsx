@@ -54,13 +54,14 @@ export default function AboutPage() {
         <p className="text-[17px] leading-relaxed md:text-[19px]">
           I&apos;m a product and UI/UX designer with a computer science
           background, based in Udaipur, India. I take products from problem
-          framing to shipped interface — and because I build what I design,
-          nothing gets lost in the handoff.
+          framing to polished interface — research, flows, design systems,
+          the whole arc.
         </p>
         <p className="mt-8 text-[15px] leading-relaxed opacity-75">
-          My workflow is AI-native: Figma for design, Claude Code and modern
-          web tooling for the build. This site is itself the proof — designed
-          and coded by me.
+          And I work AI-native: Claude Code, Framer MCP, the new toolchain —
+          so my designs become living prototypes instead of static screens.
+          This site is itself the proof: every pixel designed and
+          art-directed by me, brought to life with my AI toolchain.
         </p>
       </section>
 
@@ -99,7 +100,7 @@ export default function AboutPage() {
             How I build:
           </div>
           <p className="font-display max-w-[18ch] text-[9vw] leading-[0.95] md:text-[5vw]">
-            Figma → Claude Code → Live product
+            Figma → AI toolchain → Live prototype
           </p>
         </div>
       </section>

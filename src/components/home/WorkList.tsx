@@ -30,7 +30,7 @@ export default function WorkList() {
                 <span>{p.type}</span>
                 <span className="mono">{p.year}</span>
               </div>
-              <h2 className="font-display text-[15vw] leading-[0.9] md:text-[6.5vw]">
+              <h2 className="font-display text-[12vw] leading-[0.95] md:text-[5vw]">
                 {p.title}
               </h2>
               <p className="serif-italic mt-5 max-w-[30ch] text-[22px] leading-snug md:text-[28px]">
