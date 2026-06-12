@@ -142,6 +142,27 @@ body {
   }
 }
 
+/* hero doodle trail */
+@keyframes doodlePop {
+  0% {
+    opacity: 0;
+    scale: 0;
+  }
+  30% {
+    opacity: 1;
+    scale: 1.05;
+  }
+  70% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 0.7;
+    translate: 0 -14px;
+  }
+}
+
 /* masked line-rise entrance */
 @keyframes rise {
   from {
