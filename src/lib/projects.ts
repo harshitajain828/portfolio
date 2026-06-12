@@ -6,6 +6,14 @@ export type Narrative = {
   outcome: string;
   learnings: string[];
   stats: string[];
+  insights?: { title: string; body: string }[];
+  flow?: { steps: string[]; note?: string };
+  compare?: {
+    theirLabel: string;
+    ourLabel: string;
+    theirs: string[];
+    ours: string[];
+  };
 };
 
 export type Project = {
@@ -74,6 +82,45 @@ export const projects: Project[] = [
         "Thinking like a business: which features earn their place against monetization and build cost, not just user delight.",
       ],
       stats: ["<90 sec to a pick", "45 hrs/yr wasted choosing", "2 matching modes"],
+      insights: [
+        {
+          title: "Decision fatigue is the real product problem",
+          body: "People scroll, sample trailers, second-guess, and give up — the catalog isn't the bottleneck, the deciding is.",
+        },
+        {
+          title: "Choosing is social",
+          body: "A large share of 'what should we watch' happens in groups — the decision is a negotiation, not a query.",
+        },
+        {
+          title: "Context beats catalog",
+          body: "Mood and available time predict what gets watched better than genre taxonomy does.",
+        },
+      ],
+      flow: {
+        steps: [
+          "Pick your subscriptions",
+          "Watch 3 clips",
+          "Like / dislike",
+          "Get 3 picks",
+        ],
+        note: "Quick Match — under 90 seconds end to end.",
+      },
+      compare: {
+        theirLabel: "Endless browse",
+        ourLabel: "StreamNow",
+        theirs: [
+          "Rows of thumbnails with no opinion",
+          "Trailers as commitment tests",
+          "Catalog-first navigation",
+          "Group nights become remote wars",
+        ],
+        ours: [
+          "Exactly three recommendations",
+          "A 90-second match flow",
+          "Mood + duration come first",
+          "Watch Party settles the debate",
+        ],
+      },
     },
   },
   {
@@ -121,6 +168,40 @@ export const projects: Project[] = [
         "Next time: empathy mapping earlier, and lo-fi prototype testing before committing to features.",
       ],
       stats: ["6–12% of women affected", "3 users + 1 expert", "Yearly circular model"],
+      insights: [
+        {
+          title: "“I don't know who to talk to”",
+          body: "Isolation after a PCOS diagnosis came up again and again — support mattered more than any single feature.",
+        },
+        {
+          title: "Taboo creates information gaps",
+          body: "Because menstrual health stays unspoken, patients struggle to find information that applies to them.",
+        },
+        {
+          title: "Irregularity reads as an error state",
+          body: "Standard 28-day calendar UIs make irregular cycles feel 'abnormal' — the UI itself was hurting users.",
+        },
+      ],
+      flow: {
+        steps: ["Daily check-in", "Log symptoms", "See insights", "Lean on community"],
+        note: "Tracking, understanding and support in one loop.",
+      },
+      compare: {
+        theirLabel: "Typical tracker",
+        ourLabel: "CycleSync",
+        theirs: [
+          "Assumes a regular 28-day loop",
+          "Mental health lives in a separate app",
+          "Generic one-size content feed",
+          "Fixed layout, fixed assumptions",
+        ],
+        ours: [
+          "Yearly circular model, built for irregularity",
+          "Mood and wellbeing tracked alongside cycles",
+          "AI-filtered resources by symptom",
+          "Everything personalisable",
+        ],
+      },
     },
   },
   {
@@ -163,6 +244,34 @@ export const projects: Project[] = [
         "Presenting under time pressure is its own skill: the story of the design matters as much as the screens.",
       ],
       stats: ["7-hour sprint", "Solo, end-to-end", "AI-guided habits"],
+      insights: [
+        {
+          title: "Digital money removed the pause",
+          body: "Cash forced a moment of reflection at every payment; tap-to-pay deleted it — and saving lost its trigger.",
+        },
+        {
+          title: "Charts answer the wrong question",
+          body: "Dashboards explain what happened. Habit change needs 'what should I do right now'.",
+        },
+        {
+          title: "Nudges work at the decision moment",
+          body: "A savings prompt inside the spending flow beats a guilt-trip report at the end of the month.",
+        },
+      ],
+      compare: {
+        theirLabel: "Finance dashboards",
+        ourLabel: "Finance AI",
+        theirs: [
+          "Reports after the money is gone",
+          "Charts you have to interpret",
+          "Guilt as the motivator",
+        ],
+        ours: [
+          "Coaching at the decision moment",
+          "One clear next move",
+          "Habits framed as wins",
+        ],
+      },
     },
   },
   {
@@ -209,6 +318,24 @@ export const projects: Project[] = [
         "Designing against real build constraints (React components, responsive behavior) makes the design stronger, not smaller.",
       ],
       stats: ["Storefront + ops", "Design system → React", "Responsive-first"],
+      insights: [
+        {
+          title: "The shopper wants speed",
+          body: "Parents shop in stolen minutes — discovery and checkout had to lose every unnecessary decision.",
+        },
+        {
+          title: "The operator runs the store",
+          body: "Category management and workflow tools are the invisible half of e-commerce — designed, not bolted on.",
+        },
+        {
+          title: "The developer has to build it",
+          body: "Every pattern was designed as a React-mappable component, so the system survives contact with the codebase.",
+        },
+      ],
+      flow: {
+        steps: ["Land", "Browse by category", "Product page", "Checkout"],
+        note: "The fewest decisions between 'that's cute' and 'ordered'.",
+      },
     },
   },
 ];

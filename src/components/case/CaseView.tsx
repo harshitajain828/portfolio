@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
 import FooterStrip from "@/components/FooterStrip";
+import { Insights, Flow, Compare, Signature } from "@/components/case/blocks";
 
 export default function CaseView({
   project,
@@ -97,6 +98,12 @@ export default function CaseView({
         </p>
       </section>
 
+      {/* ── research insights ── */}
+      {n.insights && <Insights items={n.insights} accent={project.accent} />}
+
+      {/* ── bespoke signature graphic ── */}
+      <Signature project={project} />
+
       {/* ── first image, full bleed ── */}
       {heroExtra && (
         <div className="relative aspect-[16/9] w-full">
@@ -108,6 +115,16 @@ export default function CaseView({
             className="object-cover"
           />
         </div>
+      )}
+
+      {/* ── core flow diagram ── */}
+      {n.flow && (
+        <Flow
+          steps={n.flow.steps}
+          note={n.flow.note}
+          accent={project.accent}
+          accentFg={project.accentFg}
+        />
       )}
 
       {/* ── decisions ── */}
@@ -135,6 +152,15 @@ export default function CaseView({
           ))}
         </div>
       </section>
+
+      {/* ── the shift: comparison ── */}
+      {n.compare && (
+        <Compare
+          {...n.compare}
+          accent={project.accent}
+          accentFg={project.accentFg}
+        />
+      )}
 
       {/* ── gallery ── */}
       {gallery.length > 0 && (
