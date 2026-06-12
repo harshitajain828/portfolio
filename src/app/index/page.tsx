@@ -33,9 +33,12 @@ export default function IndexPage() {
           <div className="label mt-14 mb-6 border-b border-cream/20 pb-2">
             Playground
           </div>
-          <p className="text-[13px] text-cream/45">
-            Motion + interaction experiments — coming soon.
-          </p>
+          <Link
+            href="/playground"
+            className="text-[13px] text-cream/45 transition-colors hover:text-cream"
+          >
+            01 — Deck of cards (Lenis + GSAP) →
+          </Link>
         </div>
 
         {/* center thumbnails */}

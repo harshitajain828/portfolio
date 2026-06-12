@@ -58,7 +58,10 @@ export default function Hud() {
           <Link href="/work" className="hover-line">
             Work<sup className="mono">({projects.length})</sup>
           </Link>
-          <Link href="/index" className="hover-line hidden sm:block">
+          <Link href="/playground" className="hover-line hidden sm:block">
+            Playground
+          </Link>
+          <Link href="/index" className="hover-line hidden md:block">
             Index
           </Link>
           <Link href="/about" className="hover-line">

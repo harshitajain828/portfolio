@@ -111,6 +111,24 @@ body {
   animation: blink 1.6s steps(1) infinite;
 }
 
+/* masked line-rise entrance */
+@keyframes rise {
+  from {
+    transform: translateY(110%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.mask-line {
+  display: block;
+  overflow: hidden;
+}
+.mask-line > * {
+  display: block;
+  animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 a {
   text-decoration: none;
   color: inherit;
