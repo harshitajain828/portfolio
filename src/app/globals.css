@@ -55,6 +55,18 @@ body {
   letter-spacing: 0.04em;
 }
 
+.serif {
+  font-family: var(--font-instrument), Georgia, serif;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.serif-italic {
+  font-family: var(--font-instrument), Georgia, serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 /* --- ruler tick strip (nite-riot scrubber) --- */
 .ruler {
   height: 14px;

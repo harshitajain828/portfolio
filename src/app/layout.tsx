@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Anton, Oswald, Roboto_Mono } from "next/font/google";
+import { Anton, Instrument_Serif, Oswald, Roboto_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import Hud from "@/components/Hud";
@@ -14,6 +14,13 @@ const anton = Anton({
 const oswald = Oswald({
   variable: "--font-oswald",
   weight: ["400", "500", "600"],
+  subsets: ["latin"],
+});
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
+  weight: "400",
+  style: ["normal", "italic"],
   subsets: ["latin"],
 });
 
@@ -37,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${anton.variable} ${oswald.variable} ${robotoMono.variable} h-full antialiased`}
+      className={`${anton.variable} ${oswald.variable} ${robotoMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-cream text-ink">
         <Loader />

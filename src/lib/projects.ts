@@ -22,6 +22,7 @@ export type Project = {
   cover: string;
   images: string[];
   accent: string;
+  accentFg: string;
   narrative: Narrative;
 };
 
@@ -44,6 +45,7 @@ export const projects: Project[] = [
     cover: "/projects/streamnow/cover.png",
     images: img("streamnow", ["01.png", "02.png", "03.png", "04.png", "05.png", "06.png", "07.png"]),
     accent: "#ff4d1c",
+    accentFg: "#fcfaf5",
     narrative: {
       problem:
         "People spend around 45 hours a year just deciding what to watch. Streaming catalogs are huge, browsing UIs are optimized for inventory rather than decisions, and the result is decision paralysis — you scroll, you sample trailers, you give up, and your downtime shrinks. The design question: how do you get someone from “opening the app” to “watching something they'll enjoy” in under two minutes?",
@@ -89,6 +91,7 @@ export const projects: Project[] = [
     cover: "/projects/cyclesync/cover.png",
     images: img("cyclesync", ["01.png", "02.png", "03.png", "04.png", "05.png", "06.png", "07.png"]),
     accent: "#f48ab4",
+    accentFg: "#0e0e0e",
     narrative: {
       problem:
         "PCOS affects roughly 6–12% of reproductive-aged women, and the experience is isolating: menstrual health is taboo, patients often don't know who to talk to after diagnosis, and mainstream tracking apps make it worse — their monthly-calendar model assumes regular cycles, so irregularity reads as an error state. Patients told me it made them feel “abnormal.” Mental and emotional wellbeing, the hardest part of PCOS, is absent from these products entirely.",
@@ -135,6 +138,7 @@ export const projects: Project[] = [
     cover: "/projects/finance-ai/cover.png",
     images: [],
     accent: "#437ee6",
+    accentFg: "#fcfaf5",
     narrative: {
       problem:
         "Digital money removed every point of friction from spending — and with it, every natural moment of reflection. Saving became invisible: there's no equivalent of watching cash leave your wallet. The brief: design a web platform that fosters mindful spending and savings habits, and counters the negative behavioral effects of digital money.",
@@ -176,6 +180,7 @@ export const projects: Project[] = [
     cover: "/projects/mushroom-juniors/cover.png",
     images: img("mushroom-juniors", ["01.png", "02.png", "03.png", "04.png"]),
     accent: "#c8e84f",
+    accentFg: "#0e0e0e",
     narrative: {
       problem:
         "A juniors' clothing brand needs an e-commerce experience that actually reflects its fresh identity — vibrant without being noisy — while solving the unglamorous half of commerce: product browsing that converts, checkout that doesn't leak, operational workflows for the people running the store, and reliability across every device a parent might shop on.",

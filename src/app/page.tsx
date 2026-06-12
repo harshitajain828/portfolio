@@ -1,6 +1,7 @@
 import Link from "next/link";
 import WorkList from "@/components/home/WorkList";
 import FooterStrip from "@/components/FooterStrip";
+import { projects } from "@/lib/projects";
 
 const steps = [
   {
@@ -30,21 +31,38 @@ export default function Home() {
             <span style={{ animationDelay: "0.1s" }}>Harshita</span>
           </span>
           <span className="mask-line">
-            <span style={{ animationDelay: "0.22s" }}>
+            <span
+              className="items-center gap-[2vw]"
+              style={{ animationDelay: "0.22s", display: "flex" }}
+            >
               Jain<sup className="align-super text-[2.5vw]">®</sup>
+              {/* project accent pills */}
+              <span className="ml-[2vw] hidden items-center gap-3 md:flex">
+                {projects.map((p) => (
+                  <Link
+                    key={p.slug}
+                    href={`/work/${p.slug}`}
+                    aria-label={p.title}
+                    className="block h-[5.5vw] w-[2.6vw] rounded-full transition-transform duration-300 hover:scale-110"
+                    style={{ backgroundColor: p.accent }}
+                  />
+                ))}
+              </span>
             </span>
           </span>
         </h1>
 
         <div className="mt-8 flex flex-wrap items-end justify-between gap-6">
-          <p className="mask-line max-w-[34ch] text-[17px] leading-snug md:text-[19px]">
+          <p className="mask-line max-w-[40ch] text-[17px] leading-snug md:text-[20px]">
             <span style={{ animationDelay: "0.38s" }}>
-              <strong>Product designer who ships</strong> — designs in Figma,
-              builds in code.
+              <strong>Product designer who ships</strong> —{" "}
+              <em className="serif-italic text-[1.25em]">
+                designs in Figma, builds in code.
+              </em>
             </span>
           </p>
           <div className="label flex items-center gap-3">
-            <span className="rec-dot" />
+            <span className="rec-dot" style={{ color: "#ff4d1c" }} />
             <span>Open to product roles · Remote-ready</span>
           </div>
         </div>
@@ -59,10 +77,10 @@ export default function Home() {
           <span>About</span>
         </div>
         <div>
-          <p className="max-w-[44ch] text-[20px] normal-case leading-relaxed md:text-[24px]">
+          <p className="serif max-w-[40ch] text-[24px] leading-snug md:text-[32px]">
             I&apos;m a product &amp; UI/UX designer from Udaipur, India, with a
-            computer science background. Most designers stop at the handoff —
-            I keep going until it&apos;s live.
+            computer science background. Most designers stop at the handoff —{" "}
+            <em className="serif-italic">I keep going until it&apos;s live.</em>
           </p>
           <Link href="/about" className="hover-line label mt-8 inline-block">
             More about me →
@@ -98,7 +116,8 @@ export default function Home() {
           href="mailto:harshitajain828@gmail.com"
           className="font-display inline-block text-[11vw] leading-none transition-opacity hover:opacity-60 md:text-[7vw]"
         >
-          Let&apos;s work together →
+          Let&apos;s work{" "}
+          <em className="serif-italic font-normal">together</em> →
         </a>
       </section>
 
