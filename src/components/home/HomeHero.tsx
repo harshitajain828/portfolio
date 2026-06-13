@@ -179,7 +179,7 @@ export default function HomeHero() {
           <span className="mono">©2026</span>
           <span className="hidden md:block">Last update: Jun 2026</span>
           <span className="mono">
-            0{active + 1} <span className="opacity-50">//</span> 0
+            0{active + 1} <span className="opacity-50">{"//"}</span> 0
             {projects.length}
           </span>
           <span className="hidden text-right md:block">{p.statement}</span>

@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Harshita Jain — Portfolio
 
-## Getting Started
+Personal portfolio for Harshita Jain, an AI-native product & UI/UX designer.
 
-First, run the development server:
+Designed and built with an AI-native workflow. Live case studies, an interactive
+deck-of-cards playground, and an editorial index — all hand-coded.
+
+## Stack
+
+- **Next.js 16** (App Router)
+- **TypeScript** + **Tailwind CSS v4**
+- **GSAP + ScrollTrigger** and **Lenis** for scroll-driven motion
+- Type: Bricolage Grotesque · Inter Tight · Instrument Serif · Roboto Mono (`next/font`)
+
+## Develop
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm run lint     # eslint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Deploy
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Zero-config on [Vercel](https://vercel.com) — framework preset is pinned to Next.js
+via `vercel.json`. Set `NEXT_PUBLIC_SITE_URL` to the production domain so Open Graph
+and sitemap URLs resolve correctly.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/
+  app/            routes — home, work, work/[slug], about, contact, directory, playground
+  components/     Hud, Loader, PageTransition, SmoothScroll, home/, case/
+  lib/            projects.ts — case-study content
+public/projects/  case-study imagery
+```

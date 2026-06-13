@@ -35,10 +35,56 @@ const robotoMono = Roboto_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000");
+
+const title = "Harshita Jain® — Product Designer";
+const description =
+  "AI-native product & UI/UX designer — from research and Figma to live prototypes with the new AI toolchain.";
+
 export const metadata: Metadata = {
-  title: "Harshita Jain® — Product Designer",
-  description:
-    "AI-native product & UI/UX designer — from research and Figma to live prototypes with the new AI toolchain.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: title,
+    template: "%s — Harshita Jain®",
+  },
+  description,
+  applicationName: "Harshita Jain — Portfolio",
+  authors: [{ name: "Harshita Jain" }],
+  creator: "Harshita Jain",
+  keywords: [
+    "Harshita Jain",
+    "product designer",
+    "UI/UX designer",
+    "AI-native designer",
+    "design engineer",
+    "portfolio",
+    "Figma",
+    "Udaipur",
+    "India",
+  ],
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    siteName: "Harshita Jain®",
+    title,
+    description,
+    url: siteUrl,
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
 };
 
 export default function RootLayout({

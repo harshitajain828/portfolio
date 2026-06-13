@@ -32,7 +32,7 @@ export default function Hud() {
         {/* left — location + clock */}
         <div className="label hidden items-center gap-3 md:flex">
           <span>Udaipur, (IN)</span>
-          <span className="opacity-50">//</span>
+          <span className="opacity-50">{"//"}</span>
           <span className="flex items-center gap-2">
             <span className="rec-dot" />
             {time}
@@ -61,7 +61,7 @@ export default function Hud() {
           <Link href="/playground" className="hover-line hidden sm:block">
             Playground
           </Link>
-          <Link href="/index" className="hover-line hidden md:block">
+          <Link href="/directory" className="hover-line hidden md:block">
             Index
           </Link>
           <Link href="/about" className="hover-line">
