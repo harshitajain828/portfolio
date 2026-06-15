@@ -130,6 +130,97 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "plumb",
+    title: "Plumb",
+    year: "2026",
+    role: "Product Designer",
+    type: "Self-initiated concept",
+    skills: ["Product Design", "Enterprise UX", "Design Systems", "Fintech / Ops"],
+    tools: ["Figma", "Claude + Figma MCP"],
+    summary:
+      "Releasing a high-value wire is a single human action that moves real money in seconds and usually can’t be clawed back — yet the tools optimise for speed (Bloomberg) or bolt control onto decades-old forms (bank portals). Plumb is a desktop terminal built for that one irreversible moment: it makes a dense payment instruction instantly legible, forces the operator to actively confirm the amount, and rebuilds four-eyes review around what actually changed — so the catastrophic miss is caught before money leaves the building.",
+    statement: "Nothing leaves until it’s true.",
+    outcomeLine: "A desktop release terminal · the irreversible-money moment, designed to prevent the catastrophic miss",
+    cover: "/projects/plumb/cover.png",
+    images: img("plumb", ["01.png", "02.png", "03.png", "04.png"]),
+    accent: "#0F6E66",
+    accentFg: "#F7F5EF",
+    narrative: {
+      problem:
+        "A mis-keyed digit or a stale beneficiary on an outbound wire is irreversible and instantly catastrophic. The precedents are real (gathered from press during research, and flagged as such in the work): Citigroup’s 2022 input slip entered a ~$444bn order instead of ~$58m; Deutsche Bank once paid a hedge fund $6bn confusing gross for net. Misdirected-payment and business-email-compromise fraud, which quietly change the beneficiary account, drive billions in losses a year. The deeper problem is the tools: payment-ops analysts re-key across separate portals and spreadsheets, and four-eyes ‘maker-checker’ controls are bolted onto interfaces never designed for them — so the checker re-approves a flat list of 40 identical-looking fields without truly seeing what changed. Existing software prizes either speed (Bloomberg) or control (bank portals), but none makes the release moment itself its design surface.",
+      decisions: [
+        {
+          title: "Light ‘ink-on-paper’, not another dark terminal",
+          body: "Chose a high-contrast, document-like light UI so amounts and IBANs are maximally legible and color is reserved to mean something — a signal (caution, stop, cleared, verified), never decoration. Tradeoff: it defies the ‘serious finance = dark Bloomberg’ expectation and looks less ‘hardcore’ — the bet is that fewer misreads matters more than looking the part.",
+        },
+        {
+          title: "Make confirmation effortful — on purpose",
+          body: "The Confirm-the-Amount ritual renders the figure three ways at once — grouped digits, amount-in-words, and a scale bar against this beneficiary’s history and the operator’s limit — and requires actively re-typing it to proceed. Tradeoff: a few deliberate seconds at exactly the dangerous step, while everything else stays keyboard-fast — because a slow safe tool gets bypassed under cutoff pressure, but a 10× or 100× slip has to be physically caught, not skimmed past.",
+        },
+        {
+          title: "Lead the checker with a diff, not a form",
+          body: "Four-eyes is rebuilt around ‘what changed and what’s anomalous’ — the review screen opens on a diff against the last payment to this beneficiary, with the changed amount highlighted and each ranked flag requiring acknowledgement. Tradeoff: more deliberate approvals, in exchange for turning rubber-stamping back into real review that catches a changed beneficiary or an outlier amount.",
+        },
+        {
+          title: "Explainable flags, never a black-box score",
+          body: "Every anomaly is a plain-language, ranked reason (‘41× this beneficiary’s median’, ‘account changed 3 hours ago’, ‘near currency cutoff’) — not an ML risk number. Tradeoff: more design work per rule and less ‘AI magic’, but a flag the operator can understand and act on, which is the whole point of keeping a human in control.",
+        },
+        {
+          title: "Treat reference data as the real threat surface",
+          body: "Beneficiary/account changes are first-class: dual-controlled, diffed before→after, timestamped, and shown with their provenance — because misdirected-payment fraud attacks the account, not the amount. Tradeoff: more friction on a ‘boring’ settings edit, placed exactly where the costliest fraud actually happens.",
+        },
+      ],
+      outcome:
+        "Plumb is a concept, framed honestly — no real users, clients, or production metrics, and every cited figure is flagged as researched press, not a measured result. The deliverable is a focused desktop terminal designed around the release moment: the release queue with a value-at-risk and cutoff view, the Confirm-the-Amount ritual, diff-led four-eyes approval, dual-controlled beneficiary changes, and a per-currency cutoff dashboard — on a small ‘ink-on-paper’ design system where color only ever signals. Success is defined as testable hypotheses for the next step — fewer misread amounts and IBANs, injected magnitude errors caught by the ritual, and checkers rejecting planted bad-beneficiary changes more often than with a flat field list — to be validated in moderated usability tests with operations professionals.",
+      learnings: [
+        "Designing for an irreversible action flips the usual goal: the win is sometimes adding friction — precisely, at the one step where speed is dangerous — not removing it.",
+        "Legibility is a safety feature. Tabular monospace amounts, amount-in-words, and a diff aren’t decoration; they’re how a human catches the error a form lets slide.",
+        "Control theatre is worse than no control. A four-eyes step that shows the checker 40 identical fields teaches them to rubber-stamp — leading with the diff is what makes the second pair of eyes real.",
+        "It made the contrast with my agent-oversight project sharp: same rigour, opposite ends — one supervises autonomous agents, the other is an instrument for a human doing the work by hand.",
+      ],
+      stats: ["Nothing leaves until it’s true", "Confirm-the-amount ritual", "Four-eyes, led by the diff"],
+      insights: [
+        {
+          title: "The release moment gets one chance",
+          body: "Unlike a reconciliation exception (cleaned up after the fact), a wire moves real money in seconds and can’t be clawed back. The UX has exactly one shot to prevent the mistake.",
+        },
+        {
+          title: "Four-eyes is often theatre",
+          body: "Maker-checker is a core financial control, but bolted onto a flat field list the checker re-approves what they can’t really see. Real review needs the diff up front.",
+        },
+        {
+          title: "Fraud attacks the account, not the amount",
+          body: "Misdirected-payment and BEC fraud quietly change the beneficiary account. So the beneficiary record — not just the payment — has to be the dual-controlled, diffed surface.",
+        },
+      ],
+      flow: {
+        steps: [
+          "Maker enters the payment",
+          "Confirm the amount (ritual)",
+          "Checker reviews the diff",
+          "Hold to approve & release",
+        ],
+        note: "Two people, one irreversible action — designed to be deliberate, not slow.",
+      },
+      compare: {
+        theirLabel: "Bank portals & terminals",
+        ourLabel: "Plumb",
+        theirs: [
+          "Speed (Bloomberg) or bolt-on control",
+          "Amount shown only to glance past",
+          "Checker sees a flat 40-field list",
+          "Beneficiary changes buried in settings",
+        ],
+        ours: [
+          "Legibility + a deliberate amount ritual",
+          "Re-affirm the magnitude before release",
+          "Four-eyes led by the diff + ranked flags",
+          "Dual-controlled, diffed beneficiary edits",
+        ],
+      },
+    },
+  },
+  {
     slug: "streamnow",
     title: "StreamNow",
     year: "2025",

@@ -27,7 +27,7 @@ export default function WorkIndex() {
           </sup>
         </h1>
         <p className="serif-italic mt-3 text-[20px] opacity-80 md:text-[26px]">
-          Three products, designed end-to-end.
+          Four products, designed end-to-end.
         </p>
       </div>
 
