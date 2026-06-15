@@ -10,7 +10,7 @@ export default function FooterStrip({ dark = false }: { dark?: boolean }) {
       }`}
     >
       <span className="mono">©2026</span>
-      <span className="hidden md:block">Last update: Jun 2026</span>
+      <span className="hidden md:block">Udaipur, India</span>
       <a
         href="mailto:harshitajain828@gmail.com"
         className="hover-line lowercase"
@@ -18,10 +18,9 @@ export default function FooterStrip({ dark = false }: { dark?: boolean }) {
         Email
       </a>
       <Link href="/contact" className="hover-line hidden sm:block">
-        Hire me
+        Contact
       </Link>
       <span className="hidden lg:block">Designed by Harshita Jain</span>
-      <span className="mono">Built AI-native: Claude Code · GSAP</span>
     </footer>
   );
 }

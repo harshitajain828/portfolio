@@ -2,7 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/lib/projects";
 import FooterStrip from "@/components/FooterStrip";
-import { Insights, Flow, Compare, Signature } from "@/components/case/blocks";
+import {
+  Insights,
+  Flow,
+  Compare,
+  Signature,
+  Reveal,
+  Kicker,
+  ScrollProgress,
+} from "@/components/case/blocks";
 
 export default function CaseView({
   project,
@@ -21,6 +29,8 @@ export default function CaseView({
 
   return (
     <main className="bg-cream text-ink">
+      <ScrollProgress accent={project.accent} />
+
       {/* ── hero: the project's color world ── */}
       <section
         className="relative flex min-h-screen flex-col overflow-hidden px-5 pt-28 md:px-10"
@@ -40,15 +50,26 @@ export default function CaseView({
           </span>
         </div>
 
-        <h1 className="font-display mt-8 text-[15vw] leading-[0.93] md:text-[10vw]">
-          {project.title}
+        <div className="label mt-10 flex items-center gap-3 opacity-90">
+          <span className="mono">✦</span>
+          <span>{project.role}</span>
+        </div>
+
+        <h1 className="font-display mt-4 text-[15vw] leading-[0.93] md:text-[10vw]">
+          <span className="mask-line">
+            <span>{project.title}</span>
+          </span>
         </h1>
-        <p className="serif-italic mt-4 max-w-[28ch] text-[22px] leading-snug md:text-[32px]">
+        <p className="serif-italic mt-5 max-w-[28ch] text-[22px] leading-snug md:text-[34px]">
           {project.statement}
         </p>
 
         {/* cover bleeding off the bottom edge */}
         <div className="relative mx-auto mt-12 w-full max-w-[860px] flex-1">
+          <div className="label absolute -top-7 left-0 hidden items-center gap-2 opacity-70 md:flex">
+            <span className="mono">↓</span>
+            <span>Scroll</span>
+          </div>
           <div className="relative h-full min-h-[42vh] overflow-hidden rounded-t-md shadow-[0_-20px_80px_rgba(0,0,0,0.25)]">
             <Image
               src={project.cover}
@@ -62,18 +83,68 @@ export default function CaseView({
         </div>
       </section>
 
+      {/* ── TL;DR: the whole story in ~5 seconds ── */}
+      <section className="border-b border-ink/10 px-5 py-14 md:px-10 md:py-16">
+        <Reveal>
+          <Kicker mark="TL;DR" label="The 5-second version" accent={project.accent} />
+        </Reveal>
+        <div className="mt-8 grid gap-10 md:grid-cols-[1.1fr_1fr] md:gap-16">
+          <Reveal>
+            <p className="serif max-w-[32ch] text-[22px] normal-case leading-snug md:text-[28px]">
+              {project.statement}
+            </p>
+            <div className="label mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 opacity-70">
+              <span>{project.role}</span>
+              <span style={{ color: project.accent }}>/</span>
+              <span>{project.type}</span>
+              <span style={{ color: project.accent }}>/</span>
+              <span className="mono">{project.year}</span>
+            </div>
+          </Reveal>
+          <Reveal delay={100} className="md:border-l md:border-ink/10 md:pl-16">
+            <div className="label mb-4 opacity-50">Key moves</div>
+            <ul className="flex flex-col gap-3">
+              {n.decisions.slice(0, 3).map((d, i) => (
+                <li key={d.title} className="flex gap-3 text-[14px] normal-case leading-snug">
+                  <span className="mono mt-[1px]" style={{ color: project.accent }}>
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span>{d.title}</span>
+                </li>
+              ))}
+            </ul>
+            <div className="label mb-1 mt-7 opacity-50">Outcome</div>
+            <p className="text-[14px] normal-case leading-snug opacity-80">
+              {project.outcomeLine}
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── spec strip ── */}
       <section className="grid grid-cols-2 gap-6 border-b border-ink/10 px-5 py-10 md:grid-cols-4 md:px-10">
-        <Spec k="Role" v={project.role} />
-        <Spec k="Type" v={project.type} />
-        <Spec k="Skills" v={project.skills.join(" · ")} />
-        <Spec k="Tools" v={project.tools.join(" · ")} />
+        <Spec k="Role" v={project.role} accent={project.accent} />
+        <Spec k="Type" v={project.type} accent={project.accent} />
+        <Spec k="Skills" v={project.skills.join(" · ")} accent={project.accent} />
+        <Spec k="Tools" v={project.tools.join(" · ")} accent={project.accent} />
+      </section>
+
+      {/* ── lead: the project in one breath (summary) ── */}
+      <section className="grid gap-8 px-5 py-20 md:grid-cols-[220px_1fr] md:px-10 md:py-28">
+        <Reveal>
+          <Kicker mark="00" label="In short" accent={project.accent} />
+        </Reveal>
+        <Reveal y={28}>
+          <p className="serif max-w-[40ch] text-[24px] normal-case leading-[1.35] md:text-[34px]">
+            {project.summary}
+          </p>
+        </Reveal>
       </section>
 
       {/* ── stats ── */}
-      <section className="grid gap-10 border-b border-ink/10 px-5 py-16 md:grid-cols-3 md:px-10">
+      <section className="grid gap-10 border-y border-ink/10 px-5 py-16 md:grid-cols-3 md:px-10">
         {n.stats.map((s, i) => (
-          <div key={s}>
+          <Reveal key={s} delay={i * 100} className="border-t border-ink/10 pt-5">
             <div className="mono mb-3 opacity-50">
               {String(i + 1).padStart(2, "0")}
             </div>
@@ -83,19 +154,20 @@ export default function CaseView({
             >
               {s}
             </div>
-          </div>
+          </Reveal>
         ))}
       </section>
 
       {/* ── problem ── */}
       <section className="grid gap-8 px-5 py-20 md:grid-cols-[220px_1fr] md:px-10 md:py-28">
-        <div className="label flex items-start gap-3 opacity-70">
-          <span className="mono">01</span>
-          <span>The problem:</span>
-        </div>
-        <p className="serif max-w-[46ch] text-[22px] normal-case leading-[1.4] md:text-[30px]">
-          {n.problem}
-        </p>
+        <Reveal>
+          <Kicker mark="01" label="The problem" accent={project.accent} />
+        </Reveal>
+        <Reveal y={28}>
+          <p className="serif max-w-[46ch] text-[22px] normal-case leading-[1.4] md:text-[30px]">
+            {n.problem}
+          </p>
+        </Reveal>
       </section>
 
       {/* ── research insights ── */}
@@ -106,7 +178,7 @@ export default function CaseView({
 
       {/* ── first image, full bleed ── */}
       {heroExtra && (
-        <div className="relative aspect-[16/9] w-full">
+        <Reveal className="relative aspect-[16/9] w-full overflow-hidden" y={0}>
           <Image
             src={heroExtra}
             alt={`${project.title} — overview`}
@@ -114,7 +186,7 @@ export default function CaseView({
             sizes="100vw"
             className="object-cover"
           />
-        </div>
+        </Reveal>
       )}
 
       {/* ── core flow diagram ── */}
@@ -128,16 +200,19 @@ export default function CaseView({
       )}
 
       {/* ── decisions ── */}
-      <section className="px-5 py-20 md:px-10 md:py-28">
-        <div className="label mb-14 flex items-start gap-3 opacity-70">
-          <span className="mono">02</span>
-          <span>Key decisions:</span>
-        </div>
+      <section className="border-t border-ink/10 px-5 py-20 md:px-10 md:py-28">
+        <Reveal className="mb-14">
+          <Kicker mark="02" label="Key decisions" accent={project.accent} />
+        </Reveal>
         <div className="grid gap-x-14 gap-y-16 md:grid-cols-2">
           {n.decisions.map((d, i) => (
-            <div key={d.title} className="max-w-[58ch]">
+            <Reveal
+              key={d.title}
+              delay={(i % 2) * 90}
+              className="group max-w-[58ch] border-t border-ink/10 pt-6"
+            >
               <div
-                className="font-display mb-4 text-[44px] leading-none md:text-[56px]"
+                className="font-display mb-4 text-[44px] leading-none transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-translate-y-1 md:text-[56px]"
                 style={{ color: project.accent }}
               >
                 {String(i + 1).padStart(2, "0")}
@@ -148,7 +223,7 @@ export default function CaseView({
               <p className="mt-3 text-[14px] normal-case leading-relaxed opacity-80">
                 {d.body}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -164,23 +239,30 @@ export default function CaseView({
 
       {/* ── gallery ── */}
       {gallery.length > 0 && (
-        <section className="grid gap-3 px-3 pb-3 md:grid-cols-2">
-          {gallery.map((src, i) => (
-            <div
-              key={src}
-              className={`relative overflow-hidden rounded-sm ${
-                i % 3 === 0 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/3]"
-              }`}
-            >
-              <Image
-                src={src}
-                alt={`${project.title} — ${i + 2}`}
-                fill
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-          ))}
+        <section className="border-t border-ink/10 px-5 pb-3 pt-20 md:px-10 md:pt-28">
+          <Reveal className="mb-10 px-0">
+            <Kicker mark="◇" label="Selected screens" accent={project.accent} />
+          </Reveal>
+          <div className="grid gap-3 md:grid-cols-2">
+            {gallery.map((src, i) => (
+              <Reveal
+                key={src}
+                delay={(i % 2) * 80}
+                y={28}
+                className={`group relative overflow-hidden rounded-sm ${
+                  i % 3 === 0 ? "aspect-[16/9] md:col-span-2" : "aspect-[4/3]"
+                }`}
+              >
+                <Image
+                  src={src}
+                  alt={`${project.title} — ${i + 2}`}
+                  fill
+                  sizes="(min-width: 768px) 50vw, 100vw"
+                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
+                />
+              </Reveal>
+            ))}
+          </div>
         </section>
       )}
 
@@ -189,37 +271,46 @@ export default function CaseView({
         className="px-5 py-24 md:px-10 md:py-32"
         style={{ backgroundColor: project.accent, color: project.accentFg }}
       >
-        <div className="label mb-10 flex items-start gap-3 opacity-80">
-          <span className="mono">03</span>
-          <span>Outcome:</span>
-        </div>
-        <p className="serif max-w-[34ch] text-[26px] normal-case leading-[1.3] md:text-[40px]">
-          {n.outcome}
-        </p>
+        <Reveal className="mb-10">
+          <Kicker mark="03" label="Outcome" accent={project.accent} tone="light" />
+        </Reveal>
+        <Reveal y={28}>
+          <p className="serif max-w-[34ch] text-[26px] normal-case leading-[1.3] md:text-[40px]">
+            {n.outcome}
+          </p>
+        </Reveal>
         <div className="label mt-12 flex flex-wrap gap-x-10 gap-y-3 opacity-80">
-          {n.stats.map((s) => (
-            <span key={s} className="flex items-center gap-2">
+          {n.stats.map((s, i) => (
+            <Reveal
+              key={s}
+              as="span"
+              delay={i * 90}
+              y={12}
+              className="flex items-center gap-2"
+            >
               <span className="mono">✦</span> {s}
-            </span>
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* ── learnings ── */}
-      <section className="grid gap-8 px-5 py-20 md:grid-cols-[220px_1fr] md:px-10">
-        <div className="label flex items-start gap-3 opacity-70">
-          <span className="mono">04</span>
-          <span>What I learned:</span>
-        </div>
+      <section className="grid gap-8 px-5 py-20 md:grid-cols-[220px_1fr] md:px-10 md:py-28">
+        <Reveal>
+          <Kicker mark="04" label="What I learned" accent={project.accent} />
+        </Reveal>
         <ul className="flex max-w-[60ch] flex-col gap-5">
-          {n.learnings.map((l) => (
-            <li
+          {n.learnings.map((l, i) => (
+            <Reveal
               key={l}
+              as="li"
+              delay={i * 80}
+              y={16}
               className="border-l-2 pl-5 text-[15px] normal-case leading-relaxed opacity-85"
               style={{ borderColor: project.accent }}
             >
               {l}
-            </li>
+            </Reveal>
           ))}
         </ul>
       </section>
@@ -230,7 +321,10 @@ export default function CaseView({
         className="group relative block overflow-hidden px-5 py-20 md:px-10 md:py-24"
         style={{ backgroundColor: next.accent, color: next.accentFg }}
       >
-        <div className="label mb-5 opacity-80">Next project</div>
+        <div className="label mb-5 flex items-center gap-3 opacity-80">
+          <span className="mono">→</span>
+          <span>Next project</span>
+        </div>
         <div className="flex items-end justify-between gap-8">
           <span className="font-display text-[12vw] leading-[0.95] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-3 md:text-[7vw]">
             {next.title} →
@@ -252,10 +346,13 @@ export default function CaseView({
   );
 }
 
-function Spec({ k, v }: { k: string; v: string }) {
+function Spec({ k, v, accent }: { k: string; v: string; accent: string }) {
   return (
     <div>
-      <div className="label mb-2 opacity-50">{k}:</div>
+      <div className="label mb-2 flex items-center gap-2 opacity-50">
+        <span className="h-px w-4" style={{ backgroundColor: accent, opacity: 0.9 }} />
+        {k}
+      </div>
       <div className="text-[13px] leading-snug">{v}</div>
     </div>
   );

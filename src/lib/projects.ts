@@ -39,6 +39,97 @@ const img = (slug: string, names: string[]) =>
 
 export const projects: Project[] = [
   {
+    slug: "sentinel",
+    title: "Sentinel",
+    year: "2026",
+    role: "Product Designer",
+    type: "Self-initiated concept",
+    skills: ["Product Design", "Design Systems", "Enterprise UX", "AI / Agent UX"],
+    tools: ["Figma", "Claude + Figma MCP"],
+    summary:
+      "Banks are handing underwriting, collections and KYC to AI agents — but from August 2026 the EU AI Act makes a human overseer legally mandatory for high-risk credit decisions. Sentinel is an oversight console where one operator supervises a fleet of financial agents: catch a drifting agent, approve or reject a high-risk action before it executes, and reconstruct any past decision for an auditor. A self-initiated concept, designed end-to-end on a real design system.",
+    statement: "Keep a human in the loop — at the scale agents now run.",
+    outcomeLine: "40 screens on one design system · 3 end-to-end flows · designed against EU AI Act Art. 14",
+    cover: "/projects/sentinel/cover.png",
+    images: img("sentinel", ["01.png", "02.png", "03.png", "04.png", "05.png", "06.png", "07.png"]),
+    accent: "#4338ca",
+    accentFg: "#f5f3ff",
+    narrative: {
+      problem:
+        "High-stakes finance is rapidly delegating decisions — who gets a loan, whose account is frozen for an AML hit, which borrower gets a collections message — to AI agents that act faster than any human can watch. The catch: these are exactly the decisions regulators refuse to leave unattended. From 2 August 2026 the EU AI Act treats credit scoring as high-risk and requires (Art. 14) a human who can understand the system, override it, and halt it. The cost of getting it wrong is already concrete: in July 2025 the Massachusetts AG settled with Earnest Operations for $2.5M over an AI lending model that produced disparate impact through a proxy variable. So the real design problem isn't building the agents — it's building the cockpit that lets one person meaningfully supervise many of them, intervene in seconds, and prove afterwards that a human was genuinely in control.",
+      decisions: [
+        {
+          title: "Insert the human at the riskiest moments — not all of them",
+          body: "Oversight only scales if you don't ask the operator to review everything. Sentinel gates on risk: an agent pauses and parks an action only when it crosses a human-gate threshold (loan above a cap, any adverse action, an AML escalation), and the review queue is risk-ranked so the most dangerous item is always on top. Tradeoff: a badly tuned threshold either floods the human (back to rubber-stamping) or lets a risky action slip through — so the thresholds themselves became a first-class, auditable setting, not a hidden constant.",
+        },
+        {
+          title: "Per-agent pause and throttle, not one global stop button",
+          body: "When an agent drifts, halting the entire fleet is its own incident. Sentinel lets the operator throttle or pause the single misbehaving agent while the rest keep running — containing the blast radius without paging engineering. Tradeoff: partial-halt states are confusing, so the fleet view had to make 'what's running vs. what's contained' unmistakable at a glance.",
+        },
+        {
+          title: "Show confidence — and its limits — at the point of decision",
+          body: "The AI Act explicitly warns against automation bias: humans nodding through whatever the machine suggests. So every decision surfaces the model's confidence, the policy checks it passed or failed, and a step-by-step reasoning trace — including a fairness check — before the operator commits. Tradeoff: more to read per decision, but a decision a human can't interrogate isn't oversight, it's theater.",
+        },
+        {
+          title: "Make the audit trail a feature, not an export",
+          body: "Defensibility is the compliance officer's whole job. Instead of reconstructing events from logs after a regulator asks, Sentinel records a tamper-evident timeline as work happens — every system, agent and human action in order, reconstructable exactly as it stood at decision time, and mapped to the specific regulations it satisfies. Tradeoff: more state and integrity machinery up front, in exchange for an answer that already exists when someone asks 'why did the agent do this?'",
+        },
+        {
+          title: "Build on a real design system, not one-off screens",
+          body: "An oversight tool lives or dies on consistency — the same status, read the same way, everywhere. I built primitives and semantic tokens, then domain components (agent card, decision inspector, audit timeline), and assembled every screen from them. Tradeoff: slower to first pixel, but the screens are trivially consistent and the system itself is evidence of how I think.",
+        },
+      ],
+      outcome:
+        "Sentinel is a concept, and I've framed it as one — no fabricated users, deployments, or shipped metrics. What it demonstrates is the harder thing a high-stakes product is judged on: a complete, coherent system — 40 screens spanning fleet monitoring and analytics, the human-in-the-loop review gate, reasoning-replay and fairness investigation, a tamper-evident audit trail, policy governance with versioned diffs, agent configuration and deployment, the full shell (sign-in, settings, command palette, empty/loading/error states) and a responsive mobile set — all assembled from one design system, each surface designed against a named regulatory requirement. The honest success criterion is an expert review: would a risk officer accept that this plausibly supports pre-authorization, intervention, and a contestable, auditable rationale? That's the bar I designed to.",
+      learnings: [
+        "Designing for two opposed users sharpened everything: the operations lead wants speed and fewer interruptions; the compliance officer wants friction and a paper trail. The product is the negotiation between them.",
+        "Regulation is a design brief, not a constraint to route around — reading the AI Act, ECOA and SR 11-7 closely turned vague 'trust' into concrete, testable requirements.",
+        "Designing 40 screens forced real systems discipline: tokens and components first, so a status reads the same way on the fleet grid, the audit log and a mobile card — consistency is the product.",
+        "An AI-native workflow let me move fast — generating and assembling screens from the system with Figma MCP — but the load-bearing work was judgment: what to surface vs. hide on a dense fleet view, and how much friction a kill-switch should have.",
+      ],
+      stats: ["Art. 14 by design", "40 screens · one system", "Every action auditable"],
+      insights: [
+        {
+          title: "Accuracy isn't trust",
+          body: "A model can be 99% accurate and still need a human who can say no — the 1% in high-stakes finance is someone's loan, account, or livelihood.",
+        },
+        {
+          title: "Rubber-stamping fails the test",
+          body: "Article 14 isn't satisfied by a human clicking approve. Oversight only counts if the person can actually see why — and is given a real reason to look.",
+        },
+        {
+          title: "The loop is now mandatory",
+          body: "From August 2026, human oversight and auditability for high-risk credit AI are legal requirements, not product nice-to-haves. The market needs this cockpit whether it wants it or not.",
+        },
+      ],
+      flow: {
+        steps: [
+          "Agent pauses a high-risk action",
+          "Operator sees the full context",
+          "Approve, reject, or send back",
+          "Decision lands in the audit log",
+        ],
+        note: "The Article 14 moment — a human decides before anything executes.",
+      },
+      compare: {
+        theirLabel: "Autonomous agents",
+        ourLabel: "Sentinel",
+        theirs: [
+          "Agents act; humans find out later",
+          "'99% accurate' — but nobody's accountable",
+          "Reasoning buried in logs",
+          "Audit means an export after the fact",
+        ],
+        ours: [
+          "High-risk actions pause for a human",
+          "Confidence and limits shown at decision time",
+          "The agent's reasoning trace, step by step",
+          "A tamper-evident record, built as you go",
+        ],
+      },
+    },
+  },
+  {
     slug: "streamnow",
     title: "StreamNow",
     year: "2025",

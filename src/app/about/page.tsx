@@ -2,7 +2,7 @@ import Link from "next/link";
 import FooterStrip from "@/components/FooterStrip";
 import { projects } from "@/lib/projects";
 
-export const metadata = { title: "About — Harshita Jain®" };
+export const metadata = { title: "About — Harshita Jain" };
 
 const ledgers: { label: string; items: string[] }[] = [
   {
@@ -86,7 +86,7 @@ export default function AboutPage() {
           <span className="rec-dot" style={{ color: "#ff4d1c" }} />
           <span>Open to product roles</span>
         </div>
-        <div className="sm:text-center">Udaipur, IN — Remote-ready</div>
+        <div className="sm:text-center">Udaipur, IN</div>
         <div className="sm:text-right lowercase">harshitajain828@gmail.com</div>
       </section>
 

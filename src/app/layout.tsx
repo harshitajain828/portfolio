@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import {
   Bricolage_Grotesque,
   Inter_Tight,
@@ -41,7 +42,7 @@ const siteUrl =
     ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
     : "http://localhost:3000");
 
-const title = "Harshita Jain® — Product Designer";
+const title = "Harshita Jain — Product Designer";
 const description =
   "AI-native product & UI/UX designer — from research and Figma to live prototypes with the new AI toolchain.";
 
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: title,
-    template: "%s — Harshita Jain®",
+    template: "%s — Harshita Jain",
   },
   description,
   applicationName: "Harshita Jain — Portfolio",
@@ -69,7 +70,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
     type: "website",
-    siteName: "Harshita Jain®",
+    siteName: "Harshita Jain",
     title,
     description,
     url: siteUrl,
@@ -97,6 +98,15 @@ export default function RootLayout({
       lang="en"
       className={`${bricolage.variable} ${interTight.variable} ${robotoMono.variable} ${instrumentSerif.variable} h-full antialiased`}
     >
+      <head>
+        {process.env.NODE_ENV === "development" && (
+          <Script
+            src="//unpkg.com/react-grab/dist/index.global.js"
+            crossOrigin="anonymous"
+            strategy="beforeInteractive"
+          />
+        )}
+      </head>
       <body className="min-h-full bg-cream text-ink">
         <Loader />
         <PageTransition />

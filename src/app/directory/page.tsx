@@ -3,7 +3,7 @@ import Link from "next/link";
 import { projects } from "@/lib/projects";
 import FooterStrip from "@/components/FooterStrip";
 
-export const metadata = { title: "Index — Harshita Jain®" };
+export const metadata = { title: "Index — Harshita Jain" };
 
 export default function IndexPage() {
   return (
@@ -120,7 +120,7 @@ export default function IndexPage() {
           </div>
           <div className="flex items-center gap-3 py-3 text-[12px] text-cream/60">
             <span className="rec-dot" style={{ color: "#c8e84f" }} />
-            <span>Open to product roles · Remote-ready</span>
+            <span>Open to product roles</span>
           </div>
           <div className="py-1 text-[12px] lowercase text-cream/60">
             harshitajain828@gmail.com

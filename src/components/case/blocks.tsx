@@ -1,4 +1,158 @@
+"use client";
+
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { Project } from "@/lib/projects";
+
+/* ──────────────────────────────────────────────────────────
+   Reveal — scroll-into-view entrance (transform + opacity only,
+   one-shot, IntersectionObserver, respects prefers-reduced-motion).
+   ────────────────────────────────────────────────────────── */
+type RevealProps = {
+  children: React.ReactNode;
+  as?: React.ElementType;
+  className?: string;
+  style?: React.CSSProperties;
+  delay?: number;
+  y?: number;
+  id?: string;
+};
+
+export function Reveal({
+  children,
+  as,
+  className,
+  style,
+  delay = 0,
+  y = 22,
+  id,
+}: RevealProps) {
+  const Tag = as ?? "div";
+  const [shown, setShown] = useState(false);
+
+  const setRef = useCallback((node: HTMLElement | null) => {
+    if (!node) return;
+    if (
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setShown(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <Tag
+      ref={setRef}
+      id={id}
+      className={className}
+      style={{
+        ...style,
+        opacity: shown ? 1 : 0,
+        transform: shown ? "translateY(0)" : `translateY(${y}px)`,
+        transition:
+          "opacity 0.85s cubic-bezier(0.22,1,0.36,1), transform 0.85s cubic-bezier(0.22,1,0.36,1)",
+        transitionDelay: `${delay}ms`,
+        willChange: "opacity, transform",
+      }}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────
+   ScrollProgress — hairline reading indicator in the project accent.
+   Sits above content, below the HUD text. transform-only, rAF-throttled.
+   ────────────────────────────────────────────────────────── */
+export function ScrollProgress({ accent }: { accent: string }) {
+  const barRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const el = barRef.current;
+    if (!el) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const max =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      el.style.transform = `scaleX(${p})`;
+    };
+    const onScroll = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return (
+    <div className="fixed inset-x-0 top-0 z-40 h-[2px]" aria-hidden>
+      <div
+        ref={barRef}
+        className="h-full w-full origin-left"
+        style={{ backgroundColor: accent, transform: "scaleX(0)" }}
+      />
+    </div>
+  );
+}
+
+/* ──────────────────────────────────────────────────────────
+   Kicker — shared section header: mark · accent tick · label.
+   Numbered chapters and symbol-marked interludes share one rhythm.
+   ────────────────────────────────────────────────────────── */
+export function Kicker({
+  mark,
+  label,
+  accent,
+  tone = "dark",
+  className = "",
+}: {
+  mark: string;
+  label: string;
+  accent: string;
+  tone?: "dark" | "light";
+  className?: string;
+}) {
+  return (
+    <div
+      className={`label flex items-center gap-3 ${
+        tone === "light" ? "opacity-90" : "opacity-80"
+      } ${className}`}
+    >
+      <span
+        className="mono"
+        style={tone === "light" ? undefined : { color: accent }}
+      >
+        {mark}
+      </span>
+      <span
+        className="h-px w-8 md:w-12"
+        style={{
+          backgroundColor: tone === "light" ? "currentColor" : accent,
+          opacity: tone === "light" ? 0.5 : 1,
+        }}
+      />
+      <span>{label}</span>
+    </div>
+  );
+}
 
 /* ── research insights — cards ── */
 export function Insights({
@@ -9,35 +163,35 @@ export function Insights({
   accent: string;
 }) {
   return (
-    <section className="grid gap-8 border-t border-ink/10 px-5 py-20 md:grid-cols-[220px_1fr] md:px-10">
-      <div className="label flex items-start gap-3 opacity-70">
-        <span className="mono">+</span>
-        <span>What the research said:</span>
-      </div>
+    <section className="grid gap-8 border-t border-ink/10 px-5 py-20 md:grid-cols-[220px_1fr] md:px-10 md:py-28">
+      <Reveal>
+        <Kicker mark="+" label="What the research said" accent={accent} />
+      </Reveal>
       <div className="grid gap-4 md:grid-cols-3">
         {items.map((it, i) => (
-          <div
+          <Reveal
             key={it.title}
-            className="rounded-sm border border-ink/15 p-6"
+            delay={i * 90}
+            className="group rounded-sm border border-ink/15 p-6 transition-[transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(14,14,14,0.08)]"
             style={{ borderTopWidth: 3, borderTopColor: accent }}
           >
-            <div className="mono mb-4 opacity-50">
+            <div className="font-display text-[26px] leading-none" style={{ color: accent }}>
               {String(i + 1).padStart(2, "0")}
             </div>
-            <h4 className="text-[15px] font-semibold normal-case leading-snug">
+            <h4 className="mt-4 text-[15px] font-semibold normal-case leading-snug">
               {it.title}
             </h4>
             <p className="mt-2 text-[13px] normal-case leading-relaxed opacity-75">
               {it.body}
             </p>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
   );
 }
 
-/* ── flow diagram — step chips with arrows ── */
+/* ── flow diagram — step chips with connectors ── */
 export function Flow({
   steps,
   note,
@@ -50,35 +204,53 @@ export function Flow({
   accentFg: string;
 }) {
   return (
-    <section className="border-t border-ink/10 px-5 py-20 md:px-10">
-      <div className="label mb-10 flex items-center gap-3 opacity-70">
-        <span className="mono">→</span>
-        <span>The core flow:</span>
-      </div>
+    <section className="border-t border-ink/10 px-5 py-20 md:px-10 md:py-28">
+      <Reveal className="mb-12">
+        <Kicker mark="→" label="The core flow" accent={accent} />
+      </Reveal>
       <div className="flex flex-wrap items-center gap-3 md:gap-4">
-        {steps.map((s, i) => (
-          <div key={s} className="flex items-center gap-3 md:gap-4">
-            <div
-              className="rounded-full px-5 py-3 text-[13px] font-medium md:px-6 md:py-4 md:text-[15px]"
-              style={
-                i === steps.length - 1
-                  ? { backgroundColor: accent, color: accentFg }
-                  : { border: "1.5px solid var(--ink)" }
-              }
+        {steps.map((s, i) => {
+          const last = i === steps.length - 1;
+          return (
+            <Reveal
+              key={s}
+              delay={i * 110}
+              className="flex items-center gap-3 md:gap-4"
             >
-              <span className="mono mr-2 opacity-50">{i + 1}</span>
-              {s}
-            </div>
-            {i < steps.length - 1 && (
-              <span className="text-[20px] opacity-40">→</span>
-            )}
-          </div>
-        ))}
+              <div
+                className="flex items-center gap-2.5 rounded-full px-5 py-3 text-[13px] font-medium md:px-6 md:py-4 md:text-[15px]"
+                style={
+                  last
+                    ? { backgroundColor: accent, color: accentFg }
+                    : { border: "1.5px solid var(--ink)" }
+                }
+              >
+                <span
+                  className="mono"
+                  style={{
+                    opacity: last ? 0.7 : 0.45,
+                    color: last ? accentFg : undefined,
+                  }}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {s}
+              </div>
+              {!last && (
+                <span className="text-[18px] md:text-[20px]" style={{ color: accent }}>
+                  →
+                </span>
+              )}
+            </Reveal>
+          );
+        })}
       </div>
       {note && (
-        <p className="serif-italic mt-8 text-[18px] opacity-70 md:text-[20px]">
-          {note}
-        </p>
+        <Reveal delay={steps.length * 90}>
+          <p className="serif-italic mt-10 text-[20px] opacity-70 md:text-[24px]">
+            {note}
+          </p>
+        </Reveal>
       )}
     </section>
   );
@@ -101,41 +273,43 @@ export function Compare({
   accentFg: string;
 }) {
   return (
-    <section className="border-t border-ink/10 px-5 py-20 md:px-10">
-      <div className="label mb-10 flex items-center gap-3 opacity-70">
-        <span className="mono">vs</span>
-        <span>The shift:</span>
-      </div>
+    <section className="border-t border-ink/10 px-5 py-20 md:px-10 md:py-28">
+      <Reveal className="mb-12">
+        <Kicker mark="vs" label="The shift" accent={accent} />
+      </Reveal>
       <div className="grid gap-4 md:grid-cols-2">
-        <div className="rounded-sm border border-ink/15 p-7 md:p-9">
+        <Reveal className="rounded-sm border border-ink/15 p-7 md:p-9">
           <div className="label mb-6 opacity-50">{theirLabel}</div>
-          <ul className="flex flex-col gap-3">
+          <ul className="flex flex-col gap-3.5">
             {theirs.map((t) => (
               <li
                 key={t}
-                className="flex gap-3 text-[14px] normal-case leading-snug opacity-70"
+                className="flex gap-3 text-[14px] normal-case leading-snug opacity-65"
               >
-                <span className="mono">✕</span> {t}
+                <span className="mono mt-[2px] opacity-60">✕</span>
+                <span>{t}</span>
               </li>
             ))}
           </ul>
-        </div>
-        <div
+        </Reveal>
+        <Reveal
+          delay={90}
           className="rounded-sm p-7 md:p-9"
           style={{ backgroundColor: accent, color: accentFg }}
         >
           <div className="label mb-6 opacity-80">{ourLabel}</div>
-          <ul className="flex flex-col gap-3">
+          <ul className="flex flex-col gap-3.5">
             {ours.map((t) => (
               <li
                 key={t}
                 className="flex gap-3 text-[14px] font-medium normal-case leading-snug"
               >
-                <span className="mono">✓</span> {t}
+                <span className="mono mt-[2px]">✓</span>
+                <span>{t}</span>
               </li>
             ))}
           </ul>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -148,7 +322,8 @@ export function Signature({ project }: { project: Project }) {
     case "cyclesync":
       return (
         <GraphicShell
-          label="The signature decision, visualised:"
+          accent={a}
+          label="The signature decision, visualised"
           left="A month grid assumes a 28-day loop — irregularity reads as an error."
           right="A year ring has no 'correct' length — irregularity is just the shape of your year."
         >
@@ -197,7 +372,8 @@ export function Signature({ project }: { project: Project }) {
     case "streamnow":
       return (
         <GraphicShell
-          label="The promise, visualised:"
+          accent={a}
+          label="The promise, visualised"
           left="≈45 hours a year lost to scrolling, sampling, giving up."
           right="One 90-second match flow — three confident picks."
         >
@@ -240,7 +416,8 @@ export function Signature({ project }: { project: Project }) {
     case "finance-ai":
       return (
         <GraphicShell
-          label="The behavioural gap, visualised:"
+          accent={a}
+          label="The behavioural gap, visualised"
           left="Cash forced a pause — you watched money leave."
           right="Digital spending is frictionless; Finance AI puts the pause back, as a coach."
         >
@@ -280,7 +457,8 @@ export function Signature({ project }: { project: Project }) {
     case "mushroom-juniors":
       return (
         <GraphicShell
-          label="Who the design serves, visualised:"
+          accent={a}
+          label="Who the design serves, visualised"
           left="A storefront is only half the product."
           right="One system, three users — shopper, store operator, developer."
         >
@@ -325,26 +503,33 @@ function GraphicShell({
   label,
   left,
   right,
+  accent,
   children,
 }: {
   label: string;
   left: string;
   right: string;
+  accent: string;
   children: React.ReactNode;
 }) {
   return (
-    <section className="border-t border-ink/10 px-5 py-20 md:px-10">
-      <div className="label mb-10 flex items-center gap-3 opacity-70">
-        <span className="mono">◎</span>
-        <span>{label}</span>
-      </div>
-      <div className="mx-auto max-w-[980px]">
+    <section className="border-t border-ink/10 px-5 py-20 md:px-10 md:py-28">
+      <Reveal className="mb-12">
+        <Kicker mark="◎" label={label} accent={accent} />
+      </Reveal>
+      <Reveal
+        className="mx-auto max-w-[980px] rounded-sm border border-ink/10 p-6 md:p-10"
+        style={{
+          backgroundColor: `color-mix(in srgb, ${accent} 5%, transparent)`,
+        }}
+        y={32}
+      >
         {children}
-        <div className="mt-6 grid gap-4 text-[13px] normal-case leading-snug opacity-70 md:grid-cols-2">
+        <div className="mt-8 grid gap-4 border-t border-ink/10 pt-6 text-[13px] normal-case leading-snug opacity-70 md:grid-cols-2">
           <p>{left}</p>
           <p className="md:text-right">{right}</p>
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

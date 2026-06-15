@@ -1,7 +1,7 @@
 import FooterStrip from "@/components/FooterStrip";
 import DoodleTrail from "@/components/home/DoodleTrail";
 
-export const metadata = { title: "Contact — Harshita Jain®" };
+export const metadata = { title: "Contact — Harshita Jain" };
 
 export default function ContactPage() {
   return (

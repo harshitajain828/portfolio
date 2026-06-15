@@ -1,6 +1,7 @@
 import Link from "next/link";
 import WorkStack from "@/components/home/WorkStack";
 import DoodleTrail from "@/components/home/DoodleTrail";
+import HeroPills from "@/components/home/HeroPills";
 import FooterStrip from "@/components/FooterStrip";
 import { projects } from "@/lib/projects";
 
@@ -29,43 +30,48 @@ export default function Home() {
       <section className="relative flex min-h-[92vh] flex-col justify-end px-5 pb-10 pt-32 md:px-8">
         <DoodleTrail />
         <div className="pointer-events-none relative z-10">
-          <h1 className="font-display text-[14.5vw] leading-[0.92] md:text-[10.5vw]">
+          <h1 className="font-display flex flex-wrap items-baseline gap-x-4">
             <span className="mask-line">
-              <span style={{ animationDelay: "0.1s" }}>Harshita</span>
+              <span
+                className="serif-italic block text-[6vw] leading-none opacity-75 md:text-[2.4vw]"
+                style={{ animationDelay: "0s" }}
+              >
+                hi, I&apos;m
+              </span>
             </span>
             <span className="mask-line">
               <span
-                className="items-center gap-[2vw]"
-                style={{ animationDelay: "0.22s", display: "flex" }}
+                className="items-center gap-[1.4vw] text-[8vw] leading-none md:text-[4.6vw]"
+                style={{ animationDelay: "0.1s", display: "flex" }}
               >
-                Jain<sup className="align-super text-[2.5vw]">®</sup>
-                <span className="pointer-events-auto ml-[2vw] hidden items-center gap-3 md:flex">
-                  {projects.map((p) => (
-                    <Link
-                      key={p.slug}
-                      href={`/work/${p.slug}`}
-                      aria-label={p.title}
-                      className="block h-[5.5vw] w-[2.6vw] rounded-full transition-transform duration-300 hover:scale-110"
-                      style={{ backgroundColor: p.accent }}
-                    />
-                  ))}
-                </span>
+                Harshita
+                <HeroPills />
               </span>
             </span>
           </h1>
+
+          <h2 className="font-display mt-3 text-[13vw] leading-[0.9] md:text-[9vw]">
+            <span className="mask-line">
+              <span style={{ animationDelay: "0.3s" }}>I turn ideas</span>
+            </span>
+            <span className="mask-line">
+              <span style={{ animationDelay: "0.4s" }}>into interfaces.</span>
+            </span>
+          </h2>
 
           <div className="mt-8 flex flex-wrap items-end justify-between gap-6">
             <p className="mask-line max-w-[42ch] text-[17px] leading-snug md:text-[20px]">
               <span style={{ animationDelay: "0.38s" }}>
                 <strong>Product designer, AI-native</strong> —{" "}
                 <em className="serif-italic text-[1.25em]">
-                  fluent in the tools most designers haven&apos;t opened yet.
+                  fluent in the AI toolchain that&apos;s reshaping how products
+                  get designed.
                 </em>
               </span>
             </p>
             <div className="label flex items-center gap-3">
               <span className="rec-dot" style={{ color: "#ff4d1c" }} />
-              <span>Open to product roles · Remote-ready</span>
+              <span>Open to product roles</span>
             </div>
           </div>
         </div>
@@ -79,11 +85,11 @@ export default function Home() {
           <sup className="mono">({projects.length})</sup>
         </div>
         <p className="serif max-w-[24ch] text-[34px] leading-[1.15] md:text-[54px]">
-          Four products, taken from research to
+          Five products, taken from research to
           <em className="serif-italic"> living prototype.</em>
         </p>
         <p className="label mt-6 opacity-60">
-          Self-initiated concept work — honestly labeled. Scroll ↓
+          Self-initiated, owned end to end. Scroll ↓
         </p>
       </section>
 
@@ -102,7 +108,7 @@ export default function Home() {
               I&apos;m a product &amp; UI/UX designer from Udaipur, India, with
               a computer science background. I work AI-native —{" "}
               <em className="serif-italic">
-                so my designs don&apos;t sit in Figma waiting to become real.
+                carrying ideas from research through to working prototypes.
               </em>
             </p>
             <Link href="/about" className="hover-line label mt-8 inline-block">
@@ -128,17 +134,20 @@ export default function Home() {
       </section>
 
       {/* contact CTA */}
-      <section className="border-t border-ink/10 px-5 py-28 text-center md:px-8">
-        <div className="label mb-6 opacity-70">
-          Have a product that needs designing?
+      <section className="relative overflow-hidden border-t border-ink/10 px-5 py-28 text-center md:px-8">
+        <DoodleTrail />
+        <div className="relative z-10">
+          <div className="label mb-6 opacity-70">
+            Have a product that needs designing?
+          </div>
+          <a
+            href="mailto:harshitajain828@gmail.com"
+            className="font-display inline-block text-[11vw] leading-none transition-opacity hover:opacity-60 md:text-[7vw]"
+          >
+            Let&apos;s work{" "}
+            <em className="serif-italic font-normal">together</em> →
+          </a>
         </div>
-        <a
-          href="mailto:harshitajain828@gmail.com"
-          className="font-display inline-block text-[11vw] leading-none transition-opacity hover:opacity-60 md:text-[7vw]"
-        >
-          Let&apos;s work{" "}
-          <em className="serif-italic font-normal">together</em> →
-        </a>
       </section>
 
       <FooterStrip />

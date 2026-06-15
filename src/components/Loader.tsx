@@ -28,7 +28,7 @@ export default function Loader() {
         <div className="font-display text-cream text-center text-[34px] leading-[0.95] animate-[loaderUp_0.9s_cubic-bezier(0.22,1,0.36,1)_both]">
           HARSHITA
           <br />
-          JAIN<sup className="text-[12px] align-super">®</sup>
+          JAIN
         </div>
       </div>
       <div className="absolute bottom-8 left-0 right-0 flex items-center justify-between px-8">

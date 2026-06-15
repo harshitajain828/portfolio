@@ -85,7 +85,7 @@ export default function PageTransition() {
           transition: "opacity 0.25s",
         }}
       >
-        HJ<sup className="text-[11px] align-super">®</sup>
+        HJ
       </span>
     </div>
   );
