@@ -221,6 +221,97 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "crease",
+    title: "Crease",
+    year: "2026",
+    role: "Product Designer",
+    type: "Self-initiated concept",
+    skills: ["Product Design", "AI / CV UX", "Design Systems", "Sports tech"],
+    tools: ["Figma", "Claude + Figma MCP"],
+    summary:
+      "India has ~3 million registered cricketers and tens of millions of casual ones — almost all of them un-coached. They practice in the nets with a phone but no one tells them why a shot felt wrong or what to fix next. Sensors like StanceBeam and academy coaches are out of reach; the sensorless apps that exist dump metrics. Crease is a sensorless, phone-camera AI batting coach: point a phone at the nets, play your shots, and get one glanceable, trustworthy fix at a time — wrapped in a habit loop built for the week-3 cliff.",
+    statement: "Find your crease.",
+    outcomeLine: "A sensorless AI batting coach · one trustworthy cue per shot, built for the un-coached",
+    cover: "/projects/crease/cover.png",
+    images: img("crease", ["01.png", "02.png", "03.png"]),
+    accent: "#C7FB4F",
+    accentFg: "#0E1014",
+    narrative: {
+      problem:
+        "Amateur cricketers practice without feedback and quit before progress shows. India has roughly 3 million registered cricketers and only ~1,030 male professionals — so the amateur base is essentially un-coached. Elite tools don’t reach them: StanceBeam needs a ₹-heavy smart bat; academies are expensive and far. Sensorless AI apps exist but skew toward bowler metric-dumps — pitch maps and ball speed — not glanceable batting-technique correction a beginner can act on. The amateur’s frustration is feedback that’s either absent (no coach) or overwhelming (a wall of numbers). Layered on top is a retention problem: about 1 in 3 gym members quit each year and a two-week inactivity gap spikes churn — solo practice falls off at the same week-3 cliff. (Figures are researched and flagged; the gym numbers are used as a behavioural proxy, not cricket-specific data.)",
+      decisions: [
+        {
+          title: "One Cue, not a metrics dashboard",
+          body: "Each shot returns exactly one prioritised correction — “head falling toward off-side, keep it still over the ball” — with a confidence chip, a one-tap ‘why’, and a 20-second drill. Glanceable in under two seconds. Tradeoff: power users may want all the data, so the full breakdown is one tap behind the cue — but for the un-coached majority, focus beats completeness.",
+        },
+        {
+          title: "Surface the AI’s uncertainty instead of hiding it",
+          body: "Pose estimation on amateur phone footage is noisy (~83–87% stroke-classification accuracy in the research), so the UI never bluffs. Every cue carries an honest confidence state — High, Likely, or ‘Low light — can’t tell’ — with a reframe-the-camera nudge when detection is poor. Tradeoff: admitting uncertainty feels less magical, but honesty is the moat for a consumer CV product — a confident wrong cue destroys trust.",
+        },
+        {
+          title: "Sensorless and phone-only — reach over precision",
+          body: "No smart bat, no wearable: just a phone on a tripod or a stack of bricks. Tradeoff: lower precision than a sensor, accepted deliberately and managed with camera-setup guidance and the confidence states — because reach (every phone in India) beats precision (the few who buy hardware).",
+        },
+        {
+          title: "Engineer adherence for the week-3 cliff",
+          body: "A single signature metric (‘Contact’) replaces vanity numbers; the streak has a built-in rest-day freeze so a bad week doesn’t break it; and a re-engagement nudge is timed to the documented two-week churn point. Tradeoff: a freeze weakens raw streak pressure, but it prevents the burnout-quit — finishing beats flexing.",
+        },
+        {
+          title: "An async coach layer, not a marketplace",
+          body: "A coach can leave a 15-second voice or scribble note on any shot — bridging pure-AI and human coaching without building a whole marketplace. Tradeoff: less revenue and complexity than a coach platform; v1 stays focused on the solo loop, with the coach note as the bridge, not the business.",
+        },
+      ],
+      outcome:
+        "Crease is a concept, framed honestly — no real users or shipped metrics, and every figure is sourced and flagged (the soft ones, like casual-player counts and gym-retention-as-proxy, marked inline). The deliverable is a mobile system on one premium dark design system: onboarding and camera setup, the capture flow with a live pose skeleton and framing guidance, the Shot Report built around the One Cue model, the home/habit surface with the Contact meter and week-3 engine, and the trust-calibrated confidence states throughout. Success is defined as concept goals and test intentions — a first-timer getting one trustworthy, actionable cue within 60 seconds of their first recording; feedback glanceable in under two seconds; never a cue the AI isn’t confident about — to be validated with 5–8 amateur cricketers.",
+      learnings: [
+        "For a consumer CV product, designing the AI’s honesty (its confidence and its ‘I can’t tell’) is more important than designing its confidence — a wrong cue shown boldly is worse than no cue.",
+        "Constraint is the feature: returning one cue instead of twenty is harder to design and far more useful to a beginner than a complete metric dump.",
+        "Retention is a design problem, not a notification problem — the rest-day freeze and a nudge timed to the real churn cliff do more than streak pressure.",
+        "Knowing the domain matters: cricket-specific cues, the leather-red accent, and the crease-line motif make it feel made for the player, not a generic form-checker reskinned.",
+      ],
+      stats: ["~3M un-coached cricketers", "One cue per shot", "Honest AI confidence"],
+      insights: [
+        {
+          title: "The feedback gap, not the data gap",
+          body: "The un-coached batter already has a phone and practice — what’s missing is someone to say why the shot was wrong and what to fix. That’s a design problem, not a sensor problem.",
+        },
+        {
+          title: "~85% accuracy is a design brief",
+          body: "Phone pose-estimation isn’t perfect, so honest confidence states aren’t an afterthought — they’re the thing that makes a noisy CV product trustworthy enough to use.",
+        },
+        {
+          title: "Most quit at week three",
+          body: "Solo practice drops off at the same cliff gym memberships do. A streak that forgives a rest day and a nudge timed to that moment beats raw gamification.",
+        },
+      ],
+      flow: {
+        steps: [
+          "Set the phone, pick a drill",
+          "Play your shots (live skeleton)",
+          "Get your one cue",
+          "Run the 20-second fix",
+        ],
+        note: "A coach’s eye in your pocket — one fix at a time.",
+      },
+      compare: {
+        theirLabel: "Sensors & metric-dump apps",
+        ourLabel: "Crease",
+        theirs: [
+          "Smart-bat sensor (₹-heavy, elite)",
+          "A wall of numbers to decode",
+          "Confident even when the data’s noisy",
+          "Streaks that punish a missed day",
+        ],
+        ours: [
+          "Sensorless — any phone, any net",
+          "One glanceable cue per shot",
+          "Honest confidence: High / Likely / can’t-tell",
+          "A rest-day freeze tuned for week 3",
+        ],
+      },
+    },
+  },
+  {
     slug: "streamnow",
     title: "StreamNow",
     year: "2025",
