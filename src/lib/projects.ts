@@ -29,6 +29,7 @@ export type Project = {
   outcomeLine: string;
   cover: string;
   images: string[];
+  imageCaptions?: string[];
   accent: string;
   accentFg: string;
   narrative: Narrative;
@@ -52,8 +53,17 @@ export const projects: Project[] = [
     outcomeLine: "40 screens on one design system · 3 end-to-end flows · designed against EU AI Act Art. 14",
     cover: "/projects/sentinel/cover.png",
     images: img("sentinel", ["01.png", "02.png", "03.png", "04.png", "05.png", "06.png", "07.png"]),
-    accent: "#4338ca",
-    accentFg: "#f5f3ff",
+    imageCaptions: [
+      "Agent detail — confidence over the last hour, crossing the 85% drift gate that auto-throttled the agent.",
+      "The oversight gate — an agent's full reasoning trace, and the human's approve / reject decision.",
+      "Investigation — replaying a past decision step by step, with the fairness lens overlaid.",
+      "Audit trail — a tamper-evident timeline of every system, agent and human action.",
+      "Review queue — high-risk actions, risk-ranked so the most dangerous is always on top.",
+      "The design system every screen is assembled from — tokens and domain components.",
+      "Oversight analytics — how the human-in-the-loop is actually performing over time.",
+    ],
+    accent: "#4F86E6",
+    accentFg: "#fcfaf5",
     narrative: {
       problem:
         "High-stakes finance is rapidly delegating decisions — who gets a loan, whose account is frozen for an AML hit, which borrower gets a collections message — to AI agents that act faster than any human can watch. The catch: these are exactly the decisions regulators refuse to leave unattended. From 2 August 2026 the EU AI Act treats credit scoring as high-risk and requires (Art. 14) a human who can understand the system, override it, and halt it. The cost of getting it wrong is already concrete: in July 2025 the Massachusetts AG settled with Earnest Operations for $2.5M over an AI lending model that produced disparate impact through a proxy variable. So the real design problem isn't building the agents — it's building the cockpit that lets one person meaningfully supervise many of them, intervene in seconds, and prove afterwards that a human was genuinely in control.",
@@ -143,8 +153,14 @@ export const projects: Project[] = [
     outcomeLine: "A desktop release terminal · the irreversible-money moment, designed to prevent the catastrophic miss",
     cover: "/projects/plumb/cover.png",
     images: img("plumb", ["01.png", "02.png", "03.png", "04.png"]),
-    accent: "#0F6E66",
-    accentFg: "#F7F5EF",
+    imageCaptions: [
+      "Confirm-the-Amount — the figure shown three ways, with a re-type step to catch a 10× or 100× slip.",
+      "Diff-led four-eyes — the checker reviews what changed since the last payment, not a flat field list.",
+      "Beneficiary account changes are dual-controlled and diffed — the real misdirected-payment fraud surface.",
+      "Cutoff dashboard — time-to-deadline by currency, with at-risk payments surfaced.",
+    ],
+    accent: "#19B59E",
+    accentFg: "#06241F",
     narrative: {
       problem:
         "A mis-keyed digit or a stale beneficiary on an outbound wire is irreversible and instantly catastrophic. The precedents are real (gathered from press during research, and flagged as such in the work): Citigroup’s 2022 input slip entered a ~$444bn order instead of ~$58m; Deutsche Bank once paid a hedge fund $6bn confusing gross for net. Misdirected-payment and business-email-compromise fraud, which quietly change the beneficiary account, drive billions in losses a year. The deeper problem is the tools: payment-ops analysts re-key across separate portals and spreadsheets, and four-eyes ‘maker-checker’ controls are bolted onto interfaces never designed for them — so the checker re-approves a flat list of 40 identical-looking fields without truly seeing what changed. Existing software prizes either speed (Bloomberg) or control (bank portals), but none makes the release moment itself its design surface.",
@@ -234,8 +250,13 @@ export const projects: Project[] = [
     outcomeLine: "A sensorless AI batting coach · one trustworthy cue per shot, built for the un-coached",
     cover: "/projects/crease/cover.png",
     images: img("crease", ["01.png", "02.png", "03.png"]),
-    accent: "#C7FB4F",
-    accentFg: "#0E1014",
+    imageCaptions: [
+      "The One Cue model — one prioritised fix per shot, each with an honest confidence state and a 20-second drill.",
+      "Point a phone at the nets — a live pose skeleton and framing guide, then your single cue.",
+      "A single “Contact” metric and a streak with a rest-day freeze, built for the week-3 drop-off cliff.",
+    ],
+    accent: "#C8E84F",
+    accentFg: "#14160A",
     narrative: {
       problem:
         "Amateur cricketers practice without feedback and quit before progress shows. India has roughly 3 million registered cricketers and only ~1,030 male professionals — so the amateur base is essentially un-coached. Elite tools don’t reach them: StanceBeam needs a ₹-heavy smart bat; academies are expensive and far. Sensorless AI apps exist but skew toward bowler metric-dumps — pitch maps and ball speed — not glanceable batting-technique correction a beginner can act on. The amateur’s frustration is feedback that’s either absent (no coach) or overwhelming (a wall of numbers). Layered on top is a retention problem: about 1 in 3 gym members quit each year and a two-week inactivity gap spikes churn — solo practice falls off at the same week-3 cliff. (Figures are researched and flagged; the gym numbers are used as a behavioural proxy, not cricket-specific data.)",
@@ -410,8 +431,14 @@ export const projects: Project[] = [
     outcomeLine: "A 24-screen mobile system on one design system · designed for irregular bodies first",
     cover: "/projects/cyclesync/cover.png",
     images: img("cyclesync", ["01.png", "02.png", "03.png", "04.png"]),
-    accent: "#C9645A",
-    accentFg: "#FBF8F4",
+    imageCaptions: [
+      "The Year Ring — a 12-month radial view, so an irregular cycle reads as an honest shape, not a broken month.",
+      "Honest prediction — a low-confidence window instead of a fake countdown, plus a doctor-ready summary.",
+      "Onboarding where “I'm not sure” and “very irregular” are valid, first-class answers.",
+      "Anonymous community circles, woven-in wellbeing, and trust-first, local-first data controls.",
+    ],
+    accent: "#f48ab4",
+    accentFg: "#2A0E1C",
     narrative: {
       problem:
         "The most common menstrual condition produces the most unpredictable cycles — yet the tools are built for predictability. PCOS affects 8–13% of women globally (about 1 in 5 young women in India), up to ~70% go undiagnosed, and the average path to a diagnosis is years and several doctors. Mainstream apps assume a 28-day, ovulation-on-day-14 cycle, so a 45- or 72-day cycle reads as an error and a countdown keeps promising a date that never arrives — actively stressful for a group already 3–8× more likely to live with anxiety and depression. On top of that, trust is broken: a leading tracker settled with the FTC and later a $56M class action over sharing intimate cycle data. The people who most need a tool are served worst.",

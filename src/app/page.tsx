@@ -41,7 +41,7 @@ export default function Home() {
             </span>
             <span className="mask-line">
               <span
-                className="items-center gap-[1.4vw] text-[8vw] leading-none md:text-[4.6vw]"
+                className="items-center gap-[1.4vw] text-[10vw] leading-none md:text-[6.2vw]"
                 style={{ animationDelay: "0.1s", display: "flex" }}
               >
                 Harshita
@@ -50,7 +50,7 @@ export default function Home() {
             </span>
           </h1>
 
-          <h2 className="font-display mt-3 text-[13vw] leading-[0.9] md:text-[9vw]">
+          <h2 className="font-display mt-3 text-[12vw] leading-[0.92] md:text-[7.4vw]">
             <span className="mask-line">
               <span style={{ animationDelay: "0.3s" }}>I turn ideas</span>
             </span>

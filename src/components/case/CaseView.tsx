@@ -24,8 +24,6 @@ export default function CaseView({
   next: Project;
 }) {
   const n = project.narrative;
-  const [heroExtra, ...rest] = project.images;
-  const gallery = rest;
 
   return (
     <main className="bg-cream text-ink">
@@ -176,18 +174,7 @@ export default function CaseView({
       {/* ── bespoke signature graphic ── */}
       <Signature project={project} />
 
-      {/* ── first image, full bleed ── */}
-      {heroExtra && (
-        <Reveal className="relative aspect-[16/9] w-full overflow-hidden" y={0}>
-          <Image
-            src={heroExtra}
-            alt={`${project.title} — overview`}
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-        </Reveal>
-      )}
+      {/* (screens are shown, contained and captioned, in the gallery below) */}
 
       {/* ── core flow diagram ── */}
       {n.flow && (
@@ -237,31 +224,46 @@ export default function CaseView({
         />
       )}
 
-      {/* ── gallery ── */}
-      {gallery.length > 0 && (
-        <section className="border-t border-ink/10 px-5 pb-3 pt-20 md:px-10 md:pt-28">
-          <Reveal className="mb-10 px-0">
+      {/* ── gallery: contained, never cropped, captioned ── */}
+      {project.images.length > 0 && (
+        <section className="border-t border-ink/10 px-5 py-20 md:px-10 md:py-28">
+          <Reveal className="mb-12 md:mb-16">
             <Kicker mark="◇" label="Selected screens" accent={project.accent} />
           </Reveal>
-          <div className="grid gap-3 md:grid-cols-2">
-            {gallery.map((src, i) => (
-              <Reveal
-                key={src}
-                delay={(i % 2) * 80}
-                y={28}
-                className={`group relative overflow-hidden rounded-sm ${
-                  i % 3 === 0 ? "aspect-[16/9] md:col-span-2" : "aspect-[4/3]"
-                }`}
-              >
-                <Image
-                  src={src}
-                  alt={`${project.title} — ${i + 2}`}
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03]"
-                />
-              </Reveal>
-            ))}
+          <div className="mx-auto flex max-w-[1060px] flex-col gap-16 md:gap-24">
+            {project.images.map((src, i) => {
+              const caption = project.imageCaptions?.[i];
+              return (
+                <Reveal key={src} y={28}>
+                  <div
+                    className="overflow-hidden rounded-2xl border border-ink/10 p-2 md:p-3"
+                    style={{ backgroundColor: `${project.accent}14` }}
+                  >
+                    <Image
+                      src={src}
+                      alt={caption ?? `${project.title} — screen ${i + 1}`}
+                      width={1640}
+                      height={1040}
+                      sizes="(min-width: 1024px) 1040px, 100vw"
+                      className="h-auto w-full rounded-xl"
+                    />
+                  </div>
+                  {caption && (
+                    <div className="mt-4 flex gap-3 md:gap-4">
+                      <span
+                        className="mono mt-[3px] shrink-0 text-[13px]"
+                        style={{ color: project.accent }}
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <p className="max-w-[64ch] text-[14px] normal-case leading-relaxed opacity-80 md:text-[15px]">
+                        {caption}
+                      </p>
+                    </div>
+                  )}
+                </Reveal>
+              );
+            })}
           </div>
         </section>
       )}
