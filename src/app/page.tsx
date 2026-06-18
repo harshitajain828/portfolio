@@ -3,6 +3,7 @@ import WorkStack from "@/components/home/WorkStack";
 import DoodleTrail from "@/components/home/DoodleTrail";
 import HeroPills from "@/components/home/HeroPills";
 import FooterStrip from "@/components/FooterStrip";
+import MagnifyText from "@/components/MagnifyText";
 import { projects } from "@/lib/projects";
 
 const steps = [
@@ -89,7 +90,7 @@ export default function Home() {
           <em className="serif-italic"> working prototype.</em>
         </p>
         <p className="label mt-6 opacity-60">
-          All self-initiated, and designed end to end. Scroll ↓
+          Designed end to end, from the problem to the prototype. Scroll ↓
         </p>
       </section>
 
@@ -141,13 +142,18 @@ export default function Home() {
           <div className="label mb-6 opacity-70">
             Have a product that needs designing?
           </div>
-          <a
+          <MagnifyText
             href="mailto:harshitajain828@gmail.com"
-            className="font-display inline-block text-[11vw] leading-none transition-opacity hover:opacity-60 md:text-[7vw]"
-          >
-            Let&apos;s work{" "}
-            <em className="serif-italic font-normal">together</em> →
-          </a>
+            className="font-display inline-block text-[11vw] leading-none md:text-[7vw]"
+            sigma={95}
+            scale={0.28}
+            lift={12}
+            parts={[
+              { text: "Let's work " },
+              { text: "together", className: "serif-italic font-normal" },
+              { text: " →" },
+            ]}
+          />
         </div>
       </section>
 

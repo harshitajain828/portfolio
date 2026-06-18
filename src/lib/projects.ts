@@ -44,7 +44,7 @@ export const projects: Project[] = [
     title: "CycleSync",
     year: "2026",
     role: "Product Designer",
-    type: "Self-initiated concept",
+    type: "Product concept",
     skills: ["UX Research", "Product Design", "Design Systems", "Health UX"],
     tools: ["Figma", "Claude + Figma MCP"],
     summary:
@@ -142,11 +142,11 @@ export const projects: Project[] = [
     title: "Sentinel",
     year: "2026",
     role: "Product Designer",
-    type: "Self-initiated concept",
+    type: "Product concept",
     skills: ["Product Design", "Design Systems", "Enterprise UX", "AI / Agent UX"],
     tools: ["Figma", "Claude + Figma MCP"],
     summary:
-      "Banks are starting to hand underwriting, collections and KYC to AI agents. But from August 2026, the EU AI Act makes a human overseer legally required for high-risk credit decisions. Sentinel is an oversight console where one operator supervises a fleet of financial agents: spot an agent drifting, approve or reject a high-risk action before it runs, and reconstruct any past decision for an auditor. It’s a self-initiated concept, designed end to end on a real design system.",
+      "Banks are starting to hand underwriting, collections and KYC to AI agents. But from August 2026, the EU AI Act makes a human overseer legally required for high-risk credit decisions. Sentinel is an oversight console where one operator supervises a fleet of financial agents: spot an agent drifting, approve or reject a high-risk action before it runs, and reconstruct any past decision for an auditor. Designed end to end on a real design system.",
     statement: "Keep a human in the loop — at the scale agents now run.",
     outcomeLine:
       "40 screens on one design system · 3 end-to-end flows · designed against EU AI Act Art. 14",
@@ -243,7 +243,7 @@ export const projects: Project[] = [
     title: "StreamNow",
     year: "2025",
     role: "Product Designer",
-    type: "Self-initiated concept",
+    type: "Product concept",
     skills: ["UX Research", "UI Design", "Prototyping", "User Testing"],
     tools: ["Figma"],
     summary:

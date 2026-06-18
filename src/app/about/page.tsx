@@ -149,9 +149,8 @@ export default function AboutPage() {
             I&apos;m based in Udaipur, India, and I have a computer science
             background (MCA). I like taking a product all the way through —
             research, user flows, the design system, and the final interface.
-            My case studies are self-initiated on purpose: each one is a whole
-            product I thought through end to end, rather than a slice of
-            someone else&apos;s brief.
+            Each case study is a whole product I thought through end to end,
+            rather than a slice of someone else&apos;s brief.
           </p>
           <p className="max-w-[52ch] text-[15px] normal-case leading-relaxed opacity-85">
             I&apos;m AI-native. I use tools like Claude Code and Framer to turn

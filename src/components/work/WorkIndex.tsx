@@ -88,7 +88,7 @@ export default function WorkIndex() {
       </div>
 
       <div className="label flex items-center justify-between border-t border-current/20 px-5 py-6 opacity-80 md:px-8">
-        <span>All work is self-initiated concept work — honestly labeled</span>
+        <span>Each one designed end to end, from research to prototype</span>
         <Link href="/playground" className="hover-line hidden sm:block">
           Playground →
         </Link>
