@@ -1,7 +1,7 @@
 import HomeHero from "@/components/home/HomeHero";
 import FooterStrip from "@/components/FooterStrip";
 
-export const metadata = { title: "Playground — Harshita Jain" };
+export const metadata = { title: "Playground" };
 
 export default function PlaygroundPage() {
   return (

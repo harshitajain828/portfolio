@@ -119,7 +119,7 @@ export default function HomeHero() {
           AI-native, end to end.
         </div>
         <div className="label max-w-[260px] text-right text-[15px] leading-tight">
-          Fluent in the new toolchain.
+          I build with AI tools.
           <br />
           <strong>Udaipur → remote.</strong>
         </div>

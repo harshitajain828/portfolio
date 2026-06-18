@@ -181,17 +181,19 @@ body {
   animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* Keep this in the base layer so Tailwind text-color utilities (e.g.
+   text-cream on a filled link/button) can still override it. Unlayered, this
+   `color: inherit` would beat every layered utility and strand link colors. */
+@layer base {
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
 }
 
 /* index ledger rows — hover tints to the project accent */
 .idx-row {
   transition: color 0.3s ease;
-}
-.idx-row:hover {
-  color: var(--acc, currentColor);
 }
 
 .hover-line {
@@ -209,9 +211,31 @@ a {
   transform-origin: right;
   transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1);
 }
-.hover-line:hover::after {
+/* keyboard users get the underline too */
+.hover-line:focus-visible::after {
   transform: scaleX(1);
   transform-origin: left;
+}
+
+/* Hover affordances only where a real pointer can hover — on touch they'd
+   either never fire or stick after a tap, so gate them. */
+@media (hover: hover) and (pointer: fine) {
+  .idx-row:hover {
+    color: var(--acc, currentColor);
+  }
+  .hover-line:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Touch devices have no hover state — give taps a quick visual confirmation. */
+@media (hover: none) {
+  a:active,
+  button:active {
+    opacity: 0.6;
+    transition: opacity 0.1s ease;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

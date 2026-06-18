@@ -494,6 +494,92 @@ export function Signature({ project }: { project: Project }) {
           </svg>
         </GraphicShell>
       );
+    case "sentinel":
+      return (
+        <GraphicShell
+          accent={a}
+          label="The signature decision, visualised"
+          left="Agents act faster than any human can watch — most actions are low-risk and flow straight through."
+          right="The risky ones stop at a human gate: approve, reject, or send back — before anything executes."
+        >
+          <svg viewBox="0 0 560 240" className="w-full" aria-hidden>
+            {/* agents on the left */}
+            {[48, 96, 144, 192].map((y, i) => (
+              <g key={y}>
+                <rect
+                  x="24"
+                  y={y - 15}
+                  width="92"
+                  height="30"
+                  rx="6"
+                  fill="none"
+                  stroke="#0e0e0e"
+                  strokeOpacity="0.25"
+                  strokeWidth="1.5"
+                />
+                <circle cx="42" cy={y} r="4" fill={a} />
+                <text x="56" y={y + 4} fontSize="11" fill="#0e0e0e" opacity="0.6">
+                  agent {i + 1}
+                </text>
+                {/* flow line to the gate */}
+                <line
+                  x1="116"
+                  y1={y}
+                  x2="270"
+                  y2="120"
+                  stroke="#0e0e0e"
+                  strokeOpacity={i === 1 ? "0" : "0.18"}
+                  strokeWidth="1.5"
+                />
+              </g>
+            ))}
+
+            {/* the high-risk action that gets held */}
+            <line
+              x1="116"
+              y1="96"
+              x2="250"
+              y2="110"
+              stroke={a}
+              strokeWidth="2.5"
+            />
+            <g transform="translate(250 110)">
+              <circle r="11" fill="#fff" stroke={a} strokeWidth="2" />
+              <line x1="-3" y1="-4" x2="-3" y2="4" stroke={a} strokeWidth="2" strokeLinecap="round" />
+              <line x1="3" y1="-4" x2="3" y2="4" stroke={a} strokeWidth="2" strokeLinecap="round" />
+            </g>
+
+            {/* human gate */}
+            <line
+              x1="300"
+              y1="30"
+              x2="300"
+              y2="210"
+              stroke={a}
+              strokeWidth="2"
+              strokeDasharray="4 6"
+            />
+            <g transform="translate(300 120)">
+              <circle r="30" fill={a} />
+              <circle cx="0" cy="-7" r="6" fill="#fcfaf5" />
+              <path d="M-11 13a11 11 0 0 1 22 0z" fill="#fcfaf5" />
+            </g>
+            <text x="300" y="178" textAnchor="middle" fontSize="11" fontWeight="700" fill="#0e0e0e">
+              HUMAN GATE
+            </text>
+
+            {/* approved flow continues to execution */}
+            <line x1="330" y1="120" x2="500" y2="120" stroke="#0e0e0e" strokeOpacity="0.3" strokeWidth="1.5" strokeLinecap="round" />
+            <g transform="translate(516 120)">
+              <circle r="14" fill="none" stroke="#0e0e0e" strokeOpacity="0.4" strokeWidth="1.5" />
+              <path d="M-5 0 4 0 M0 -4 4 0 0 4" fill="none" stroke="#0e0e0e" strokeOpacity="0.5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </g>
+            <text x="516" y="150" textAnchor="middle" fontSize="10" fill="#0e0e0e" opacity="0.55">
+              EXECUTE
+            </text>
+          </svg>
+        </GraphicShell>
+      );
     default:
       return null;
   }

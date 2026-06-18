@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { projects } from "@/lib/projects";
+import { RESUME_URL } from "@/lib/links";
 
 function useClock() {
   const [time, setTime] = useState("--:-- --");
@@ -56,7 +57,10 @@ function useHeaderTone() {
       const stack = document.elementsFromPoint(x, y);
       for (const el of stack) {
         if (!(el instanceof HTMLElement)) continue;
-        if (el.closest("header")) continue;
+        // ignore the header itself and any full-screen overlay (loader /
+        // page-transition wipe) — otherwise we'd sample the ink overlay on
+        // first paint and turn the header cream-on-cream until a scroll.
+        if (el.closest("header") || el.closest("[data-overlay]")) continue;
         const rgb = parseRGB(getComputedStyle(el).backgroundColor);
         if (rgb && rgb.a > 0.5) {
           setTone(luminance(rgb.r, rgb.g, rgb.b) < 0.35 ? "light" : "dark");
@@ -70,6 +74,7 @@ function useHeaderTone() {
     };
     sample();
     const t = setTimeout(sample, 80); // re-sample after route paint
+    const t2 = setTimeout(sample, 2700); // re-sample once the loader has lifted
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
@@ -77,10 +82,75 @@ function useHeaderTone() {
       window.removeEventListener("resize", onScroll);
       cancelAnimationFrame(raf);
       clearTimeout(t);
+      clearTimeout(t2);
     };
   }, [pathname]);
 
   return tone;
+}
+
+// Dock-style per-letter magnifier on the wordmark: each letter swells as the
+// cursor passes, with a smooth Gaussian falloff. Desktop / fine-pointer only.
+function Wordmark() {
+  const ref = useRef<HTMLAnchorElement>(null);
+  const spans = useRef<(HTMLSpanElement | null)[]>([]);
+  const letters = "HARSHITA".split("");
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    let raf = 0;
+    const onMove = (e: PointerEvent) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const sigma = 46;
+        for (const s of spans.current) {
+          if (!s) continue;
+          const r = s.getBoundingClientRect();
+          const cx = r.left + r.width / 2;
+          const d = e.clientX - cx;
+          const amp = Math.exp(-(d * d) / (2 * sigma * sigma)); // 0..1
+          s.style.transform = `translateY(${-amp * 5}px) scale(${1 + amp * 0.42})`;
+        }
+      });
+    };
+    const reset = () => {
+      if (raf) cancelAnimationFrame(raf);
+      raf = 0;
+      for (const s of spans.current)
+        if (s) s.style.transform = "translateY(0) scale(1)";
+    };
+    el.addEventListener("pointermove", onMove);
+    el.addEventListener("pointerleave", reset);
+    return () => {
+      el.removeEventListener("pointermove", onMove);
+      el.removeEventListener("pointerleave", reset);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, []);
+
+  return (
+    <Link
+      ref={ref}
+      href="/"
+      aria-label="Harshita — home"
+      className="font-display hidden text-center text-[22px] tracking-tight md:flex md:justify-center"
+    >
+      {letters.map((ch, i) => (
+        <span
+          key={i}
+          ref={(n) => {
+            spans.current[i] = n;
+          }}
+          className="inline-block origin-bottom transition-transform duration-150 ease-out will-change-transform"
+        >
+          {ch}
+        </span>
+      ))}
+    </Link>
+  );
 }
 
 export default function Hud() {
@@ -107,13 +177,8 @@ export default function Hud() {
           <Link href="/">HJ</Link>
         </div>
 
-        {/* center — wordmark */}
-        <Link
-          href="/"
-          className="font-display hidden text-center text-[22px] tracking-tight md:block"
-        >
-          HARSHITA
-        </Link>
+        {/* center — wordmark (magnifier) */}
+        <Wordmark />
 
         {/* right — nav */}
         <nav className="label flex items-center justify-end gap-5 md:gap-7">
@@ -123,15 +188,20 @@ export default function Hud() {
           <Link href="/playground" className="hover-line hidden sm:block">
             Playground
           </Link>
-          <Link href="/directory" className="hover-line hidden md:block">
-            Index
-          </Link>
           <Link href="/about" className="hover-line">
             About
           </Link>
           <Link href="/contact" className="hover-line">
             Contact
           </Link>
+          <a
+            href={RESUME_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover-line"
+          >
+            Résumé<span className="mono"> ↗</span>
+          </a>
         </nav>
       </div>
     </header>

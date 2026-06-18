@@ -9,17 +9,17 @@ const steps = [
   {
     n: "01",
     t: "Design",
-    d: "Research, flows and UI in Figma — from problem framing to a full design system.",
+    d: "I start with research and user flows, then design the screens and a proper design system in Figma.",
   },
   {
     n: "02",
     t: "Prototype",
-    d: "AI-native: Claude Code, Framer MCP, the new toolchain — designs become real, clickable prototypes. This site is one.",
+    d: "I use AI tools like Claude Code and Framer to turn those designs into prototypes you can actually click through. This site is one of them.",
   },
   {
     n: "03",
     t: "Hand off",
-    d: "A CS background means I speak engineer — specs and edge cases land build-ready.",
+    d: "My computer science background means I can hand work over the way developers need it — clear specs, with the awkward edge cases already worked out.",
   },
 ];
 
@@ -60,12 +60,12 @@ export default function Home() {
           </h2>
 
           <div className="mt-8 flex flex-wrap items-end justify-between gap-6">
-            <p className="mask-line max-w-[42ch] text-[17px] leading-snug md:text-[20px]">
+            <p className="mask-line max-w-[44ch] text-[17px] leading-snug md:text-[20px]">
               <span style={{ animationDelay: "0.38s" }}>
-                <strong>Product designer, AI-native</strong> —{" "}
+                <strong>Product designer, AI-native.</strong>{" "}
                 <em className="serif-italic text-[1.25em]">
-                  fluent in the AI toolchain that&apos;s reshaping how products
-                  get designed.
+                  I use AI tools to take an idea from first research all the way
+                  to a working prototype.
                 </em>
               </span>
             </p>
@@ -84,12 +84,12 @@ export default function Home() {
           <span>Selected work</span>
           <sup className="mono">({projects.length})</sup>
         </div>
-        <p className="serif max-w-[24ch] text-[34px] leading-[1.15] md:text-[54px]">
-          Three products, taken from research to
-          <em className="serif-italic"> living prototype.</em>
+        <p className="serif max-w-[26ch] text-[34px] leading-[1.15] md:text-[54px]">
+          Three products I took from first research to a
+          <em className="serif-italic"> working prototype.</em>
         </p>
         <p className="label mt-6 opacity-60">
-          Self-initiated, owned end to end. Scroll ↓
+          All self-initiated, and designed end to end. Scroll ↓
         </p>
       </section>
 
@@ -105,10 +105,11 @@ export default function Home() {
               <span>About</span>
             </div>
             <p className="serif max-w-[36ch] text-[26px] leading-snug md:text-[34px]">
-              I&apos;m a product &amp; UI/UX designer from Udaipur, India, with
-              a computer science background. I work AI-native —{" "}
+              I&apos;m a product and UI/UX designer based in Udaipur, India,
+              with a background in computer science. I&apos;m AI-native —{" "}
               <em className="serif-italic">
-                carrying ideas from research through to working prototypes.
+                I use AI tools to carry an idea from research through to a
+                working prototype.
               </em>
             </p>
             <Link href="/about" className="hover-line label mt-8 inline-block">

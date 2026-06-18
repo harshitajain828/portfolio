@@ -75,6 +75,7 @@ export default function PageTransition() {
   return (
     <div
       className="pointer-events-none fixed inset-0 z-[90] flex items-center justify-center bg-ink"
+      data-overlay
       style={style}
       aria-hidden
     >

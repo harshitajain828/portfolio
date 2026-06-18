@@ -44,7 +44,7 @@ const siteUrl =
 
 const title = "Harshita Jain — Product Designer";
 const description =
-  "AI-native product & UI/UX designer — from research and Figma to live prototypes with the new AI toolchain.";
+  "AI-native product & UI/UX designer. I take ideas from research and Figma all the way to working prototypes, using AI tools.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

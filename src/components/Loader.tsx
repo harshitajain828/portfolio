@@ -19,6 +19,7 @@ export default function Loader() {
   return (
     <div
       className="fixed inset-0 z-[100] flex items-center justify-center bg-ink transition-transform duration-[900ms] ease-[cubic-bezier(0.76,0,0.24,1)]"
+      data-overlay
       style={{
         transform: phase === "leaving" ? "translateY(-100%)" : "translateY(0)",
       }}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { RESUME_URL } from "@/lib/links";
 
 export default function FooterStrip({ dark = false }: { dark?: boolean }) {
   return (
@@ -10,11 +11,15 @@ export default function FooterStrip({ dark = false }: { dark?: boolean }) {
       }`}
     >
       <span className="mono">©2026</span>
-      <span className="hidden md:block">Udaipur, India</span>
       <a
-        href="mailto:harshitajain828@gmail.com"
-        className="hover-line lowercase"
+        href={RESUME_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="hover-line hidden md:block"
       >
+        Résumé<span className="mono"> ↗</span>
+      </a>
+      <a href="mailto:harshitajain828@gmail.com" className="hover-line">
         Email
       </a>
       <Link href="/contact" className="hover-line hidden sm:block">
