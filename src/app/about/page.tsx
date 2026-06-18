@@ -45,19 +45,12 @@ const tools: Tool[] = [
     ),
   },
   {
-    name: "GSAP",
+    name: "jittr",
     note: "Motion",
     mark: (
       <svg viewBox="0 0 24 24" className="h-7 w-7" aria-hidden>
         <rect width="24" height="24" rx="6" fill="#0AE448" />
-        <path
-          d="M7 9.5h6.5M16 7.5c-1-1-3.2-1.4-5 0-2 1.6-2 5.4 0 7 1.6 1.3 3.6 1 4.6 0 .6-.6.9-1.6.9-2.6h-3.2"
-          fill="none"
-          stroke="#0e0e0e"
-          strokeWidth="1.8"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <path d="M13 4 7 13h4l-1 7 6-9h-4l1-7z" fill="#0e0e0e" />
       </svg>
     ),
   },
