@@ -32,32 +32,44 @@ export default function Home() {
         <DoodleTrail />
         <div className="pointer-events-none relative z-10">
           <h1 className="font-display flex flex-wrap items-baseline gap-x-4">
-            <span className="mask-line">
-              <span
-                className="serif-italic block text-[6vw] leading-none opacity-75 md:text-[2.4vw]"
-                style={{ animationDelay: "0s" }}
-              >
-                hi, I&apos;m
-              </span>
+            <span
+              className="serif-italic rise-soft block text-[6vw] leading-none opacity-75 md:text-[2.4vw]"
+              style={{ animationDelay: "0s" }}
+            >
+              hi, I&apos;m
             </span>
-            <span className="mask-line">
-              <span
-                className="items-center gap-[1.4vw] text-[10vw] leading-none md:text-[6.2vw]"
-                style={{ animationDelay: "0.1s", display: "flex" }}
-              >
-                Harshita
-                <HeroPills />
-              </span>
+            <span
+              className="rise-soft flex items-center gap-[1.4vw] text-[10vw] leading-none md:text-[6.2vw]"
+              style={{ animationDelay: "0.1s" }}
+            >
+              <MagnifyText
+                className="pointer-events-auto inline-block"
+                sigma={75}
+                scale={0.32}
+                lift={10}
+                parts={[{ text: "Harshita" }]}
+              />
+              <HeroPills />
             </span>
           </h1>
 
           <h2 className="font-display mt-3 text-[12vw] leading-[0.92] md:text-[7.4vw]">
-            <span className="mask-line">
-              <span style={{ animationDelay: "0.3s" }}>I turn ideas</span>
-            </span>
-            <span className="mask-line">
-              <span style={{ animationDelay: "0.4s" }}>into interfaces.</span>
-            </span>
+            <MagnifyText
+              className="rise-soft pointer-events-auto block"
+              style={{ animationDelay: "0.3s" }}
+              sigma={90}
+              scale={0.26}
+              lift={12}
+              parts={[{ text: "I turn ideas" }]}
+            />
+            <MagnifyText
+              className="rise-soft pointer-events-auto block"
+              style={{ animationDelay: "0.4s" }}
+              sigma={90}
+              scale={0.26}
+              lift={12}
+              parts={[{ text: "into interfaces." }]}
+            />
           </h2>
 
           <div className="mt-8 flex flex-wrap items-end justify-between gap-6">

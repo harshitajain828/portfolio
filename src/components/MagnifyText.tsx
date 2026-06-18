@@ -8,12 +8,14 @@ type Part = { text: string; className?: string };
  * Dock-style per-letter magnifier. Each letter swells as the cursor passes,
  * with a smooth Gaussian falloff. Letters are grouped into words so the text
  * still wraps only at spaces. Effect runs on fine-pointer (desktop) only;
- * on touch it renders as normal text.
+ * on touch it renders as normal text. Renders an <a> when `href` is given,
+ * otherwise a <span> (so it can be used inside headings).
  */
 export default function MagnifyText({
   parts,
   href,
   className = "",
+  style,
   sigma = 70,
   scale = 0.3,
   lift = 8,
@@ -22,12 +24,13 @@ export default function MagnifyText({
   parts: Part[];
   href?: string;
   className?: string;
+  style?: React.CSSProperties;
   sigma?: number;
   scale?: number;
   lift?: number;
   ariaLabel?: string;
 }) {
-  const ref = useRef<HTMLAnchorElement>(null);
+  const ref = useRef<HTMLAnchorElement & HTMLSpanElement>(null);
   const spans = useRef<(HTMLSpanElement | null)[]>([]);
 
   useEffect(() => {
@@ -88,30 +91,39 @@ export default function MagnifyText({
 
   const aria = ariaLabel ?? parts.map((p) => p.text).join("");
 
-  return (
-    <a ref={ref} href={href} aria-label={aria} className={className}>
-      {tokens.map((t, ti) =>
-        t.type === "space" ? (
-          <span key={`s${ti}`}> </span>
-        ) : (
-          <span key={`w${ti}`} className="inline-block whitespace-nowrap">
-            {t.chars.map((c) => (
-              <span
-                key={c.idx}
-                ref={(n) => {
-                  spans.current[c.idx] = n;
-                }}
-                aria-hidden
-                className={`inline-block origin-bottom transition-transform duration-150 ease-out will-change-transform ${
-                  c.className ?? ""
-                }`}
-              >
-                {c.ch}
-              </span>
-            ))}
+  const content = tokens.map((t, ti) =>
+    t.type === "space" ? (
+      <span key={`s${ti}`}> </span>
+    ) : (
+      <span key={`w${ti}`} className="inline-block whitespace-nowrap align-baseline">
+        {t.chars.map((c) => (
+          <span
+            key={c.idx}
+            ref={(n) => {
+              spans.current[c.idx] = n;
+            }}
+            aria-hidden
+            className={`inline-block origin-bottom align-baseline transition-transform duration-150 ease-out will-change-transform ${
+              c.className ?? ""
+            }`}
+          >
+            {c.ch}
           </span>
-        )
-      )}
-    </a>
+        ))}
+      </span>
+    )
+  );
+
+  if (href) {
+    return (
+      <a ref={ref} href={href} aria-label={aria} className={className} style={style}>
+        {content}
+      </a>
+    );
+  }
+  return (
+    <span ref={ref} aria-label={aria} className={className} style={style}>
+      {content}
+    </span>
   );
 }
