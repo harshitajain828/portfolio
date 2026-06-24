@@ -239,6 +239,196 @@ export const projects: Project[] = [
     },
   },
   {
+    slug: "fixit",
+    title: "Fixit",
+    year: "2026",
+    role: "Product Designer",
+    type: "Product concept",
+    skills: ["Product Design", "AI / Vision UX", "Design Systems", "Mobile"],
+    tools: ["Figma", "Claude + Figma MCP"],
+    summary:
+      "The world bins tens of millions of tonnes of fixable goods a year — not because repair is impossible, but because the knowledge to fix is locked behind a moment of intimidation. Fixit is a camera-first AI repair companion: point your phone at a broken thing and it identifies the item and the likely fault with visible confidence, guides the fix step by step, names the exact parts and tools, and — honestly and visibly — knows when to stop and tell you to call a pro.",
+    statement: "Point. Diagnose. Fix — and know when to stop.",
+    outcomeLine:
+      "A 94-screen iOS system on one design system, built around confidence calibration and safety-first deferral",
+    cover: "/projects/fixit/cover.png",
+    images: img("fixit", ["01.png", "02.png", "03.png", "04.png", "05.png", "06.png"]),
+    imageCaptions: [
+      "The core loop at a glance — point, analyze, diagnose, plan, fix.",
+      "The diagnosis that sells the product — a ranked differential with calibrated confidence, never a bare verdict.",
+      "Cook-mode guided repair — one step at a time, the exact parts for this step, a timer when it matters.",
+      "The safety hard-stop — for gas, mains, refrigerant or structural work it refuses to coach, and routes to a pro.",
+      "3D point-cloud scan — the premium capture path for larger or hard-to-photograph faults.",
+      "Parts & tools turned into an orderable, have-it / need-it checklist.",
+    ],
+    accent: "#E2641F",
+    accentFg: "#FBF7F0",
+    narrative: {
+      problem:
+        "E-waste is the fastest-growing waste stream on Earth — 62 million tonnes in 2022, up 82% since 2010, and only about a fifth recycled — and textiles are larger still. When things break, people bin them: around 56% of US homeowners would now rather replace than repair, and roughly one in three have thrown out a broken appliance specifically because they couldn’t find someone they trusted to fix it. The barrier isn’t unwillingness, it’s a single intimidating moment — ‘I don’t know what’s wrong, I don’t know what it’s called, and I’m scared I’ll make it worse.’ Every existing tool makes it harder: iFixit, YouTube and manuals all force a text query you can’t write yet, and the new wave of AI chatbots will confidently hallucinate a fix — which, on electrical, gas or structural work, can injure or kill.",
+      decisions: [
+        {
+          title: "Camera as the front door, not search",
+          body: "The hardest moment is naming the problem, so Fixit removes naming entirely. The centre of the tab bar is a capture button, not a feed — point the phone at the broken thing and the product identifies the item and fault across the everyday long tail (appliances, electronics, clothing, furniture, bikes). Out-breadth the guide libraries on coverage; out-design the chatbots on trust.",
+        },
+        {
+          title: "Show confidence — never a bare verdict, never a cold %",
+          body: "The result screen always shows a ranked differential (most likely / possible / less likely) with a calibrated-language confidence bar — ‘a hunch’ through ‘fairly sure’ — not a false-precision percentage. Grounded (‘based on the manual for your model’) versus inferred guidance is a first-class, labelled state. This structurally prevents the confidently-wrong single answer that is a vision model’s default failure.",
+        },
+        {
+          title: "When unsure, run a safe test — don’t guess",
+          body: "If confidence sits in the uncertain band, Fixit doesn’t improvise. It hands the user one cheap, safe, reversible test (‘open the bottom panel and photograph the pump’), then re-analyses and animates the confidence moving. Uncertainty becomes productive instead of scary, and the human becomes the model’s sensor.",
+        },
+        {
+          title: "Safety as the product, not a disclaimer",
+          body: "When a hazardous class is detected — gas, mains voltage, sealed refrigerant, a microwave capacitor, structural — Fixit routes to a blocking screen with no ‘proceed anyway’ button, only ‘why’ and ‘find a pro’. Declining to help is the feature: false ‘stop’ is cheap, false ‘proceed’ can kill, so caution is deliberately asymmetric.",
+        },
+        {
+          title: "Honest repair-vs-replace",
+          body: "A ‘worth fixing?’ verdict makes the 50% rule visual — part-and-effort cost against a new unit, weighted by age — and will, when honest, recommend replacing and route to responsible disposal. Advice aligned with the user’s actual interest, including ‘don’t bother’, is what earns trust for the next repair.",
+        },
+      ],
+      outcome:
+        "Fixit is a concept, and I’ve framed it as one: no real users, no launch, no shipped metrics. What it shows is a complete, coherent system — 94 screens across 17 flows covering the camera-first core loop, confidence-calibrated diagnosis, the low-confidence guided-test loop, a 3D AR scan, parts and ordering, repair-vs-replace, the blocking safety system, library, account, paywall and the full set of edge and error states — all assembled from one reusable design system, with confidence calibration and safety-first deferral as the signature. The honest test is an expert review: would a repair professional accept that this guides a novice safely, and refuses at the right moments? That’s the bar I designed to.",
+      learnings: [
+        "Designing for an intimidated novice changed the brief — the most valuable decisions were about restraint, not features: not naming, not guessing, not coaching danger.",
+        "Honesty is a UX pattern. Showing uncertainty, and a safe way to resolve it, built more trust than any confident answer could.",
+        "Regulation-grade safety thinking sharpens a product. Treating the hard-stop as a designed, first-class state — not a footnote — is what separates this from the AI-chatbot wave.",
+        "A 94-screen system forces real systems discipline — tokens and components first, so a confidence reading or a severity dot means the same thing everywhere.",
+      ],
+      stats: ["62 Mt e-waste a year", "Confidence, never a bare verdict", "It refuses dangerous fixes"],
+      insights: [
+        {
+          title: "The barrier is intimidation, not laziness",
+          body: "People want to fix things — Repair Cafés prove demand outstrips access. What stops them is not knowing the fault or its name, and the fear of making it worse.",
+        },
+        {
+          title: "A confident wrong answer is the real danger",
+          body: "Vision models hallucinate, and their ‘confidence’ is token probability, not diagnostic certainty. On electrical or gas work, one confidently-wrong step is a safety incident.",
+        },
+        {
+          title: "Declining builds trust",
+          body: "A tool that sometimes says ‘stop, get a pro’ or ‘replace this one’ is a tool you believe the rest of the time.",
+        },
+      ],
+      flow: {
+        steps: ["Point the camera", "Analyzing", "Diagnosis + confidence", "Repair plan", "Guided fix", "Fixed"],
+        note: "The core loop — from a broken thing to a fix, with a human always able to stop.",
+      },
+      compare: {
+        theirLabel: "Guides & AI chatbots",
+        ourLabel: "Fixit",
+        theirs: [
+          "A text query you can’t write yet",
+          "One confident answer — often wrong",
+          "Safety treated as a footnote",
+          "No idea when to stop",
+        ],
+        ours: [
+          "Point the camera — no naming needed",
+          "A ranked differential with honest confidence",
+          "Blocking safety stops, by design",
+          "Refuses danger, routes to a pro",
+        ],
+      },
+    },
+  },
+  {
+    slug: "appeal",
+    title: "Appeal",
+    year: "2026",
+    role: "Product Designer",
+    type: "Product concept",
+    skills: ["Product Design", "AI / Trust UX", "Design Systems", "Mobile"],
+    tools: ["Figma", "Claude + Figma MCP"],
+    summary:
+      "Fewer than 1% of denied health-insurance claims are ever appealed — yet 40–80% of the appeals people do file succeed. The gap isn’t the merits, it’s the giving up: denials are written to be opaque and exhausting. Appeal closes that gap. Photograph a denial letter and it decodes the real reason behind the boilerplate, surfaces the specific grounds that win — each cited back to your own documents — and drafts an appeal you edit, own, and send. It’s a calm, evidence-led decoder that never pretends to be a lawyer.",
+    statement: "Decode the denial. Win the appeal.",
+    outcomeLine:
+      "A 78-screen iOS system on one design system, built on traceable citations and honest, calibrated confidence",
+    cover: "/projects/appeal/cover.png",
+    images: img("appeal", ["01.png", "02.png", "03.png", "04.png", "05.png", "06.png"]),
+    imageCaptions: [
+      "The journey at a glance — decode, argue, send.",
+      "The Decode — the boilerplate reason translated into plain language, the decisive clause highlighted in your own letter.",
+      "The Verdict — a calibrated strength meter and an honest base rate, with each ground cited back to your documents.",
+      "The Draft — the appeal in your name, AI-authored runs marked, leverage points pinned to your evidence.",
+      "The case timeline — filed, sent, under review, outcome — so you always know what happens next.",
+      "Trust as a feature — local-first, HIPAA-grade handling, surfaced before anything is asked of you.",
+    ],
+    accent: "#E0A23B",
+    accentFg: "#16243D",
+    narrative: {
+      problem:
+        "About one in five health-insurance claims is denied, but under 1% are appealed — not from laziness, but by design. The deterrent is administrative burden: the learning, paperwork and emotional cost of fighting back. 69% of denied patients don’t know they can appeal and 85% never file. And the denials people surrender to are mostly beatable — the largest category is ‘other’ (no stated reason) followed by administrative errors; genuine medical-necessity calls are a small minority. Letter-writing is already commoditised; what no one owns is the real bottleneck — the moment at the kitchen table of ‘what does this even mean, do I have a case, what do I say?’ The cautionary tale is DoNotPay, whose FTC settlement reads like a spec of what not to do: never tested against lawyers, hallucinated documents, faked endorsements.",
+      decisions: [
+        {
+          title: "Show your work before building on it",
+          body: "After reading the letter, Appeal never silently proceeds. It shows the fields it extracted over a thumbnail of your actual letter; tap any field to see the exact source region. High-confidence reads are quiet, low-confidence reads get an amber ‘tap to confirm’, and nothing downstream runs on an unconfirmed read. That’s the foundation that makes every later citation trustworthy.",
+        },
+        {
+          title: "Decode the real reason — the empathy moment",
+          body: "The hero screen is a split: your scanned letter with the decisive clause highlighted in brick, and a plain-language ‘what this actually means’ beside it. The 36%-of-denials ‘they didn’t actually say why’ case isn’t a failure state — it’s reframed as leverage: ‘that’s common, and it’s a weakness we can use.’",
+        },
+        {
+          title: "A calibrated verdict, with citations",
+          body: "The verdict pairs a strength meter with an honest base rate (‘appeals like yours succeed about X% of the time’), and every ground carries a citation chip that traces to the exact line in your own document or a named regulation — never an unverifiable claim. Weak cases get an honest ‘this is a harder case’ path; genuinely complex ones are routed to a lawyer or advocate.",
+        },
+        {
+          title: "A draft the user owns and sends",
+          body: "The appeal is presented as a finished letter you can edit anywhere; AI-authored runs carry a subtle marigold rule so authorship is always legible, and refine suggestions come as accept/reject diffs. The flow forces a ‘review before you send’ checklist and an explicit ‘I’m sending my appeal’ — deliberate friction that is both a trust feature and the legal firewall: the user is always the author and the sender.",
+        },
+        {
+          title: "Never paywall the decode",
+          body: "Understanding your denial and seeing your grounds is always free; payment is asked only at send, with a hardship path that grants full access. The ethical north star is to not monetise desperation — the inverse of the failure mode the product was designed against.",
+        },
+      ],
+      outcome:
+        "Appeal is a concept and I’ve framed it as one: no real users, no launch, no shipped metrics. What it shows is a complete, coherent system — 78 screens across 19 flows covering capture, show-your-work decode, adaptive intake, the cited verdict, the user-owned draft editor, send-and-track, the evidence locker, deadlines, learn, escalation, account, security and app-lock, privacy controls, the ethical paywall, and the full edge-and-error set — all on one design system, with traceable citations and calibrated confidence as the spine. The honest test is an expert review: would a patient advocate accept that this helps a layperson understand and contest a denial without ever overclaiming or posing as a lawyer? That’s the bar I designed to.",
+      learnings: [
+        "Designing against an anti-pattern (DoNotPay’s FTC settlement) was clarifying — every trust mechanic is a direct answer to a documented failure.",
+        "Traceability is the whole product. A citation you can tap back to your own letter is what separates this from a confident letter-generator.",
+        "Honesty scales down as well as up — the weak-case path and the ‘see a lawyer’ route earn the trust that the strong-case path spends.",
+        "A 78-screen system forced real systems discipline — one verdict component, one citation chip, one strength meter, reused everywhere.",
+      ],
+      stats: ["<1% of denials are appealed", "40–80% of appeals win", "Every ground cited to your docs"],
+      insights: [
+        {
+          title: "Giving up is the design problem",
+          body: "The barrier to appealing isn’t the merits — most filed appeals win. It’s administrative burden: not knowing you can, and the exhaustion of trying.",
+        },
+        {
+          title: "Opacity is leverage, not a dead end",
+          body: "The biggest denial category has no stated reason. That looks like a wall, but a missing rationale is itself a weakness you can appeal on.",
+        },
+        {
+          title: "Trust is the product, not the model",
+          body: "Letter-writing is commoditised. What wins is traceable citations, calibrated confidence, and a user who is always the author — never a tool pretending to be a lawyer.",
+        },
+      ],
+      flow: {
+        steps: ["Photograph the denial", "Decode the real reason", "See your grounds", "Draft your appeal", "Send & track"],
+        note: "From a confusing letter to a sent appeal you own — understanding first, then action.",
+      },
+      compare: {
+        theirLabel: "DIY / letter generators",
+        ourLabel: "Appeal",
+        theirs: [
+          "Boilerplate you can’t decode",
+          "A letter with unverifiable claims",
+          "Confidence with no basis",
+          "Tools that imply they’re lawyers",
+        ],
+        ours: [
+          "The real reason, in plain language",
+          "Grounds cited to your own documents",
+          "An honest strength meter and base rate",
+          "You’re always the author and sender",
+        ],
+      },
+    },
+  },
+  {
     slug: "streamnow",
     title: "StreamNow",
     year: "2025",

@@ -580,6 +580,91 @@ export function Signature({ project }: { project: Project }) {
           </svg>
         </GraphicShell>
       );
+    case "fixit":
+      return (
+        <GraphicShell
+          accent={a}
+          label="The signature decision, visualised"
+          left="A vision model hands you one confident answer — and it’s often wrong."
+          right="Fixit shows a ranked differential with honest confidence, and refuses the fixes that could hurt you."
+        >
+          <svg viewBox="0 0 560 240" className="w-full" aria-hidden>
+            {/* left: a single confident-but-wrong answer */}
+            <rect x="24" y="66" width="170" height="104" rx="10" fill="none" stroke="#0e0e0e" strokeOpacity="0.25" strokeWidth="1.5" />
+            <text x="40" y="94" fontSize="11" fill="#0e0e0e" opacity="0.55">ONE ANSWER</text>
+            <rect x="40" y="108" width="138" height="10" rx="5" fill="#0e0e0e" opacity="0.12" />
+            <rect x="40" y="108" width="132" height="10" rx="5" fill={a} />
+            <text x="40" y="146" fontSize="12" fill="#0e0e0e" opacity="0.7">“It’s the pump.”</text>
+            <g transform="translate(178 82)" stroke="#D5402B" strokeWidth="2.5" strokeLinecap="round">
+              <line x1="-7" y1="-7" x2="7" y2="7" />
+              <line x1="-7" y1="7" x2="7" y2="-7" />
+            </g>
+            <text x="244" y="124" fontSize="22" fill={a}>→</text>
+            {/* right: a ranked differential + a safety check */}
+            <g transform="translate(300 0)">
+              <g transform="translate(0 60)">
+                <circle cx="6" cy="6" r="5" fill={a} />
+                <text x="20" y="10" fontSize="11" fill="#0e0e0e" opacity="0.6">Most likely</text>
+                <rect x="20" y="20" width="150" height="9" rx="4.5" fill="#0e0e0e" opacity="0.1" />
+                <rect x="20" y="20" width="132" height="9" rx="4.5" fill={a} />
+              </g>
+              <g transform="translate(0 102)">
+                <circle cx="6" cy="6" r="5" fill={a} opacity="0.55" />
+                <text x="20" y="10" fontSize="11" fill="#0e0e0e" opacity="0.6">Possible</text>
+                <rect x="20" y="20" width="150" height="9" rx="4.5" fill="#0e0e0e" opacity="0.1" />
+                <rect x="20" y="20" width="86" height="9" rx="4.5" fill={a} opacity="0.55" />
+              </g>
+              <g transform="translate(0 144)">
+                <circle cx="6" cy="6" r="5" fill={a} opacity="0.3" />
+                <text x="20" y="10" fontSize="11" fill="#0e0e0e" opacity="0.6">Less likely</text>
+                <rect x="20" y="20" width="150" height="9" rx="4.5" fill="#0e0e0e" opacity="0.1" />
+                <rect x="20" y="20" width="48" height="9" rx="4.5" fill={a} opacity="0.3" />
+              </g>
+              <g transform="translate(214 108)">
+                <path d="M0 -24 L20 -14 V4 C20 19 0 28 0 28 C0 28 -20 19 -20 4 V-14 Z" fill={a} />
+                <path d="M-8 2 l6 6 l10 -12" fill="none" stroke="#fcfaf5" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              </g>
+              <text x="214" y="152" textAnchor="middle" fontSize="10" fill="#0e0e0e" opacity="0.55">SAFE TO COACH</text>
+            </g>
+          </svg>
+        </GraphicShell>
+      );
+    case "appeal":
+      return (
+        <GraphicShell
+          accent={a}
+          label="The signature move, visualised"
+          left="A denial is written to be opaque — dense, procedural, easy to give up on."
+          right="Appeal highlights the decisive clause and translates it, cited back to your own letter."
+        >
+          <svg viewBox="0 0 560 240" className="w-full" aria-hidden>
+            {/* left: the dense denial letter with one clause highlighted */}
+            <rect x="24" y="24" width="196" height="192" rx="8" fill="#fff" stroke="#0e0e0e" strokeOpacity="0.14" strokeWidth="1.5" />
+            {[44, 60, 76, 92].map((y, i) => (
+              <rect key={y} x="42" y={y} width={i % 2 ? 120 : 150} height="6" rx="3" fill="#0e0e0e" opacity="0.16" />
+            ))}
+            <rect x="34" y="106" width="176" height="28" rx="5" fill="#F1DAD3" />
+            <rect x="42" y="117" width="150" height="6" rx="3" fill="#B4472F" />
+            {[148, 164, 180].map((y, i) => (
+              <rect key={y} x="42" y={y} width={i % 2 ? 110 : 150} height="6" rx="3" fill="#0e0e0e" opacity="0.16" />
+            ))}
+            <text x="246" y="124" fontSize="22" fill={a}>→</text>
+            {/* right: the plain-language meaning + a citation chip */}
+            <g transform="translate(300 40)">
+              <rect x="0" y="0" width="236" height="160" rx="10" fill="#fff" stroke="#0e0e0e" strokeOpacity="0.12" strokeWidth="1.5" />
+              <text x="18" y="36" fontSize="14" fontWeight="700" fill="#16243D">They never proved it.</text>
+              {[56, 74, 92].map((y, i) => (
+                <rect key={y} x="18" y={y} width={i === 2 ? 120 : 200} height="6" rx="3" fill="#16243D" opacity="0.18" />
+              ))}
+              <g transform="translate(18 116)">
+                <rect x="0" y="0" width="156" height="28" rx="14" fill="#F6E4C2" />
+                <circle cx="16" cy="14" r="4" fill={a} />
+                <text x="28" y="18" fontSize="11" fill="#16243D">Denial letter, p.1</text>
+              </g>
+            </g>
+          </svg>
+        </GraphicShell>
+      );
     default:
       return null;
   }
