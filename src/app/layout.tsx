@@ -6,6 +6,7 @@ import {
   Instrument_Serif,
   Roboto_Mono,
   Caveat,
+  Anton,
 } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -40,6 +41,12 @@ const robotoMono = Roboto_Mono({
 const caveat = Caveat({
   variable: "--font-hand",
   weight: ["400", "600"],
+  subsets: ["latin"],
+});
+
+const anton = Anton({
+  variable: "--font-anton",
+  weight: "400",
   subsets: ["latin"],
 });
 
@@ -103,7 +110,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${interTight.variable} ${robotoMono.variable} ${instrumentSerif.variable} ${caveat.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${interTight.variable} ${robotoMono.variable} ${instrumentSerif.variable} ${caveat.variable} ${anton.variable} h-full antialiased`}
     >
       <head>
         {process.env.NODE_ENV === "development" && (

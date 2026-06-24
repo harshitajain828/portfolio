@@ -49,18 +49,18 @@ export const projects: Project[] = [
     tools: ["Figma", "Claude + Figma MCP"],
     summary:
       "The world bins tens of millions of tonnes of fixable goods a year — not because repair is impossible, but because the knowledge to fix is locked behind a moment of intimidation. Fixit is a camera-first AI repair companion: point your phone at a broken thing and it identifies the item and the likely fault with visible confidence, guides the fix step by step, names the exact parts and tools, and — honestly and visibly — knows when to stop and tell you to call a pro.",
-    statement: "Point. Diagnose. Fix — and know when to stop.",
+    statement: "A camera-first repair application that helps users repair everyday objects, and defers to a professional when a task is unsafe.",
     outcomeLine:
       "A 94-screen iOS system on one design system, built around confidence calibration and safety-first deferral",
     cover: "/projects/fixit/cover.png",
     images: img("fixit", ["01.png", "02.png", "03.png", "04.png", "05.png", "06.png"]),
     imageCaptions: [
-      "The core loop at a glance — point, analyze, diagnose, plan, fix.",
-      "The diagnosis that sells the product — a ranked differential with calibrated confidence, never a bare verdict.",
-      "Cook-mode guided repair — one step at a time, the exact parts for this step, a timer when it matters.",
-      "The safety hard-stop — for gas, mains, refrigerant or structural work it refuses to coach, and routes to a pro.",
-      "3D point-cloud scan — the premium capture path for larger or hard-to-photograph faults.",
-      "Parts & tools turned into an orderable, have-it / need-it checklist.",
+      "The core loop, from pointing the camera to a completed repair.",
+      "The diagnosis: several likely faults, ranked, with a calibrated level of certainty.",
+      "Guided repair, presented one step at a time, with the parts required for each step.",
+      "For hazardous work, the application stops and directs the user to a professional.",
+      "A 3D scan, for larger items or faults that are difficult to photograph.",
+      "The required parts and tools, organised into a clear checklist.",
     ],
     accent: "#0071C2",
     accentFg: "#FFFFFF",
@@ -69,35 +69,35 @@ export const projects: Project[] = [
         "E-waste is the fastest-growing waste stream on Earth — 62 million tonnes in 2022, up 82% since 2010, and only about a fifth recycled — and textiles are larger still. When things break, people bin them: around 56% of US homeowners would now rather replace than repair, and roughly one in three have thrown out a broken appliance specifically because they couldn’t find someone they trusted to fix it. The barrier isn’t unwillingness, it’s a single intimidating moment — ‘I don’t know what’s wrong, I don’t know what it’s called, and I’m scared I’ll make it worse.’ Every existing tool makes it harder: iFixit, YouTube and manuals all force a text query you can’t write yet, and the new wave of AI chatbots will confidently hallucinate a fix — which, on electrical, gas or structural work, can injure or kill.",
       decisions: [
         {
-          title: "Camera as the front door, not search",
-          body: "The hardest moment is naming the problem, so Fixit removes naming entirely. The centre of the tab bar is a capture button, not a feed — point the phone at the broken thing and the product identifies the item and fault across the everyday long tail (appliances, electronics, clothing, furniture, bikes). Out-breadth the guide libraries on coverage; out-design the chatbots on trust.",
+          title: "The camera, rather than search, is the primary entry point",
+          body: "Naming the problem is the most difficult step for a non-expert, so the application removes it. The central control is a capture button rather than a feed; the user points the phone at the object and the app identifies the item and the fault across common categories — appliances, electronics, clothing, furniture and bicycles.",
         },
         {
-          title: "Show confidence — never a bare verdict, never a cold %",
-          body: "The result screen always shows a ranked differential (most likely / possible / less likely) with a calibrated-language confidence bar — ‘a hunch’ through ‘fairly sure’ — not a false-precision percentage. Grounded (‘based on the manual for your model’) versus inferred guidance is a first-class, labelled state. This structurally prevents the confidently-wrong single answer that is a vision model’s default failure.",
+          title: "Confidence is communicated in plain language",
+          body: "Each result presents a ranked set of possible faults with a calibrated indication of certainty in words rather than a percentage, which would imply false precision. Whether the guidance is drawn from the model’s manual or is general is shown explicitly. This prevents a single, potentially incorrect answer from being presented as definitive.",
         },
         {
-          title: "When unsure, run a safe test — don’t guess",
-          body: "If confidence sits in the uncertain band, Fixit doesn’t improvise. It hands the user one cheap, safe, reversible test (‘open the bottom panel and photograph the pump’), then re-analyses and animates the confidence moving. Uncertainty becomes productive instead of scary, and the human becomes the model’s sensor.",
+          title: "When uncertain, the system requests a simple check",
+          body: "Where confidence is low, the application does not guess. It asks the user to perform one safe, reversible check — for example, photographing a specific component — and then re-evaluates, rather than presenting an unreliable conclusion.",
         },
         {
-          title: "Safety as the product, not a disclaimer",
-          body: "When a hazardous class is detected — gas, mains voltage, sealed refrigerant, a microwave capacitor, structural — Fixit routes to a blocking screen with no ‘proceed anyway’ button, only ‘why’ and ‘find a pro’. Declining to help is the feature: false ‘stop’ is cheap, false ‘proceed’ can kill, so caution is deliberately asymmetric.",
+          title: "Hazardous repairs are blocked, not merely flagged",
+          body: "When a hazardous category is detected — gas, mains electricity, sealed refrigerant, capacitors or structural work — the application presents a blocking screen with no option to proceed, and directs the user to a professional. An incorrect instruction in these areas can cause injury, so the system is deliberately cautious.",
         },
         {
-          title: "Honest repair-vs-replace",
-          body: "A ‘worth fixing?’ verdict makes the 50% rule visual — part-and-effort cost against a new unit, weighted by age — and will, when honest, recommend replacing and route to responsible disposal. Advice aligned with the user’s actual interest, including ‘don’t bother’, is what earns trust for the next repair.",
+          title: "An honest repair-or-replace assessment",
+          body: "An assessment compares the cost of parts and effort against replacement, weighted by the age of the item, and recommends replacement and responsible disposal where appropriate. Advice that reflects the user’s actual interest, including the decision not to repair, supports long-term trust.",
         },
       ],
       outcome:
-        "Fixit is a concept, and I’ve framed it as one: no real users, no launch, no shipped metrics. What it shows is a complete, coherent system — 94 screens across 17 flows covering the camera-first core loop, confidence-calibrated diagnosis, the low-confidence guided-test loop, a 3D AR scan, parts and ordering, repair-vs-replace, the blocking safety system, library, account, paywall and the full set of edge and error states — all assembled from one reusable design system, with confidence calibration and safety-first deferral as the signature. The honest test is an expert review: would a repair professional accept that this guides a novice safely, and refuses at the right moments? That’s the bar I designed to.",
+        "Fixit is a concept — no real users, no launch, no shipped metrics. What it is, is a complete, coherent system: 94 screens across 17 flows covering the camera-first core loop, confidence-calibrated diagnosis, the low-confidence guided-test loop, a 3D scan, parts and ordering, repair-vs-replace, the blocking safety system, library, account, paywall and the full set of edge and error states — all built from one reusable design system, with confidence and safety as the spine. The honest test would be an expert review: would a repair professional accept that it guides a beginner safely, and refuses at the right moments?",
       learnings: [
         "Designing for an intimidated novice changed the brief — the most valuable decisions were about restraint, not features: not naming, not guessing, not coaching danger.",
         "Honesty is a UX pattern. Showing uncertainty, and a safe way to resolve it, built more trust than any confident answer could.",
         "Regulation-grade safety thinking sharpens a product. Treating the hard-stop as a designed, first-class state — not a footnote — is what separates this from the AI-chatbot wave.",
         "A 94-screen system forces real systems discipline — tokens and components first, so a confidence reading or a severity dot means the same thing everywhere.",
       ],
-      stats: ["62 Mt e-waste a year", "Confidence, never a bare verdict", "It refuses dangerous fixes"],
+      stats: ["62 Mt of e-waste a year", "56% would rather replace than repair", "~1 in 3 discarded a fixable appliance"],
       insights: [
         {
           title: "The barrier is intimidation, not laziness",

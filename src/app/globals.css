@@ -72,6 +72,11 @@ body {
   text-transform: none;
   letter-spacing: 0;
 }
+.font-anton {
+  font-family: var(--font-anton), Impact, sans-serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
 
 /* --- ruler tick strip (nite-riot scrubber) --- */
 .ruler {
