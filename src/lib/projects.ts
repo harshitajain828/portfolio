@@ -159,7 +159,7 @@ export const projects: Project[] = [
     ],
     accent: "#C2674A",
     accentFg: "#F6F0E6",
-    figmaUrl: "https://www.figma.com/proto/PCa7rf0Pd4CKfOzdhjo8M1/CycleSync-%E2%80%94-Cycle-Wellbeing-Companion?node-id=3-2&starting-point-node-id=3-2&scaling=scale-down&content-scaling=fixed",
+    figmaUrl: "https://www.figma.com/proto/PCa7rf0Pd4CKfOzdhjo8M1/CycleSync-%E2%80%94-Cycle-Wellbeing-Companion?node-id=51-29&starting-point-node-id=51-29&scaling=scale-down&content-scaling=fixed",
     narrative: {
       problem:
         "The most common hormonal condition in women also produces the most unpredictable cycles, and the tools are all built for predictability. PCOS affects 8–13% of women globally (about 1 in 5 young women in India), up to 70% of cases go undiagnosed, and getting a diagnosis often takes years and several doctors. Mainstream apps assume a 28-day cycle with ovulation on day 14, so a 45- or 72-day cycle looks like an error, and the countdown keeps promising a date that never comes. For a group that is already three to eight times more likely to live with anxiety or depression, that is genuinely stressful. Trust is shaky too: a leading tracker settled with the FTC, then a $56M class action, over how it shared intimate cycle data. The people who need a good tool the most are the ones served worst.",
