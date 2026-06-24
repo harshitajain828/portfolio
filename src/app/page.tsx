@@ -98,7 +98,7 @@ export default function Home() {
           <sup className="mono">({projects.length})</sup>
         </div>
         <p className="serif max-w-[26ch] text-[34px] leading-[1.15] md:text-[54px]">
-          Five products I took from first research to a
+          Four products I took from first research to a
           <em className="serif-italic"> working prototype.</em>
         </p>
         <p className="label mt-6 opacity-60">
