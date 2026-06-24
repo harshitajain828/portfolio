@@ -340,7 +340,7 @@ export const projects: Project[] = [
     tools: ["Figma", "Claude + Figma MCP"],
     summary:
       "Banks are starting to hand underwriting, collections and KYC to AI agents. But from August 2026, the EU AI Act makes a human overseer legally required for high-risk credit decisions. Sentinel is an oversight console where one operator supervises a fleet of financial agents: spot an agent drifting, approve or reject a high-risk action before it runs, and reconstruct any past decision for an auditor. Designed end to end on a real design system.",
-    statement: "Keep a human in the loop — at the scale agents now run.",
+    statement: "An oversight console for supervising the AI agents that make high-stakes financial decisions.",
     outcomeLine:
       "40 screens on one design system · 3 end-to-end flows · designed against EU AI Act Art. 14",
     cover: "/projects/sentinel/cover.png",
@@ -378,11 +378,11 @@ export const projects: Project[] = [
         },
         {
           title: "Build on a real design system",
-          body: "An oversight tool lives or dies on consistency, the same status read the same way everywhere. I built primitives and semantic tokens first, then domain components (agent card, decision inspector, audit timeline), and assembled every screen from them. It’s slower to the first pixel, but the screens stay consistent and the system itself shows how I think.",
+          body: "An oversight tool lives or dies on consistency — the same status read the same way everywhere. The product is built from primitives and semantic tokens first, then domain components (agent card, decision inspector, audit timeline), with every screen assembled from them. It is slower to the first pixel, but the screens stay consistent and the system is itself part of the work.",
         },
       ],
       outcome:
-        "Sentinel is a concept and I’ve framed it as one: no invented users, no launch, no shipped metrics. What it shows is the harder thing a high-stakes product is judged on, a complete and coherent system. Forty screens cover fleet monitoring and analytics, the human-in-the-loop review gate, reasoning-replay and fairness investigation, the tamper-evident audit trail, policy governance with versioned diffs, agent configuration and deployment, the full shell (sign-in, settings, command palette, empty/loading/error states) and a responsive mobile set, all from one design system, each surface designed against a named regulatory requirement. The honest test is an expert review: would a risk officer accept that this plausibly supports pre-authorisation, intervention and a contestable, auditable rationale? That’s the bar I designed to.",
+        "Sentinel is a concept: no invented users, no launch, no shipped metrics. It is the harder thing a high-stakes product is judged on — a complete, coherent system. Forty screens cover fleet monitoring and analytics, the human-in-the-loop review gate, reasoning-replay and fairness investigation, the tamper-evident audit trail, policy governance with versioned diffs, agent configuration and deployment, the full shell (sign-in, settings, command palette, empty/loading/error states) and a responsive mobile set — all from one design system, each surface designed against a named regulatory requirement. A meaningful evaluation would be an expert review: whether a risk officer would accept that it plausibly supports pre-authorisation, intervention, and a contestable, auditable rationale.",
       learnings: [
         "Designing for two opposed users sharpened everything. The operations lead wants speed and fewer interruptions; the compliance officer wants friction and a paper trail. The product is the negotiation between them.",
         "Regulation is a design brief, not a constraint to route around. Reading the AI Act, ECOA and SR 11-7 closely turned a vague idea of “trust” into concrete, testable requirements.",

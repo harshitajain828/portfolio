@@ -3,10 +3,12 @@ import { getProject, projects } from "@/lib/projects";
 import CaseView from "@/components/case/CaseView";
 import FixitCase from "@/components/case/FixitCase";
 import AppealCase from "@/components/case/AppealCase";
+import SentinelCase from "@/components/case/SentinelCase";
 
 const CUSTOM: Record<string, typeof CaseView> = {
   fixit: FixitCase,
   appeal: AppealCase,
+  sentinel: SentinelCase,
 };
 
 export function generateStaticParams() {
