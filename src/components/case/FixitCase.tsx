@@ -338,9 +338,15 @@ export default function FixitCase({
             guided repair, the safety stop, parts, the library and the edge cases
             — that can be navigated from start to finish.
           </p>
-          <span className="mono mt-8 inline-block rounded-full px-5 py-3 text-[13px] opacity-80" style={{ border: `1px solid ${BLUE}` }}>
-            Interactive embed to follow
-          </span>
+          <a
+            href="https://www.figma.com/design/7I0mUprnWqPlUPdNT92tA6/Fixit-%E2%80%94-AI-Repair-Companion"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex items-center gap-2.5 rounded-full px-5 py-3.5 text-[15px] font-semibold"
+            style={{ backgroundColor: BLUE, color: "#fff" }}
+          >
+            Open in Figma <span aria-hidden>→</span>
+          </a>
         </Reveal>
       </section>
 
