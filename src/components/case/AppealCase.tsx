@@ -10,8 +10,8 @@ const PAPER = "#F6F2EA";
 const MARIGOLD = "#E0A23B";
 const GREEN = "#1F7A5C";
 const BRICK = "#B4472F";
+const LINE = "rgba(22,36,61,0.14)";
 
-/* hand-drawn annotation arrow */
 function HandArrow({ flip, color = INK, className = "" }: { flip?: boolean; color?: string; className?: string }) {
   return (
     <svg viewBox="0 0 120 64" className={className} style={{ transform: flip ? "scaleX(-1)" : undefined, color }} aria-hidden>
@@ -41,20 +41,27 @@ function StrengthMeter({ filled = 4, total = 5, label = "Strong case" }: { fille
 
 function Phone({ src, alt, className = "" }: { src: string; alt: string; className?: string }) {
   return (
-    <div className={`mx-auto w-fit overflow-hidden rounded-[22px] border border-[#16243D]/10 p-2 ${className}`} style={{ backgroundColor: "rgba(224,162,59,0.12)" }}>
+    <div className={`mx-auto w-fit overflow-hidden rounded-[22px] border p-2 ${className}`} style={{ borderColor: LINE, backgroundColor: "rgba(224,162,59,0.12)" }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={alt} loading="lazy" className="block max-h-[560px] w-auto rounded-[14px]" />
     </div>
   );
 }
 
-function Eyebrow({ mark, label, color = MARIGOLD, light = false }: { mark: string; label: string; color?: string; light?: boolean }) {
+/* dossier section: a numbered exhibit margin + content */
+function Exhibit({ no, label, children, className = "" }: { no: string; label: string; children: React.ReactNode; className?: string }) {
   return (
-    <div className={`label flex items-center gap-3 ${light ? "opacity-90" : "opacity-70"}`}>
-      <span className="mono" style={{ color }}>{mark}</span>
-      <span className="h-px w-10" style={{ background: color, opacity: light ? 0.6 : 1 }} />
-      <span>{label}</span>
-    </div>
+    <section className={`border-t px-5 py-20 md:px-10 md:py-24 ${className}`} style={{ borderColor: LINE }}>
+      <div className="grid gap-8 md:grid-cols-[190px_1fr] md:gap-14">
+        <Reveal>
+          <div className="md:sticky md:top-28">
+            <div className="mono text-[12px]" style={{ color: MARIGOLD }}>EXHIBIT {no}</div>
+            <div className="label mt-2 opacity-60">{label}</div>
+          </div>
+        </Reveal>
+        <div>{children}</div>
+      </div>
+    </section>
   );
 }
 
@@ -71,7 +78,7 @@ export default function AppealCase({
 }) {
   const n = project.narrative;
   const cap = project.imageCaptions ?? [];
-  // images: 0 flow · 1 decode · 2 verdict · 3 draft · 4 timeline · 5 privacy
+  // 0 flow · 1 decode · 2 verdict · 3 draft · 4 timeline · 5 privacy
   const gallery = [
     { src: project.images[3], cap: cap[3] },
     { src: project.images[4], cap: cap[4] },
@@ -82,24 +89,25 @@ export default function AppealCase({
     <main style={{ backgroundColor: PAPER, color: INK }}>
       <ScrollProgress accent={MARIGOLD} />
 
-      {/* ══ HERO ══ */}
-      <section className="relative overflow-hidden px-5 pt-28 md:px-10" style={{ backgroundColor: INK, color: PAPER }}>
-        <div className="label flex items-center justify-between opacity-75">
-          <Link href="/work" className="hover-line pointer-events-auto">← All work</Link>
+      {/* ══ HERO — case file, letter-led ══ */}
+      <section className="px-5 pt-28 pb-16 md:px-10">
+        <div className="mono flex items-center justify-between border-b pb-3 text-[11px]" style={{ borderColor: LINE, color: "rgba(22,36,61,0.6)" }}>
+          <span>CASE FILE — HEALTH-INSURANCE DENIAL</span>
           <span className="flex items-center gap-4">
-            <span className="mono">{String(index + 1).padStart(2, "0")}/{String(total).padStart(2, "0")}</span>
-            <span className="hidden sm:inline">{project.type}</span>
-            <span className="mono">{project.year}</span>
+            <Link href="/work" className="hover-line pointer-events-auto">← All work</Link>
+            <span>{String(index + 1).padStart(2, "0")}/{String(total).padStart(2, "0")}</span>
+            <span>{project.year}</span>
           </span>
         </div>
 
-        <div className="grid items-center gap-10 pt-12 md:grid-cols-[1.1fr_0.9fr] md:pt-14">
-          <div className="pb-16 md:pb-24">
-            <div className="label mb-5 opacity-65">{project.role} · iOS</div>
+        <div className="mt-14 grid items-center gap-12 md:grid-cols-[1fr_0.8fr] md:gap-16">
+          <div>
+            <div className="label mb-5" style={{ color: MARIGOLD }}>{project.role} · iOS</div>
             <h1 className="font-fraunces text-[20vw] leading-[0.9] md:text-[10vw]">
               Appeal<span style={{ color: MARIGOLD }}>.</span>
             </h1>
-            <p className="mt-7 max-w-[48ch] text-[17px] leading-relaxed opacity-85 md:text-[20px]">
+            <div className="mt-6 h-px w-24" style={{ background: MARIGOLD }} />
+            <p className="mt-6 max-w-[48ch] text-[17px] normal-case leading-relaxed md:text-[20px]" style={{ color: "rgba(22,36,61,0.82)" }}>
               An AI tool for contesting a denied health-insurance claim. The user
               photographs the denial letter; the app explains the real reason in
               plain language, sets out the grounds for an appeal — each cited to
@@ -111,49 +119,43 @@ export default function AppealCase({
             </a>
           </div>
 
-          <div className="relative mx-auto flex w-full max-w-[400px] items-end justify-center pb-12 md:pb-20">
-            <div className="relative w-[46%] -translate-y-2 -rotate-[7deg]">
-              <div className="overflow-hidden rounded-[20px] border border-white/10 shadow-[0_24px_60px_rgba(0,0,0,0.45)]">
-                <Image src={project.images[2]} alt="" width={390} height={844} className="block h-auto w-full" />
-              </div>
-            </div>
-            <div className="relative z-10 -ml-5 w-[54%] rotate-[3deg]">
-              <div className="overflow-hidden rounded-[24px] border border-white/10 shadow-[0_38px_85px_rgba(0,0,0,0.55)]">
-                <Image src={project.images[1]} alt="Appeal — the decode screen" width={390} height={844} priority className="block h-auto w-full" />
-              </div>
+          {/* the denial letter, as a single stamped document */}
+          <div className="relative mx-auto w-fit">
+            <span className="mono absolute -left-3 -top-3 z-20 -rotate-6 rounded-sm px-3 py-1 text-[11px] font-semibold shadow-[0_6px_18px_rgba(0,0,0,0.18)]" style={{ background: BRICK, color: PAPER }}>
+              DENIED
+            </span>
+            <div className="rotate-[1.5deg] overflow-hidden rounded-[26px] border bg-white p-2 shadow-[0_34px_80px_rgba(22,36,61,0.2)]" style={{ borderColor: LINE }}>
+              <Image src={project.images[1]} alt="Appeal — decoding the denial letter" width={390} height={844} priority className="block h-auto w-[clamp(232px,42vw,300px)] rounded-[18px]" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ══ THE PROBLEM ══ */}
-      <section className="px-5 py-20 md:px-10 md:py-28">
-        <Reveal><Eyebrow mark="01" label="The problem" /></Reveal>
-        <div className="mt-10 grid gap-12 md:grid-cols-[1.3fr_1fr] md:gap-16">
-          <Reveal y={24}>
-            <p className="font-fraunces max-w-[28ch] text-[28px] leading-[1.2] md:text-[38px]">
-              Most denied claims are never appealed — not because they lack merit,
-              but because the process is made opaque and exhausting.
-            </p>
-            <p className="hand mt-9 max-w-[26ch] text-[26px] leading-tight md:text-[32px]" style={{ color: INK }}>
-              “What does this even mean — do I have a case, and what am I supposed
-              to say?”
-            </p>
-          </Reveal>
-          <Reveal delay={120} className="flex flex-col justify-center gap-8 md:border-l md:border-[#16243D]/15 md:pl-16">
+      {/* ══ EXHIBIT 01 — the problem ══ */}
+      <Exhibit no="01" label="The problem">
+        <Reveal y={24}>
+          <p className="font-fraunces max-w-[28ch] text-[28px] leading-[1.2] md:text-[38px]">
+            Most denied claims are never appealed — not because they lack merit,
+            but because the process is made opaque and exhausting.
+          </p>
+          <p className="hand mt-8 max-w-[26ch] text-[26px] leading-tight md:text-[32px]" style={{ color: INK }}>
+            “What does this even mean — do I have a case, and what am I supposed
+            to say?”
+          </p>
+          <div className="mt-12 grid gap-8 border-t pt-8 sm:grid-cols-3" style={{ borderColor: LINE }}>
             {n.stats.map((s) => (
-              <div key={s} className="font-fraunces text-[24px] leading-tight md:text-[28px]" style={{ color: BRICK }}>
+              <div key={s} className="font-fraunces text-[22px] leading-tight md:text-[24px]" style={{ color: BRICK }}>
                 {s}
               </div>
             ))}
-          </Reveal>
-        </div>
-      </section>
+          </div>
+        </Reveal>
+      </Exhibit>
 
-      {/* ══ WHERE EXISTING TOOLS FALL SHORT ══ */}
+      {/* ══ THE CAUTIONARY EVIDENCE (one dark band) ══ */}
       <section className="px-5 py-20 md:px-10 md:py-28" style={{ backgroundColor: INK, color: PAPER }}>
-        <Reveal><Eyebrow mark="02" label="Where existing tools fall short" color={MARIGOLD} light /></Reveal>
-        <div className="mt-10 grid gap-10 md:grid-cols-2 md:gap-16">
+        <div className="mono text-[11px]" style={{ color: MARIGOLD }}>EXHIBIT 02 — WHERE EXISTING TOOLS FALL SHORT</div>
+        <div className="mt-8 grid gap-10 md:grid-cols-2 md:gap-16">
           <Reveal>
             <p className="font-fraunces text-[24px] leading-[1.32] md:text-[30px]">
               Letter generators produce a document full of claims the user cannot
@@ -170,10 +172,9 @@ export default function AppealCase({
         </div>
       </section>
 
-      {/* ══ THE APPROACH ══ */}
-      <section className="px-5 py-20 md:px-10 md:py-28">
-        <Reveal><Eyebrow mark="◇" label="The approach" /></Reveal>
-        <Reveal y={24} className="mt-10">
+      {/* ══ EXHIBIT 03 — the approach ══ */}
+      <Exhibit no="03" label="The approach">
+        <Reveal y={24}>
           <p className="font-fraunces max-w-[42ch] text-[24px] leading-[1.32] md:text-[34px]">
             The aim is to address the part no existing tool owns: helping the user
             understand the denial and judge whether they have a case, before any
@@ -186,11 +187,14 @@ export default function AppealCase({
             throughout.
           </p>
         </Reveal>
-      </section>
+      </Exhibit>
 
-      {/* ══ THE SIGNATURE — decode + cited verdict ══ */}
-      <section className="px-5 py-20 md:px-10 md:py-28" style={{ backgroundColor: "rgba(224,162,59,0.10)" }}>
-        <Reveal className="mb-14"><Eyebrow mark="◎" label="Traceability and honest confidence" /></Reveal>
+      {/* ══ THE METHOD — decode + cited verdict ══ */}
+      <section className="border-t px-5 py-20 md:px-10 md:py-28" style={{ borderColor: LINE }}>
+        <Reveal className="mb-14">
+          <div className="mono text-[12px]" style={{ color: MARIGOLD }}>EXHIBIT 04</div>
+          <div className="label mt-2 opacity-60">The method</div>
+        </Reveal>
 
         <div className="grid items-center gap-10 md:grid-cols-12 md:gap-14">
           <Reveal className="md:col-span-7">
@@ -225,7 +229,7 @@ export default function AppealCase({
               rate, and every ground carries a citation that traces back to a
               specific line in the user’s documents or a named regulation.
             </p>
-            <div className="mt-7 rounded-2xl border border-[#16243D]/10 bg-white p-5 text-left">
+            <div className="mt-7 rounded-2xl border bg-white p-5 text-left" style={{ borderColor: LINE }}>
               <StrengthMeter />
             </div>
             <p className="hand mt-5 text-[24px] leading-tight" style={{ color: BRICK }}>
@@ -236,26 +240,13 @@ export default function AppealCase({
         </div>
       </section>
 
-      {/* ══ THE CORE LOOP ══ */}
-      {project.images[0] && (
-        <section className="px-5 py-20 md:px-10 md:py-28">
-          <Reveal className="mb-10"><Eyebrow mark="→" label="The core loop" /></Reveal>
-          <Reveal y={28}>
-            <div className="overflow-hidden rounded-2xl border border-[#16243D]/10 p-3" style={{ backgroundColor: "rgba(224,162,59,0.10)" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={project.images[0]} alt={cap[0] ?? "Core loop"} loading="lazy" className="block w-full rounded-xl" />
-            </div>
-            <p className="hand mx-auto mt-6 max-w-[42ch] text-center text-[26px] leading-snug" style={{ color: INK }}>
-              {cap[0]}
-            </p>
-          </Reveal>
-        </section>
-      )}
-
-      {/* ══ INSIDE THE APP ══ */}
+      {/* ══ EXHIBIT 05 — the rest of the file ══ */}
       {gallery.length > 0 && (
-        <section className="border-t border-[#16243D]/10 px-5 py-20 md:px-10 md:py-28">
-          <Reveal className="mb-16"><Eyebrow mark="◇" label="Inside the app" /></Reveal>
+        <section className="border-t px-5 py-20 md:px-10 md:py-28" style={{ borderColor: LINE }}>
+          <Reveal className="mb-16">
+            <div className="mono text-[12px]" style={{ color: MARIGOLD }}>EXHIBIT 05</div>
+            <div className="label mt-2 opacity-60">The rest of the file</div>
+          </Reveal>
           <div className="mx-auto flex max-w-[1100px] flex-col gap-24 md:gap-32">
             {gallery.map((g, i) => {
               const flip = i % 2 === 1;
@@ -278,27 +269,23 @@ export default function AppealCase({
         </section>
       )}
 
-      {/* ══ KEY DECISIONS ══ */}
-      <section className="border-t border-[#16243D]/10 px-5 py-20 md:px-10 md:py-28">
-        <Reveal className="mb-14"><Eyebrow mark="03" label="Key decisions" /></Reveal>
-        <div className="mx-auto flex max-w-[920px] flex-col">
+      {/* ══ EXHIBIT 06 — key decisions ══ */}
+      <Exhibit no="06" label="Key decisions">
+        <div className="flex flex-col">
           {n.decisions.map((d, i) => (
-            <Reveal key={d.title} className="grid gap-4 border-t border-[#16243D]/10 py-9 md:grid-cols-[90px_1fr] md:gap-10">
-              <div className="font-fraunces text-[40px] leading-none md:text-[52px]" style={{ color: MARIGOLD }}>
-                {String(i + 1).padStart(2, "0")}
-              </div>
+            <Reveal key={d.title} className="grid gap-3 border-t py-7 first:border-t-0 first:pt-0 md:grid-cols-[56px_1fr] md:gap-8" style={{ borderColor: LINE }}>
+              <div className="font-fraunces text-[34px] leading-none" style={{ color: MARIGOLD }}>{String(i + 1).padStart(2, "0")}</div>
               <div>
-                <h3 className="font-fraunces text-[24px] leading-tight md:text-[28px]">{d.title}</h3>
-                <p className="mt-3 max-w-[64ch] text-[14px] normal-case leading-relaxed opacity-80 md:text-[15px]">{d.body}</p>
+                <h3 className="font-fraunces text-[22px] leading-tight md:text-[26px]">{d.title}</h3>
+                <p className="mt-2 max-w-[64ch] text-[14px] normal-case leading-relaxed opacity-80 md:text-[15px]">{d.body}</p>
               </div>
             </Reveal>
           ))}
         </div>
-      </section>
+      </Exhibit>
 
       {/* ══ DESIGN SYSTEM ══ */}
-      <section className="px-5 py-16 md:px-10 md:py-20" style={{ backgroundColor: "rgba(224,162,59,0.10)" }}>
-        <Reveal className="mb-6"><Eyebrow mark="◳" label="Design system" /></Reveal>
+      <Exhibit no="07" label="Design system">
         <Reveal>
           <p className="mb-7 max-w-[60ch] text-[15px] normal-case leading-relaxed opacity-80 md:text-[16px]">
             One set of tokens and shared components runs through the product, so a
@@ -307,21 +294,21 @@ export default function AppealCase({
           </p>
           <div className="flex flex-wrap items-center gap-3">
             {[["Ink", INK], ["Paper", PAPER], ["Marigold", MARIGOLD], ["Verdict", GREEN], ["Denial", BRICK]].map(([name, c]) => (
-              <div key={name} className="flex items-center gap-2.5 rounded-full border border-[#16243D]/15 bg-white py-2 pl-2 pr-4">
-                <span className="h-7 w-7 rounded-full border border-[#16243D]/10" style={{ backgroundColor: c }} />
+              <div key={name} className="flex items-center gap-2.5 rounded-full border bg-white py-2 pl-2 pr-4" style={{ borderColor: LINE }}>
+                <span className="h-7 w-7 rounded-full border" style={{ backgroundColor: c, borderColor: LINE }} />
                 <span className="text-[13px]">{name}</span>
               </div>
             ))}
             <span className="label ml-2 opacity-60">Fraunces · Inter · Space Mono</span>
           </div>
         </Reveal>
-      </section>
+      </Exhibit>
 
       {/* ══ PROTOTYPE ══ */}
-      <section id="prototype" className="px-5 py-24 md:px-10 md:py-32" style={{ backgroundColor: INK, color: PAPER }}>
+      <section id="prototype" className="border-t px-5 py-24 md:px-10 md:py-32" style={{ borderColor: LINE, backgroundColor: INK, color: PAPER }}>
         <Reveal>
-          <Eyebrow mark="▶" label="The prototype" color={MARIGOLD} light />
-          <p className="mt-7 max-w-[58ch] text-[18px] leading-relaxed opacity-90 md:text-[22px]">
+          <div className="mono text-[12px]" style={{ color: MARIGOLD }}>▶ THE PROTOTYPE</div>
+          <p className="mt-6 max-w-[58ch] text-[18px] normal-case leading-relaxed md:text-[22px]" style={{ opacity: 0.92 }}>
             All 78 screens are connected into a single flow — capture, the decode,
             the cited verdict, the draft editor, send-and-track, the evidence
             locker, privacy and the edge cases — that can be navigated from start
@@ -336,12 +323,11 @@ export default function AppealCase({
       </section>
 
       {/* ══ WHAT IT IS ══ */}
-      <section className="grid gap-10 px-5 py-20 md:grid-cols-[230px_1fr] md:px-10 md:py-28">
-        <Reveal><Eyebrow mark="04" label="What it is" /></Reveal>
+      <Exhibit no="08" label="What it is">
         <Reveal y={24}>
-          <p className="font-fraunces max-w-[50ch] text-[22px] normal-case leading-[1.4] md:text-[28px]">{n.outcome}</p>
+          <p className="font-fraunces max-w-[52ch] text-[22px] normal-case leading-[1.4] md:text-[28px]">{n.outcome}</p>
         </Reveal>
-      </section>
+      </Exhibit>
 
       {/* ══ NEXT ══ */}
       <Link
