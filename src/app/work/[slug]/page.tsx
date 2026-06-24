@@ -1,6 +1,11 @@
 import { notFound } from "next/navigation";
 import { getProject, projects } from "@/lib/projects";
 import CaseView from "@/components/case/CaseView";
+import FixitCase from "@/components/case/FixitCase";
+
+const CUSTOM: Record<string, typeof CaseView> = {
+  fixit: FixitCase,
+};
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -32,8 +37,10 @@ export default async function CasePage({
   const idx = projects.findIndex((p) => p.slug === slug);
   const next = projects[(idx + 1) % projects.length];
 
+  const View = CUSTOM[slug] ?? CaseView;
+
   return (
-    <CaseView
+    <View
       project={project}
       index={idx}
       total={projects.length}
