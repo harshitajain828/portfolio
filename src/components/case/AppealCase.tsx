@@ -315,8 +315,8 @@ export default function AppealCase({
             to finish.
           </p>
           {project.figmaUrl && (
-            <div className="mt-9 max-w-[920px]">
-              <FigmaEmbed url={project.figmaUrl} title="Appeal — Figma prototype" accent={MARIGOLD} />
+            <div className="mt-9 max-w-[400px]">
+              <FigmaEmbed url={project.figmaUrl} title="Appeal — Figma prototype" accent={MARIGOLD} aspect="39 / 84" />
             </div>
           )}
         </Reveal>

@@ -263,8 +263,8 @@ export default function CycleSyncCase({
             so it can be navigated from start to finish.
           </p>
           {project.figmaUrl ? (
-            <div className="mx-auto mt-9 max-w-[900px]">
-              <FigmaEmbed url={project.figmaUrl} title="CycleSync — Figma prototype" accent={TERRA} />
+            <div className="mx-auto mt-9 max-w-[400px]">
+              <FigmaEmbed url={project.figmaUrl} title="CycleSync — Figma prototype" accent={TERRA} aspect="39 / 84" />
             </div>
           ) : (
             <span className="mono mt-8 inline-block rounded-full border px-5 py-3 text-[12px]" style={{ borderColor: "rgba(244,238,228,0.3)", opacity: 0.8 }}>

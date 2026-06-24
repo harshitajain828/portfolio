@@ -8,10 +8,12 @@ export default function FigmaEmbed({
   url,
   title,
   accent = "#0071C2",
+  aspect = "16 / 10",
 }: {
   url: string;
   title: string;
   accent?: string;
+  aspect?: string;
 }) {
   const src = `https://www.figma.com/embed?embed_host=harshita-portfolio&url=${encodeURIComponent(
     url
@@ -20,7 +22,7 @@ export default function FigmaEmbed({
     <div>
       <div
         className="relative w-full overflow-hidden rounded-2xl border border-white/15 bg-black/20"
-        style={{ aspectRatio: "16 / 10" }}
+        style={{ aspectRatio: aspect }}
       >
         <iframe
           src={src}
