@@ -32,6 +32,7 @@ export type Project = {
   imageCaptions?: string[];
   accent: string;
   accentFg: string;
+  figmaUrl?: string;
   narrative: Narrative;
 };
 
@@ -64,6 +65,7 @@ export const projects: Project[] = [
     ],
     accent: "#0071C2",
     accentFg: "#FFFFFF",
+    figmaUrl: "https://www.figma.com/design/7I0mUprnWqPlUPdNT92tA6/Fixit-%E2%80%94-AI-Repair-Companion",
     narrative: {
       problem:
         "E-waste is the fastest-growing waste stream on Earth — 62 million tonnes in 2022, up 82% since 2010, and only about a fifth recycled — and textiles are larger still. When things break, people bin them: around 56% of US homeowners would now rather replace than repair, and roughly one in three have thrown out a broken appliance specifically because they couldn’t find someone they trusted to fix it. The barrier isn’t unwillingness, it’s a single intimidating moment — ‘I don’t know what’s wrong, I don’t know what it’s called, and I’m scared I’ll make it worse.’ Every existing tool makes it harder: iFixit, YouTube and manuals all force a text query you can’t write yet, and the new wave of AI chatbots will confidently hallucinate a fix — which, on electrical, gas or structural work, can injure or kill.",
@@ -242,55 +244,56 @@ export const projects: Project[] = [
     tools: ["Figma", "Claude + Figma MCP"],
     summary:
       "Fewer than 1% of denied health-insurance claims are ever appealed — yet 40–80% of the appeals people do file succeed. The gap isn’t the merits, it’s the giving up: denials are written to be opaque and exhausting. Appeal closes that gap. Photograph a denial letter and it decodes the real reason behind the boilerplate, surfaces the specific grounds that win — each cited back to your own documents — and drafts an appeal you edit, own, and send. It’s a calm, evidence-led decoder that never pretends to be a lawyer.",
-    statement: "Decode the denial. Win the appeal.",
+    statement: "An AI tool that decodes a health-insurance denial letter and helps the user assemble and send an appeal.",
     outcomeLine:
       "A 78-screen iOS system on one design system, built on traceable citations and honest, calibrated confidence",
     cover: "/projects/appeal/cover.png",
     images: img("appeal", ["01.png", "02.png", "03.png", "04.png", "05.png", "06.png"]),
     imageCaptions: [
-      "The journey at a glance — decode, argue, send.",
-      "The Decode — the boilerplate reason translated into plain language, the decisive clause highlighted in your own letter.",
-      "The Verdict — a calibrated strength meter and an honest base rate, with each ground cited back to your documents.",
-      "The Draft — the appeal in your name, AI-authored runs marked, leverage points pinned to your evidence.",
-      "The case timeline — filed, sent, under review, outcome — so you always know what happens next.",
-      "Trust as a feature — local-first, HIPAA-grade handling, surfaced before anything is asked of you.",
+      "An overview of the flow, from the denial letter to a sent appeal.",
+      "The decode: the decisive clause highlighted in the user’s own letter, with a plain-language explanation.",
+      "The verdict: a calibrated strength estimate and base rate, with each ground cited to the user’s documents.",
+      "The draft: an editable appeal in the user’s name, with AI-written passages marked and each point linked to evidence.",
+      "The case timeline — filed, sent, under review, outcome — showing the current stage and the next step.",
+      "Data handling is local-first and made clear to the user before any information is requested.",
     ],
     accent: "#E0A23B",
     accentFg: "#16243D",
+    figmaUrl: "https://www.figma.com/design/UHfATn5ewYgSJJQIgwdIkT/Appeal-%E2%80%94-Fight-Your-Denial",
     narrative: {
       problem:
         "About one in five health-insurance claims is denied, but under 1% are appealed — not from laziness, but by design. The deterrent is administrative burden: the learning, paperwork and emotional cost of fighting back. 69% of denied patients don’t know they can appeal and 85% never file. And the denials people surrender to are mostly beatable — the largest category is ‘other’ (no stated reason) followed by administrative errors; genuine medical-necessity calls are a small minority. Letter-writing is already commoditised; what no one owns is the real bottleneck — the moment at the kitchen table of ‘what does this even mean, do I have a case, what do I say?’ The cautionary tale is DoNotPay, whose FTC settlement reads like a spec of what not to do: never tested against lawyers, hallucinated documents, faked endorsements.",
       decisions: [
         {
-          title: "Show your work before building on it",
-          body: "After reading the letter, Appeal never silently proceeds. It shows the fields it extracted over a thumbnail of your actual letter; tap any field to see the exact source region. High-confidence reads are quiet, low-confidence reads get an amber ‘tap to confirm’, and nothing downstream runs on an unconfirmed read. That’s the foundation that makes every later citation trustworthy.",
+          title: "Confirm what was read before building on it",
+          body: "After the letter is read, the application does not proceed silently. It displays the extracted fields over an image of the user’s letter; tapping a field highlights its source. Low-confidence reads are marked for confirmation, and nothing downstream relies on an unconfirmed value, which keeps every later citation dependable.",
         },
         {
-          title: "Decode the real reason — the empathy moment",
-          body: "The hero screen is a split: your scanned letter with the decisive clause highlighted in brick, and a plain-language ‘what this actually means’ beside it. The 36%-of-denials ‘they didn’t actually say why’ case isn’t a failure state — it’s reframed as leverage: ‘that’s common, and it’s a weakness we can use.’",
+          title: "Translate the real reason into plain language",
+          body: "The central screen presents the user’s letter with the decisive clause highlighted, alongside a plain-language explanation. Where a denial gives no stated reason — the largest single category — that absence is itself presented as a basis for appeal rather than a dead end.",
         },
         {
-          title: "A calibrated verdict, with citations",
-          body: "The verdict pairs a strength meter with an honest base rate (‘appeals like yours succeed about X% of the time’), and every ground carries a citation chip that traces to the exact line in your own document or a named regulation — never an unverifiable claim. Weak cases get an honest ‘this is a harder case’ path; genuinely complex ones are routed to a lawyer or advocate.",
+          title: "A calibrated verdict, supported by citations",
+          body: "The verdict combines a strength estimate with an honest base rate, and every ground is accompanied by a citation that traces to a specific line in the user’s documents or a named regulation. Weak cases are described as such, and genuinely complex matters are referred to a lawyer or advocate.",
         },
         {
-          title: "A draft the user owns and sends",
-          body: "The appeal is presented as a finished letter you can edit anywhere; AI-authored runs carry a subtle marigold rule so authorship is always legible, and refine suggestions come as accept/reject diffs. The flow forces a ‘review before you send’ checklist and an explicit ‘I’m sending my appeal’ — deliberate friction that is both a trust feature and the legal firewall: the user is always the author and the sender.",
+          title: "The user remains the author and sender",
+          body: "The appeal is presented as an editable letter; passages written by the system are marked, and suggested changes are offered as accept-or-reject edits. A review step is required before sending. This keeps the user in control and draws a clear boundary: the tool assists, but does not act as a lawyer.",
         },
         {
-          title: "Never paywall the decode",
-          body: "Understanding your denial and seeing your grounds is always free; payment is asked only at send, with a hardship path that grants full access. The ethical north star is to not monetise desperation — the inverse of the failure mode the product was designed against.",
+          title: "The decode is never behind a paywall",
+          body: "Understanding the denial and seeing the available grounds is always free; payment applies only at the point of sending, and a hardship path provides full access. The intent is to avoid charging people at their most vulnerable.",
         },
       ],
       outcome:
-        "Appeal is a concept and I’ve framed it as one: no real users, no launch, no shipped metrics. What it shows is a complete, coherent system — 78 screens across 19 flows covering capture, show-your-work decode, adaptive intake, the cited verdict, the user-owned draft editor, send-and-track, the evidence locker, deadlines, learn, escalation, account, security and app-lock, privacy controls, the ethical paywall, and the full edge-and-error set — all on one design system, with traceable citations and calibrated confidence as the spine. The honest test is an expert review: would a patient advocate accept that this helps a layperson understand and contest a denial without ever overclaiming or posing as a lawyer? That’s the bar I designed to.",
+        "Appeal is a concept: there are no real users, no launch and no shipped metrics. It is a complete, coherent system — 78 screens across 19 flows covering capture, the show-your-work decode, adaptive intake, the cited verdict, the editable draft, send-and-track, the evidence locker, deadlines, guidance, escalation, account and security, privacy controls, the paywall, and the full set of edge and error states — all built from a single design system, with traceable citations and calibrated confidence at its centre. A meaningful evaluation would be an expert review: whether a patient advocate would accept that it helps a layperson understand and contest a denial without overstating its role.",
       learnings: [
         "Designing against an anti-pattern (DoNotPay’s FTC settlement) was clarifying — every trust mechanic is a direct answer to a documented failure.",
         "Traceability is the whole product. A citation you can tap back to your own letter is what separates this from a confident letter-generator.",
         "Honesty scales down as well as up — the weak-case path and the ‘see a lawyer’ route earn the trust that the strong-case path spends.",
         "A 78-screen system forced real systems discipline — one verdict component, one citation chip, one strength meter, reused everywhere.",
       ],
-      stats: ["<1% of denials are appealed", "40–80% of appeals win", "Every ground cited to your docs"],
+      stats: ["<1% of denials are appealed", "40–80% of filed appeals succeed", "5% are true medical-necessity calls"],
       insights: [
         {
           title: "Giving up is the design problem",

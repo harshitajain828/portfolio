@@ -77,6 +77,17 @@ body {
   font-weight: 400;
   letter-spacing: -0.01em;
 }
+.font-fraunces {
+  font-family: var(--font-fraunces), Georgia, serif;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
+.font-fraunces-italic {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+}
 
 /* --- ruler tick strip (nite-riot scrubber) --- */
 .ruler {

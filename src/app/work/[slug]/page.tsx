@@ -2,9 +2,11 @@ import { notFound } from "next/navigation";
 import { getProject, projects } from "@/lib/projects";
 import CaseView from "@/components/case/CaseView";
 import FixitCase from "@/components/case/FixitCase";
+import AppealCase from "@/components/case/AppealCase";
 
 const CUSTOM: Record<string, typeof CaseView> = {
   fixit: FixitCase,
+  appeal: AppealCase,
 };
 
 export function generateStaticParams() {
