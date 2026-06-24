@@ -236,27 +236,26 @@ export default function CaseView({
               return (
                 <Reveal key={src} y={28}>
                   <div
-                    className="overflow-hidden rounded-2xl border border-ink/10 p-2 md:p-3"
+                    className="mx-auto w-fit max-w-full overflow-hidden rounded-2xl border border-ink/10 p-2 md:p-3"
                     style={{ backgroundColor: `${project.accent}14` }}
                   >
-                    <Image
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
                       src={src}
                       alt={caption ?? `${project.title} — screen ${i + 1}`}
-                      width={1640}
-                      height={1040}
-                      sizes="(min-width: 1024px) 1040px, 100vw"
-                      className="h-auto w-full rounded-xl"
+                      loading="lazy"
+                      className="block max-h-[680px] w-auto max-w-full rounded-xl object-contain"
                     />
                   </div>
                   {caption && (
-                    <div className="mt-4 flex gap-3 md:gap-4">
+                    <div className="mx-auto mt-5 flex max-w-[60ch] gap-3 md:gap-4">
                       <span
                         className="mono mt-[3px] shrink-0 text-[13px]"
                         style={{ color: project.accent }}
                       >
                         {String(i + 1).padStart(2, "0")}
                       </span>
-                      <p className="max-w-[64ch] text-[14px] normal-case leading-relaxed opacity-80 md:text-[15px]">
+                      <p className="text-[14px] normal-case leading-relaxed opacity-80 md:text-[15px]">
                         {caption}
                       </p>
                     </div>
