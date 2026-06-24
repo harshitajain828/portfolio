@@ -82,6 +82,11 @@ body {
   text-transform: none;
   letter-spacing: -0.01em;
 }
+.font-round {
+  font-family: var(--font-round), "Trebuchet MS", sans-serif;
+  text-transform: none;
+  letter-spacing: -0.01em;
+}
 .font-fraunces-italic {
   font-family: var(--font-fraunces), Georgia, serif;
   font-style: italic;

@@ -8,6 +8,7 @@ import {
   Caveat,
   Anton,
   Fraunces,
+  Fredoka,
 } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
@@ -55,6 +56,12 @@ const fraunces = Fraunces({
   variable: "--font-fraunces",
   weight: ["400", "500", "600"],
   style: ["normal", "italic"],
+  subsets: ["latin"],
+});
+
+const fredoka = Fredoka({
+  variable: "--font-round",
+  weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -118,7 +125,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bricolage.variable} ${interTight.variable} ${robotoMono.variable} ${instrumentSerif.variable} ${caveat.variable} ${anton.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${interTight.variable} ${robotoMono.variable} ${instrumentSerif.variable} ${caveat.variable} ${anton.variable} ${fraunces.variable} ${fredoka.variable} h-full antialiased`}
     >
       <head>
         {process.env.NODE_ENV === "development" && (
