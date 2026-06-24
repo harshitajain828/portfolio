@@ -224,7 +224,7 @@ export default function SentinelCase({
             <Reveal key={g.label} y={24}>
               <Window src={g.img} alt={g.cap ?? g.label} label={g.label} />
               <div className={`mt-5 flex ${i % 2 ? "justify-end" : ""}`}>
-                <p className="hand max-w-[44ch] text-[24px] leading-snug md:text-[28px]" style={{ color: ACCENT }}>
+                <p className="hand max-w-[44ch] text-[24px] leading-snug md:text-[28px]" style={{ color: "#E7ECF4" }}>
                   {g.cap}
                 </p>
               </div>

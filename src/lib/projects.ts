@@ -146,53 +146,53 @@ export const projects: Project[] = [
     tools: ["Figma", "Claude + Figma MCP"],
     summary:
       "PCOS affects 8–13% of women, about 1 in 5 young women in India, and it causes some of the most unpredictable cycles there are. Yet almost every tracker still assumes a tidy 28-day month, overlooks the much higher rates of anxiety and depression that come with the condition, and has a shaky record on privacy. CycleSync is a cycle and wellbeing companion built for irregular bodies first. It shows your real pattern instead of a broken month, is honest when it isn't sure, keeps wellbeing in the same place you log symptoms, and treats your data as yours.",
-    statement: "Built for cycles that don’t fit a calendar.",
+    statement: "A cycle and wellbeing companion designed for irregular cycles, such as those caused by PCOS.",
     outcomeLine:
       "A 24-screen mobile system on one design system, designed for irregular bodies first",
     cover: "/projects/cyclesync/cover.png",
     images: img("cyclesync", ["01.png", "02.png", "03.png", "04.png"]),
     imageCaptions: [
-      "The Year Ring — a 12-month radial view, so an irregular cycle reads as an honest shape, not a broken month.",
-      "Honest prediction — a low-confidence window instead of a fake countdown, plus a doctor-ready summary.",
-      "Onboarding where “I'm not sure” and “very irregular” are valid, first-class answers.",
-      "Anonymous community circles, woven-in wellbeing, and trust-first, local-first data controls.",
+      "The Year Ring — a 12-month radial view, so an irregular cycle reads as a pattern rather than an error.",
+      "An estimate shown as a window with its confidence, rather than a precise countdown, alongside a doctor-ready summary.",
+      "Onboarding in which “not sure” and “very irregular” are valid, first-class answers.",
+      "Anonymous community spaces, wellbeing kept alongside tracking, and local-first data controls.",
     ],
-    accent: "#f48ab4",
-    accentFg: "#2A0E1C",
+    accent: "#C2674A",
+    accentFg: "#F6F0E6",
     narrative: {
       problem:
         "The most common hormonal condition in women also produces the most unpredictable cycles, and the tools are all built for predictability. PCOS affects 8–13% of women globally (about 1 in 5 young women in India), up to 70% of cases go undiagnosed, and getting a diagnosis often takes years and several doctors. Mainstream apps assume a 28-day cycle with ovulation on day 14, so a 45- or 72-day cycle looks like an error, and the countdown keeps promising a date that never comes. For a group that is already three to eight times more likely to live with anxiety or depression, that is genuinely stressful. Trust is shaky too: a leading tracker settled with the FTC, then a $56M class action, over how it shared intimate cycle data. The people who need a good tool the most are the ones served worst.",
       decisions: [
         {
           title: "Turn the calendar into a Year Ring",
-          body: "The signature move is a 12-month radial view instead of a monthly grid. Period days, cycle lengths and symptom dots sit around a circle, so a long or skipped cycle reads as your real pattern rather than a mistake. It is unfamiliar at first, so a month-detail view keeps the usual grid one tap away for anyone who wants it.",
+          body: "The signature interaction is a 12-month radial view instead of a monthly grid. Period days, cycle lengths and symptom markers sit around a circle, so a long or skipped cycle reads as the user’s real pattern rather than a mistake. It is unfamiliar at first, so a familiar month-detail grid remains one tap away.",
         },
         {
           title: "Choose honesty over certainty",
-          body: "Instead of “Period in 3 days,” CycleSync shows a probability window with its confidence (“likely Jun 18–26, low confidence — your cycles vary 31–68 days”), and it names anovulatory cycles plainly. It feels less magical in a demo, but calendar prediction is only around 18% accurate for irregular cycles, so a confident date would be a quiet lie. For an anxious audience, not lying is the whole trust unlock.",
+          body: "Rather than a precise date, the app shows a probability window with its confidence (“likely Jun 18–26, low confidence — cycles vary 31–68 days”), and names anovulatory cycles plainly. Calendar prediction is only around 18% accurate for irregular cycles, so a confident date would often be wrong. For an anxious audience, being clear about uncertainty is what builds trust.",
         },
         {
           title: "Keep wellbeing in the cycle, not in a separate tab",
-          body: "Mood, energy and body-image check-ins live in the same log as physical symptoms, and the insights connect them (“acne tends to flare after low-sleep weeks”). A light, CBT-informed support layer shows up when it’s relevant. Mental health is sensitive ground, so the app is explicit that it explains and supports but never diagnoses, cites its sources, and points to real help when low mood lingers.",
+          body: "Mood, energy and body-image check-ins sit in the same log as physical symptoms, and the insights connect them. A light, CBT-informed support layer appears when it is relevant. The app is explicit that it explains and supports but does not diagnose, cites its sources, and points to professional help when low mood persists.",
         },
         {
-          title: "Make trust visible, and drop the pink",
-          body: "The local-first, no-sell promise appears in the first 30 seconds, with easy export and delete. The palette is warm terracotta, sage and plum rather than clinical pink. Pink is the expected signal for this category, but research shows it reads as stereotype and even shame to this user, so the choice is deliberate. Attention states use a gentle amber, never a shaming red.",
+          title: "Make trust visible, and avoid the default pink",
+          body: "The local-first, no-sell commitment appears in the first 30 seconds, with straightforward export and delete. The palette is warm terracotta, sage and plum rather than the clinical pink typical of the category — research indicates that pink can read as a stereotype to this user, so the choice is deliberate. Attention states use a gentle amber rather than a warning red.",
         },
         {
           title: "Scope it to a companion, not a medical device",
-          body: "CycleSync is a literacy, tracking and wellbeing companion, not a contraceptive or a diagnostic tool. That means a smaller feature set than fertility-first apps, but it keeps the product honest about what it can and can’t claim, and well clear of regulatory overreach.",
+          body: "CycleSync is a literacy, tracking and wellbeing companion — not a contraceptive or a diagnostic tool. This means a smaller feature set than fertility-first apps, but it keeps the product honest about what it can claim, and clear of regulatory overreach.",
         },
       ],
       outcome:
-        "CycleSync is a concept, and I’ve been upfront about that: no real users, no launch, no shipped metrics. What it shows is a complete, coherent system — a 24-screen mobile flow covering onboarding, the Year Ring, symptom and mood logging, honest insights, a doctor-summary export, anonymous community circles, cited resources, privacy controls and edge states — all built on one reusable design system, with the Year Ring as the signature interaction. The way I’d validate it is moderated testing with 5–8 people who have irregular cycles: does the Year Ring read more clearly than a monthly grid, how do confidence windows feel next to countdowns, and does privacy-first onboarding actually build trust. Success would be comprehension and trust in testing, not download numbers.",
+        "CycleSync is a concept: no real users, no launch, no shipped metrics. It is a complete, coherent system — a 24-screen mobile flow covering onboarding, the Year Ring, symptom and mood logging, honest insights, a doctor-summary export, anonymous community spaces, cited resources, privacy controls and edge states — all built on one design system, with the Year Ring as the signature interaction. A meaningful evaluation would be moderated testing with people who have irregular cycles: whether the Year Ring reads more clearly than a monthly grid, how confidence windows feel next to countdowns, and whether privacy-first onboarding builds trust. Success would be comprehension and trust, not download numbers.",
       learnings: [
         "Designing for an anxious, underserved group changed the brief. The most important decisions were often about restraint: not predicting, not shaming, not surveilling.",
         "Honesty turned out to be a UX pattern in itself. Showing uncertainty built far more trust than any confident-but-wrong prediction could.",
         "Research changed the look. The obvious pink-and-flowers style is exactly what this user reads as stereotype, so the calmer palette is a research decision, not a taste one.",
         "A 24-screen system forced real systems discipline. Tokens and components first, so a symptom or a mood reads the same way on the ring, the log and the doctor summary.",
       ],
-      stats: ["8–13% have PCOS", "Honest windows, not countdowns", "Local-first by design"],
+      stats: ["8–13% of women have PCOS", "~70% of cases go undiagnosed", "~18% prediction accuracy for irregular cycles"],
       insights: [
         {
           title: "Irregularity isn’t an error",
