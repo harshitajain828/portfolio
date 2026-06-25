@@ -2,66 +2,35 @@ import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/projects";
 
-// A framed "stamp / plate" around a screenshot: cream mat, caption metadata
-// top and bottom, corner registration marks, drop shadow, slight rotation.
-function Plate({
-  src,
-  fig,
-  year,
-  topRight,
-  bottomLeft,
-  bottomRight,
-  accent,
-  aspect = "4/5",
-  small = false,
-}: {
-  src: string;
-  fig?: string;
-  year?: string;
-  topRight?: string;
-  bottomLeft?: string;
-  bottomRight?: string;
-  accent: string;
-  aspect?: string;
-  small?: boolean;
-}) {
-  const pad = small ? "p-[0.7vw]" : "p-[1vw]";
-  const cap = small ? "text-[0.62vw]" : "text-[0.74vw]";
+// which screen to feature per project, and how to frame it
+const SHOWCASE: Record<string, { img: number; device: "phone" | "desktop" }> = {
+  fixit: { img: 1, device: "phone" },
+  appeal: { img: 1, device: "phone" },
+  sentinel: { img: 1, device: "desktop" },
+  cyclesync: { img: 0, device: "phone" },
+};
+
+function PhoneMock({ src, className = "" }: { src: string; className?: string }) {
   return (
-    <div
-      className={`bg-cream ${pad} shadow-[0_30px_70px_rgba(0,0,0,0.32)] ring-1 ring-ink/10`}
-    >
-      {(fig || year) && (
-        <div className={`mono ${cap} flex items-center justify-between pb-[0.6vw] text-ink/50`}>
-          <span>{fig}</span>
-          <span>{topRight ?? year}</span>
-        </div>
-      )}
-      <div className="relative overflow-hidden" style={{ aspectRatio: aspect }}>
-        <Image
-          src={src}
-          alt=""
-          fill
-          sizes={small ? "20vw" : "34vw"}
-          className="object-cover"
-        />
-        {/* corner registration marks */}
-        <span className="pointer-events-none absolute left-2 top-2 h-3 w-3 border-l border-t border-cream/80" />
-        <span className="pointer-events-none absolute bottom-2 right-2 h-3 w-3 border-b border-r border-cream/80" />
-        {/* accent quote glyph */}
-        <span
-          className="serif pointer-events-none absolute -top-[0.4vw] left-[0.4vw] text-[3.2vw] leading-none"
-          style={{ color: accent }}
-        >
-          &ldquo;
-        </span>
+    <div className={`rounded-[30px] bg-white p-[7px] shadow-[0_44px_90px_rgba(0,0,0,0.4)] ${className}`}>
+      <div className="relative overflow-hidden rounded-[24px]" style={{ aspectRatio: "390 / 844" }}>
+        <Image src={src} alt="" fill sizes="(max-width:768px) 64vw, 24vw" className="object-cover" />
       </div>
-      {(bottomLeft || bottomRight) && (
-        <div className={`label ${cap} flex items-end justify-between pt-[0.6vw] text-ink/65`}>
-          <span>{bottomLeft}</span>
-          <span>{bottomRight}</span>
-        </div>
-      )}
+    </div>
+  );
+}
+
+function DesktopMock({ src, className = "" }: { src: string; className?: string }) {
+  return (
+    <div className={`overflow-hidden rounded-[16px] bg-white shadow-[0_44px_90px_rgba(0,0,0,0.4)] ${className}`}>
+      <div className="flex items-center gap-2 border-b border-black/5 px-4 py-3">
+        <span className="h-2.5 w-2.5 rounded-full bg-black/15" />
+        <span className="h-2.5 w-2.5 rounded-full bg-black/15" />
+        <span className="h-2.5 w-2.5 rounded-full bg-black/15" />
+      </div>
+      <div className="relative" style={{ aspectRatio: "16 / 10" }}>
+        <Image src={src} alt="" fill sizes="(max-width:768px) 92vw, 46vw" className="object-cover object-top" />
+      </div>
     </div>
   );
 }
@@ -70,7 +39,9 @@ export default function WorkStack() {
   return (
     <section>
       {projects.map((p, i) => {
-        const fig = `FIG. ${String(i + 1).padStart(2, "0")}`;
+        const conf = SHOWCASE[p.slug] ?? { img: 0, device: "phone" as const };
+        const src = p.images[conf.img] ?? p.cover;
+        const isPhone = conf.device === "phone";
         return (
           <Link
             key={p.slug}
@@ -111,41 +82,34 @@ export default function WorkStack() {
                 </span>
               </div>
 
-              {/* image composition — stamp plates */}
+              {/* device mockup */}
               <div className="relative hidden h-full items-center justify-center md:flex">
-                {p.images[0] && (
-                  <div className="absolute left-[2%] top-[15%] w-[40%] -rotate-6 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:-rotate-3 group-hover:-translate-y-1">
-                    <Plate
-                      src={p.images[0]}
-                      accent={p.accent}
-                      aspect="4/3"
-                      small
-                    />
-                  </div>
-                )}
-                <div className="relative z-10 w-[62%] rotate-2 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:rotate-0 group-hover:-translate-y-2">
-                  <Plate
-                    src={p.cover}
-                    fig={fig}
-                    year={p.year}
-                    bottomLeft={p.type}
-                    bottomRight={p.role}
-                    accent={p.accent}
+                {/* soft halo for depth */}
+                <span
+                  className="pointer-events-none absolute h-[58%] w-[58%] rounded-full"
+                  style={{ backgroundColor: p.accentFg, opacity: 0.12 }}
+                  aria-hidden
+                />
+                {isPhone ? (
+                  <PhoneMock
+                    src={src}
+                    className="relative w-[clamp(200px,23vw,300px)] rotate-2 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:rotate-0 group-hover:-translate-y-2"
                   />
-                </div>
+                ) : (
+                  <DesktopMock
+                    src={src}
+                    className="relative w-[clamp(380px,46vw,640px)] rotate-1 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:rotate-0 group-hover:-translate-y-2"
+                  />
+                )}
               </div>
 
-              {/* mobile plate */}
-              <div className="md:hidden">
-                <Plate
-                  src={p.cover}
-                  fig={fig}
-                  year={p.year}
-                  bottomLeft={p.type}
-                  bottomRight={p.role}
-                  accent={p.accent}
-                  aspect="4/3"
-                />
+              {/* mobile mockup */}
+              <div className="flex justify-center md:hidden">
+                {isPhone ? (
+                  <PhoneMock src={src} className="w-[62vw] max-w-[280px]" />
+                ) : (
+                  <DesktopMock src={src} className="w-full" />
+                )}
               </div>
             </div>
           </Link>
