@@ -260,7 +260,7 @@ export const projects: Project[] = [
     ],
     accent: "#E0A23B",
     accentFg: "#16243D",
-    figmaUrl: "https://embed.figma.com/design/UHfATn5ewYgSJJQIgwdIkT/Appeal-%E2%80%94-Fight-Your-Denial?node-id=0-1&embed-host=share",
+    figmaUrl: "https://embed.figma.com/proto/UHfATn5ewYgSJJQIgwdIkT/Appeal-%E2%80%94-Fight-Your-Denial?node-id=52-98&p=f&scaling=min-zoom&content-scaling=fixed&page-id=146%3A26&starting-point-node-id=52%3A98&embed-host=share",
     narrative: {
       problem:
         "About one in five health-insurance claims is denied, but under 1% are appealed — not from laziness, but by design. The deterrent is administrative burden: the learning, paperwork and emotional cost of fighting back. 69% of denied patients don’t know they can appeal and 85% never file. And the denials people surrender to are mostly beatable — the largest category is ‘other’ (no stated reason) followed by administrative errors; genuine medical-necessity calls are a small minority. Letter-writing is already commoditised; what no one owns is the real bottleneck — the moment at the kitchen table of ‘what does this even mean, do I have a case, what do I say?’ The cautionary tale is DoNotPay, whose FTC settlement reads like a spec of what not to do: never tested against lawyers, hallucinated documents, faked endorsements.",
