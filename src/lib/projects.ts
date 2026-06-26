@@ -157,8 +157,8 @@ export const projects: Project[] = [
       "Onboarding in which “not sure” and “very irregular” are valid, first-class answers.",
       "Anonymous community spaces, wellbeing kept alongside tracking, and local-first data controls.",
     ],
-    accent: "#C2674A",
-    accentFg: "#F6F0E6",
+    accent: "#F4663C",
+    accentFg: "#FBF4EA",
     figmaUrl: "https://www.figma.com/proto/PCa7rf0Pd4CKfOzdhjo8M1/CycleSync-%E2%80%94-Cycle-Wellbeing-Companion?node-id=51-29&starting-point-node-id=51-29&scaling=scale-down&content-scaling=fixed",
     narrative: {
       problem:

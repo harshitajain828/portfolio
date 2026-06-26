@@ -5,13 +5,15 @@ import FooterStrip from "@/components/FooterStrip";
 import { Reveal, ScrollProgress } from "@/components/case/blocks";
 import FigmaEmbed from "@/components/case/FigmaEmbed";
 
-const CREAM = "#F6EFE3";
+// Vibrant, joyful palette (derived from the Behance refs). Names kept for
+// diffing; values are now coral / green / violet / sun / sky. Still anti-pink.
+const CREAM = "#FBF4EA";
 const INK = "#3A2A30";
-const TERRA = "#C2674A";
-const SAGE = "#7F9374";
-const PLUM = "#6B3A52";
-const BUTTER = "#E6B450";
-const SKY = "#9FB8D6";
+const TERRA = "#F4663C"; // coral (primary)
+const SAGE = "#2BC48A"; // green
+const PLUM = "#7B61FF"; // violet
+const BUTTER = "#FFC23D"; // sun
+const SKY = "#4FA4F0"; // sky
 const LINE = "rgba(58,42,48,0.12)";
 
 function Sparkle({ className = "", color = TERRA }: { className?: string; color?: string }) {
@@ -46,7 +48,7 @@ function RingGraphic({ size = 240, className = "", style }: { size?: number; cla
   );
 }
 
-function Pill({ children, bg = "rgba(127,147,116,0.18)", color = INK, className = "" }: { children: React.ReactNode; bg?: string; color?: string; className?: string }) {
+function Pill({ children, bg = "rgba(43,196,138,0.18)", color = INK, className = "" }: { children: React.ReactNode; bg?: string; color?: string; className?: string }) {
   return (
     <span className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px] font-medium ${className}`} style={{ backgroundColor: bg, color }}>
       {children}
@@ -105,7 +107,7 @@ export default function CycleSyncCase({
           </div>
 
           <div className="mt-14 flex flex-col items-center">
-            <Pill bg="rgba(127,147,116,0.18)" color="#4F5E45">
+            <Pill bg="rgba(43,196,138,0.18)" color="#0E7A52">
               <span className="h-2 w-2 rounded-full" style={{ background: SAGE }} />
               Cycle &amp; wellbeing companion · iOS
             </Pill>
@@ -118,7 +120,7 @@ export default function CycleSyncCase({
               is not sure, keeps wellbeing alongside tracking, and treats the data
               as the user’s own.
             </p>
-            <a href="#prototype" className="mt-8 inline-flex items-center gap-2.5 rounded-full px-6 py-3.5 text-[15px] font-semibold shadow-[0_12px_30px_rgba(194,103,74,0.35)]" style={{ backgroundColor: TERRA, color: CREAM }}>
+            <a href="#prototype" className="mt-8 inline-flex items-center gap-2.5 rounded-full px-6 py-3.5 text-[15px] font-semibold shadow-[0_12px_30px_rgba(244,102,60,0.35)]" style={{ backgroundColor: TERRA, color: CREAM }}>
               <span>▶</span> View the prototype
             </a>
           </div>
@@ -146,7 +148,7 @@ export default function CycleSyncCase({
       <section className="relative px-5 py-20 text-center md:px-10 md:py-28">
         <div className="pointer-events-none absolute right-6 top-8 select-none font-round text-[26vw] font-bold leading-none md:text-[12vw]" style={{ color: TERRA, opacity: 0.06 }} aria-hidden>01</div>
         <Reveal className="relative">
-          <Pill bg="rgba(194,103,74,0.16)" color={TERRA}>01 · The problem</Pill>
+          <Pill bg="rgba(244,102,60,0.16)" color={TERRA}>01 · The problem</Pill>
           <p className="font-round mx-auto mt-7 max-w-[22ch] text-[30px] font-semibold leading-[1.12] md:text-[46px]">
             The most common hormonal condition produces the most unpredictable
             cycles — and the tools are built for predictability.
@@ -162,7 +164,7 @@ export default function CycleSyncCase({
       </section>
 
       {/* ══ 02 · THE YEAR RING (signature) ══ */}
-      <section className="relative px-5 py-20 md:px-10 md:py-28" style={{ backgroundColor: "rgba(127,147,116,0.12)" }}>
+      <section className="relative px-5 py-20 md:px-10 md:py-28" style={{ backgroundColor: "rgba(43,196,138,0.12)" }}>
         <div className="grid items-center gap-12 md:grid-cols-12 md:gap-14">
           <Reveal className="md:col-span-6">
             <div className="relative flex items-center justify-center">
@@ -171,7 +173,7 @@ export default function CycleSyncCase({
             </div>
           </Reveal>
           <Reveal delay={100} className="md:col-span-6">
-            <Pill bg="rgba(127,147,116,0.2)" color="#4F5E45">02 · The signature</Pill>
+            <Pill bg="rgba(43,196,138,0.2)" color="#0E7A52">02 · The signature</Pill>
             <h2 className="font-round mt-5 text-[34px] font-semibold leading-[1.04] md:text-[46px]">The Year Ring</h2>
             <p className="mt-5 max-w-[48ch] text-[16px] leading-relaxed md:text-[18px]" style={{ color: "rgba(58,42,48,0.8)" }}>
               Instead of a monthly grid, the cycle is shown as a 12-month radial
@@ -193,7 +195,7 @@ export default function CycleSyncCase({
             <Phone src={project.images[1]} alt="An estimate shown with its confidence" />
           </Reveal>
           <Reveal delay={100} className="md:col-span-6 md:order-1">
-            <Pill bg="rgba(159,184,214,0.28)" color="#3E5169">03 · Honesty over certainty</Pill>
+            <Pill bg="rgba(79,164,240,0.28)" color="#1E5C99">03 · Honesty over certainty</Pill>
             <h2 className="font-round mt-5 text-[30px] font-semibold leading-[1.06] md:text-[40px]">
               A window with its confidence, not a false countdown.
             </h2>
@@ -212,9 +214,9 @@ export default function CycleSyncCase({
       </section>
 
       {/* ══ 04 · TRUST ══ */}
-      <section className="relative px-5 py-20 md:px-10 md:py-28" style={{ backgroundColor: "rgba(230,180,80,0.12)" }}>
+      <section className="relative px-5 py-20 md:px-10 md:py-28" style={{ backgroundColor: "rgba(255,194,61,0.12)" }}>
         <Reveal className="mb-14 text-center">
-          <Pill bg="rgba(230,180,80,0.28)" color="#8a6210">04 · Built on trust</Pill>
+          <Pill bg="rgba(255,194,61,0.28)" color="#9A6B00">04 · Built on trust</Pill>
         </Reveal>
         <div className="mx-auto grid max-w-[1000px] gap-12 md:grid-cols-2 md:gap-10">
           {[
@@ -232,7 +234,7 @@ export default function CycleSyncCase({
       {/* ══ 05 · DECISIONS ══ */}
       <section className="relative px-5 py-20 md:px-10 md:py-28">
         <Reveal className="mb-12 text-center">
-          <Pill bg="rgba(107,58,82,0.16)" color={PLUM}>05 · Key decisions</Pill>
+          <Pill bg="rgba(123,97,255,0.16)" color={PLUM}>05 · Key decisions</Pill>
         </Reveal>
         <div className="mx-auto flex max-w-[820px] flex-col gap-5">
           {n.decisions.map((d, i) => (
@@ -252,9 +254,9 @@ export default function CycleSyncCase({
       </section>
 
       {/* ══ DESIGN SYSTEM ══ */}
-      <section className="relative px-5 py-16 text-center md:px-10 md:py-20" style={{ backgroundColor: "rgba(127,147,116,0.1)" }}>
+      <section className="relative px-5 py-16 text-center md:px-10 md:py-20" style={{ backgroundColor: "rgba(43,196,138,0.1)" }}>
         <Reveal className="mb-7">
-          <Pill bg="rgba(127,147,116,0.2)" color="#4F5E45">Design system</Pill>
+          <Pill bg="rgba(43,196,138,0.2)" color="#0E7A52">Design system</Pill>
           <p className="mx-auto mt-6 max-w-[58ch] text-[15px] leading-relaxed md:text-[16px]" style={{ color: "rgba(58,42,48,0.8)" }}>
             One warm, deliberately non-pink palette and a shared component set run
             through the product, so a symptom or a mood reads the same way on the
@@ -262,7 +264,7 @@ export default function CycleSyncCase({
           </p>
         </Reveal>
         <Reveal className="flex flex-wrap items-center justify-center gap-3">
-          {[["Cream", CREAM], ["Terracotta", TERRA], ["Sage", SAGE], ["Plum", PLUM], ["Butter", BUTTER], ["Sky", SKY]].map(([name, c]) => (
+          {[["Cream", CREAM], ["Coral", TERRA], ["Green", SAGE], ["Violet", PLUM], ["Sun", BUTTER], ["Sky", SKY]].map(([name, c]) => (
             <div key={name} className="flex items-center gap-2.5 rounded-full bg-white py-2 pl-2 pr-4 shadow-[0_6px_16px_rgba(58,42,48,0.08)]">
               <span className="h-7 w-7 rounded-full border" style={{ backgroundColor: c, borderColor: LINE }} />
               <span className="text-[13px]">{name}</span>
@@ -294,7 +296,7 @@ export default function CycleSyncCase({
       {/* ══ WHAT IT IS ══ */}
       <section className="px-5 py-20 text-center md:px-10 md:py-28">
         <Reveal>
-          <Pill bg="rgba(194,103,74,0.16)" color={TERRA}>What it is</Pill>
+          <Pill bg="rgba(244,102,60,0.16)" color={TERRA}>What it is</Pill>
           <p className="mx-auto mt-7 max-w-[58ch] text-[20px] leading-[1.45] md:text-[24px]" style={{ color: "rgba(58,42,48,0.85)" }}>{n.outcome}</p>
         </Reveal>
       </section>
