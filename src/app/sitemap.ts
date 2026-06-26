@@ -14,7 +14,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about", priority: 0.7 },
     { path: "/contact", priority: 0.7 },
     { path: "/directory", priority: 0.5 },
-    { path: "/playground", priority: 0.5 },
   ];
 
   const staticEntries = staticRoutes.map((r) => ({

@@ -47,21 +47,6 @@ export default function IndexPage() {
           </ul>
 
           <div className="label mt-14 mb-6 border-b border-cream/20 pb-2 text-cream/80">
-            Playground
-          </div>
-          <Link
-            href="/playground"
-            className="idx-row flex items-baseline justify-between gap-6 py-3 text-cream/45"
-            style={{ "--acc": "#ff4d1c" } as React.CSSProperties}
-          >
-            <span className="flex items-baseline gap-4">
-              <span className="mono opacity-60">01</span>
-              <span className="font-display text-[22px]">Deck of cards</span>
-            </span>
-            <span className="text-right text-[12px]">Lenis // GSAP</span>
-          </Link>
-
-          <div className="label mt-14 mb-6 border-b border-cream/20 pb-2 text-cream/80">
             Pages
           </div>
           <ul className="flex flex-wrap gap-x-8 gap-y-2 py-1">

@@ -357,7 +357,7 @@ export const projects: Project[] = [
     ],
     accent: "#4F86E6",
     accentFg: "#fcfaf5",
-    figmaUrl: "https://embed.figma.com/proto/vOnjwRDnkrFdrgh5bBRMYw/SENTINEL-%E2%80%94-Agent-Oversight-Console?node-id=49-122&p=f&scaling=scale-down-width&content-scaling=fixed&page-id=1%3A5&starting-point-node-id=49%3A122&embed-host=share",
+    figmaUrl: "https://embed.figma.com/proto/vOnjwRDnkrFdrgh5bBRMYw/SENTINEL-%E2%80%94-Agent-Oversight-Console?node-id=49-122&p=f&scaling=min-zoom&content-scaling=fixed&page-id=1%3A5&starting-point-node-id=49%3A122&embed-host=share",
     narrative: {
       problem:
         "High-stakes finance is starting to hand its decisions to AI agents that act faster than any person can watch: who gets a loan, whose account is frozen for an AML hit, which borrower gets a collections message. The catch is that these are exactly the decisions regulators won’t leave unattended. From 2 August 2026 the EU AI Act treats credit scoring as high-risk and requires (Article 14) a human who can understand the system, override it and stop it. The cost of getting it wrong is already real: in July 2025 the Massachusetts Attorney General settled with Earnest Operations for $2.5M over an AI lending model that produced disparate impact through a proxy variable. So the design problem isn’t building the agents. It’s building the cockpit that lets one person genuinely supervise many of them, step in within seconds, and prove afterwards that a human was actually in control.",
