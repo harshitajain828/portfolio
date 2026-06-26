@@ -65,7 +65,7 @@ export const projects: Project[] = [
     ],
     accent: "#0071C2",
     accentFg: "#FFFFFF",
-    figmaUrl: "https://embed.figma.com/design/7I0mUprnWqPlUPdNT92tA6/Fixit-%E2%80%94-AI-Repair-Companion?node-id=0-1&embed-host=share",
+    figmaUrl: "https://embed.figma.com/proto/7I0mUprnWqPlUPdNT92tA6/Fixit-%E2%80%94-AI-Repair-Companion?node-id=175-3&p=f&scaling=min-zoom&content-scaling=fixed&page-id=175%3A2&starting-point-node-id=175%3A3&embed-host=share",
     narrative: {
       problem:
         "E-waste is the fastest-growing waste stream on Earth — 62 million tonnes in 2022, up 82% since 2010, and only about a fifth recycled — and textiles are larger still. When things break, people bin them: around 56% of US homeowners would now rather replace than repair, and roughly one in three have thrown out a broken appliance specifically because they couldn’t find someone they trusted to fix it. The barrier isn’t unwillingness, it’s a single intimidating moment — ‘I don’t know what’s wrong, I don’t know what it’s called, and I’m scared I’ll make it worse.’ Every existing tool makes it harder: iFixit, YouTube and manuals all force a text query you can’t write yet, and the new wave of AI chatbots will confidently hallucinate a fix — which, on electrical, gas or structural work, can injure or kill.",
