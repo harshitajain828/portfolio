@@ -65,7 +65,7 @@ export const projects: Project[] = [
     ],
     accent: "#0071C2",
     accentFg: "#FFFFFF",
-    figmaUrl: "https://www.figma.com/proto/7I0mUprnWqPlUPdNT92tA6/Fixit-%E2%80%94-AI-Repair-Companion?node-id=175-3&starting-point-node-id=175-3&scaling=scale-down&content-scaling=fixed",
+    figmaUrl: "https://embed.figma.com/design/7I0mUprnWqPlUPdNT92tA6/Fixit-%E2%80%94-AI-Repair-Companion?node-id=0-1&embed-host=share",
     narrative: {
       problem:
         "E-waste is the fastest-growing waste stream on Earth — 62 million tonnes in 2022, up 82% since 2010, and only about a fifth recycled — and textiles are larger still. When things break, people bin them: around 56% of US homeowners would now rather replace than repair, and roughly one in three have thrown out a broken appliance specifically because they couldn’t find someone they trusted to fix it. The barrier isn’t unwillingness, it’s a single intimidating moment — ‘I don’t know what’s wrong, I don’t know what it’s called, and I’m scared I’ll make it worse.’ Every existing tool makes it harder: iFixit, YouTube and manuals all force a text query you can’t write yet, and the new wave of AI chatbots will confidently hallucinate a fix — which, on electrical, gas or structural work, can injure or kill.",
@@ -159,7 +159,7 @@ export const projects: Project[] = [
     ],
     accent: "#F4663C",
     accentFg: "#FBF4EA",
-    figmaUrl: "https://www.figma.com/proto/PCa7rf0Pd4CKfOzdhjo8M1/CycleSync-%E2%80%94-Cycle-Wellbeing-Companion?node-id=68-2&starting-point-node-id=68-2&scaling=scale-down&content-scaling=fixed",
+    figmaUrl: "https://embed.figma.com/design/PCa7rf0Pd4CKfOzdhjo8M1/CycleSync-%E2%80%94-Cycle---Wellbeing-Companion--concept-?node-id=1-4&embed-host=share",
     narrative: {
       problem:
         "The most common hormonal condition in women also produces the most unpredictable cycles, and the tools are all built for predictability. PCOS affects 8–13% of women globally (about 1 in 5 young women in India), up to 70% of cases go undiagnosed, and getting a diagnosis often takes years and several doctors. Mainstream apps assume a 28-day cycle with ovulation on day 14, so a 45- or 72-day cycle looks like an error, and the countdown keeps promising a date that never comes. For a group that is already three to eight times more likely to live with anxiety or depression, that is genuinely stressful. Trust is shaky too: a leading tracker settled with the FTC, then a $56M class action, over how it shared intimate cycle data. The people who need a good tool the most are the ones served worst.",
@@ -260,7 +260,7 @@ export const projects: Project[] = [
     ],
     accent: "#E0A23B",
     accentFg: "#16243D",
-    figmaUrl: "https://www.figma.com/proto/UHfATn5ewYgSJJQIgwdIkT/Appeal-%E2%80%94-Fight-Your-Denial?node-id=52-98&starting-point-node-id=52-98&scaling=scale-down&content-scaling=fixed",
+    figmaUrl: "https://embed.figma.com/design/UHfATn5ewYgSJJQIgwdIkT/Appeal-%E2%80%94-Fight-Your-Denial?node-id=0-1&embed-host=share",
     narrative: {
       problem:
         "About one in five health-insurance claims is denied, but under 1% are appealed — not from laziness, but by design. The deterrent is administrative burden: the learning, paperwork and emotional cost of fighting back. 69% of denied patients don’t know they can appeal and 85% never file. And the denials people surrender to are mostly beatable — the largest category is ‘other’ (no stated reason) followed by administrative errors; genuine medical-necessity calls are a small minority. Letter-writing is already commoditised; what no one owns is the real bottleneck — the moment at the kitchen table of ‘what does this even mean, do I have a case, what do I say?’ The cautionary tale is DoNotPay, whose FTC settlement reads like a spec of what not to do: never tested against lawyers, hallucinated documents, faked endorsements.",
@@ -357,7 +357,7 @@ export const projects: Project[] = [
     ],
     accent: "#4F86E6",
     accentFg: "#fcfaf5",
-    figmaUrl: "https://www.figma.com/proto/vOnjwRDnkrFdrgh5bBRMYw/SENTINEL-%E2%80%94-Agent-Oversight-Console?node-id=103-2&starting-point-node-id=103-2&scaling=scale-down&content-scaling=fixed",
+    figmaUrl: "https://embed.figma.com/design/vOnjwRDnkrFdrgh5bBRMYw/SENTINEL-%E2%80%94-Agent-Oversight-Console?node-id=0-1&embed-host=share",
     narrative: {
       problem:
         "High-stakes finance is starting to hand its decisions to AI agents that act faster than any person can watch: who gets a loan, whose account is frozen for an AML hit, which borrower gets a collections message. The catch is that these are exactly the decisions regulators won’t leave unattended. From 2 August 2026 the EU AI Act treats credit scoring as high-risk and requires (Article 14) a human who can understand the system, override it and stop it. The cost of getting it wrong is already real: in July 2025 the Massachusetts Attorney General settled with Earnest Operations for $2.5M over an AI lending model that produced disparate impact through a proxy variable. So the design problem isn’t building the agents. It’s building the cockpit that lets one person genuinely supervise many of them, step in within seconds, and prove afterwards that a human was actually in control.",

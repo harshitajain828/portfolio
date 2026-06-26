@@ -1,23 +1,20 @@
 /**
- * FigmaEmbed — embeds a Figma file or prototype.
- * Renders once the target file is shared as "Anyone with the link can view";
- * otherwise Figma shows an access prompt inside the frame. The accompanying
- * link is always available as a fallback.
+ * FigmaEmbed — embeds a Figma file via the official embed.figma.com URL.
+ * `url` is the embed.figma.com link (file must be shared "anyone with the
+ * link can view"). The "Open in Figma" link points at the normal file URL.
  */
 export default function FigmaEmbed({
   url,
   title,
   accent = "#0071C2",
-  aspect = "16 / 10",
+  aspect = "16 / 9",
 }: {
   url: string;
   title: string;
   accent?: string;
   aspect?: string;
 }) {
-  const src = `https://www.figma.com/embed?embed_host=harshita-portfolio&url=${encodeURIComponent(
-    url
-  )}`;
+  const open = url.replace("embed.figma.com", "www.figma.com");
   return (
     <div>
       <div
@@ -25,7 +22,7 @@ export default function FigmaEmbed({
         style={{ aspectRatio: aspect }}
       >
         <iframe
-          src={src}
+          src={url}
           title={title}
           loading="lazy"
           allowFullScreen
@@ -33,7 +30,7 @@ export default function FigmaEmbed({
         />
       </div>
       <a
-        href={url}
+        href={open}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-5 inline-flex items-center gap-2.5 rounded-full px-5 py-3 text-[14px] font-semibold"

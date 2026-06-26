@@ -340,8 +340,8 @@ export default function FixitCase({
             — that can be navigated from start to finish.
           </p>
           {project.figmaUrl && (
-            <div className="mt-9 max-w-[400px]">
-              <FigmaEmbed url={project.figmaUrl} title="Fixit — Figma prototype" accent={BLUE} aspect="39 / 84" />
+            <div className="mt-9 max-w-[940px]">
+              <FigmaEmbed url={project.figmaUrl} title="Fixit — Figma file" accent={BLUE} />
             </div>
           )}
         </Reveal>
