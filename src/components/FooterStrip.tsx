@@ -17,7 +17,7 @@ export default function FooterStrip({ dark = false }: { dark?: boolean }) {
         rel="noopener noreferrer"
         className="hover-line hidden md:block"
       >
-        Résumé<span className="mono"> ↗</span>
+        Resume<span className="mono"> ↗</span>
       </a>
       <a href="mailto:harshitajain828@gmail.com" className="hover-line">
         Email

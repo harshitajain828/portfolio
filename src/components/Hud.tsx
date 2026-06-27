@@ -197,7 +197,7 @@ export default function Hud() {
             rel="noopener noreferrer"
             className="hover-line"
           >
-            Résumé<span className="mono"> ↗</span>
+            Resume<span className="mono"> ↗</span>
           </a>
         </nav>
       </div>
