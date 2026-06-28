@@ -280,6 +280,48 @@ body {
   }
 }
 
+/* Hero accent pills. Touch (incl. iPad) can't hover, so the default state shows
+   the project cover thumbnail outright (tappable -> case study). Only on a real
+   pointer do they collapse into capsules that spring open on hover. */
+.hero-pill {
+  width: 6vw;
+  height: 6vw;
+}
+.hero-pill .hero-pill-img {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.hero-pill .hero-pill-label {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.3s ease 0.1s, transform 0.3s ease 0.1s;
+}
+@media (hover: hover) and (pointer: fine) {
+  .hero-pill {
+    width: 1.7vw;
+    height: 3.4vw;
+    transition: width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .hero-pill .hero-pill-img {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  .hero-pill:hover {
+    width: 12vw;
+  }
+  .hero-pill:hover .hero-pill-img {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .hero-pill:hover .hero-pill-label {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

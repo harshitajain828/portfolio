@@ -72,15 +72,7 @@ export default function DoodleTrail() {
     const parent = host?.parentElement;
     if (!host || !parent) return;
 
-    const onMove = (e: MouseEvent) => {
-      const rect = parent.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const dx = x - last.current.x;
-      const dy = y - last.current.y;
-      if (dx * dx + dy * dy < 110 * 110) return;
-      last.current = { x, y };
-
+    const spawn = (x: number, y: number) => {
       const n = counter.current++;
       const d: Doodle = {
         id: n,
@@ -98,8 +90,49 @@ export default function DoodleTrail() {
       );
     };
 
+    // Mouse: a trail that follows the cursor.
+    const onMove = (e: MouseEvent) => {
+      const rect = parent.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const dx = x - last.current.x;
+      const dy = y - last.current.y;
+      if (dx * dx + dy * dy < 110 * 110) return;
+      last.current = { x, y };
+      spawn(x, y);
+    };
     parent.addEventListener("mousemove", onMove);
-    return () => parent.removeEventListener("mousemove", onMove);
+
+    // Touch (phones, iPad) has no hover — keep the hero alive instead with
+    // a tap-to-pop burst, an opening burst, and a gentle ambient drip.
+    const touch =
+      window.matchMedia("(hover: none)").matches &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let ambient: ReturnType<typeof setInterval> | undefined;
+    const onTap = (e: PointerEvent) => {
+      if (e.pointerType === "mouse") return;
+      const rect = parent.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      for (let i = 0; i < 3; i++)
+        spawn(x + (Math.random() - 0.5) * 70, y + (Math.random() - 0.5) * 70);
+    };
+    if (touch) {
+      parent.addEventListener("pointerdown", onTap);
+      const r = parent.getBoundingClientRect();
+      const drip = () =>
+        spawn(r.width * (0.12 + Math.random() * 0.76), r.height * (0.3 + Math.random() * 0.5));
+      drip();
+      setTimeout(drip, 350);
+      setTimeout(drip, 700);
+      ambient = setInterval(drip, 1500);
+    }
+
+    return () => {
+      parent.removeEventListener("mousemove", onMove);
+      parent.removeEventListener("pointerdown", onTap);
+      if (ambient) clearInterval(ambient);
+    };
   }, []);
 
   return (
