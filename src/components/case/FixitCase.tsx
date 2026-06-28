@@ -341,7 +341,7 @@ export default function FixitCase({
           </p>
           {project.figmaUrl && (
             <div className="mt-9 max-w-[940px]">
-              <FigmaEmbed url={project.figmaUrl} title="Fixit — Figma file" accent={BLUE} />
+              <FigmaEmbed url={project.figmaUrl} title="Fixit — Figma file" accent={BLUE} kind="phone" />
             </div>
           )}
         </Reveal>

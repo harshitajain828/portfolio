@@ -287,7 +287,7 @@ export default function CycleSyncCase({
           </p>
           {project.figmaUrl && (
             <div className="mx-auto mt-9 max-w-[940px]">
-              <FigmaEmbed url={project.figmaUrl} title="CycleSync — Figma file" accent={TERRA} />
+              <FigmaEmbed url={project.figmaUrl} title="CycleSync — Figma file" accent={TERRA} kind="phone" />
             </div>
           )}
         </Reveal>

@@ -46,7 +46,7 @@ export default function WorkStack() {
           <Link
             key={p.slug}
             href={`/work/${p.slug}`}
-            className="group sticky top-0 flex h-screen flex-col justify-center overflow-hidden"
+            className="group relative flex min-h-screen flex-col justify-center overflow-hidden md:sticky md:top-0 md:h-screen"
             style={{ backgroundColor: p.accent, color: p.accentFg }}
           >
             {/* giant number watermark */}

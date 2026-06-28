@@ -163,7 +163,7 @@ export default function Hud() {
         tone === "light" ? "text-cream" : "text-ink"
       }`}
     >
-      <div className="grid grid-cols-3 items-center px-5 py-4 md:grid-cols-[1fr_auto_1fr] md:px-8">
+      <div className="flex items-center justify-between px-5 py-4 md:grid md:grid-cols-[1fr_auto_1fr] md:px-8">
         {/* left — location + clock */}
         <div className="label hidden items-center gap-3 md:flex">
           <span>Udaipur, (IN)</span>
@@ -181,7 +181,7 @@ export default function Hud() {
         <Wordmark />
 
         {/* right — nav */}
-        <nav className="label flex items-center justify-end gap-5 md:gap-7">
+        <nav className="label flex items-center justify-end gap-4 md:gap-7">
           <Link href="/work" className="hover-line">
             Work<sup className="mono">({projects.length})</sup>
           </Link>
