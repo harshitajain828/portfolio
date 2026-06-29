@@ -11,6 +11,8 @@ import {
   Fredoka,
 } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import SmoothScroll from "@/components/SmoothScroll";
 import Hud from "@/components/Hud";
 import Loader from "@/components/Loader";
@@ -141,6 +143,8 @@ export default function RootLayout({
         <PageTransition />
         <Hud />
         <SmoothScroll>{children}</SmoothScroll>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
